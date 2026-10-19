@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jurassic War — multiple games</title>
+<style>
+  :root { --bg:#111; --ink:#ddd; --dim:#888; --line:#333; --acc:#7c4; }
+  html,body { margin:0; height:100%; background:var(--bg); color:var(--ink); font:12px/1.4 ui-monospace,Menlo,Consolas,monospace; overflow:hidden; }
+  body { display:flex; flex-direction:column; }
+  #bar { display:flex; gap:8px; align-items:center; padding:4px 8px; border-bottom:1px solid var(--line); flex:none; }
+  #bar button, #bar input { font:inherit; background:#222; color:var(--ink); border:1px solid #444; border-radius:4px; padding:3px 10px; }
+  #bar button:hover { background:#2c2c2c; }
+  #add { font-size:16px; line-height:1; padding:2px 12px; color:var(--acc); }
+  #bar .dim { color:var(--dim); }
+  #grid { flex:1; display:grid; gap:3px; padding:3px; min-height:0; }
+  .tile { position:relative; border:2px solid var(--line); border-radius:4px; overflow:hidden; background:#000; min-width:0; min-height:0; }
+  .tile.focus { border-color:var(--acc); }
+  .tile iframe { width:100%; height:100%; border:0; display:block; }
+  .tile .hd { position:absolute; top:0; right:0; display:flex; gap:2px; padding:2px; opacity:.35; transition:opacity .15s; }
+  .tile:hover .hd { opacity:1; }
+  .hd button { font:inherit; background:#222c; color:var(--ink); border:1px solid #444; border-radius:3px; padding:1px 6px; cursor:pointer; }
+  .hd .name { background:#222c; border:1px solid #444; border-radius:3px; padding:1px 6px; color:var(--dim); }
+  #empty { position:absolute; inset:40% 0 0 0; text-align:center; color:var(--dim); pointer-events:none; }
+</style>
+</head>
+<body>
+<div id="bar">
+  <button id="add" title="add another game">+</button>
+  <span id="count" class="dim"></span>
+  <span class="dim">·</span>
+  <label class="dim">name <input id="nick" size="10" value="player"></label>
+  <label class="dim"><input type="checkbox" id="mute" checked> sound only in the first tile</label>
+  <span class="dim" style="margin-left:auto">keys go to the tile you clicked</span>
+</div>
+<div id="grid"><div id="empty">press “+” to open a game</div></div>
+<script>
+// Несколько партий на одном экране: каждая плитка — своя вкладка game.html в iframe со своим
+// именем и своим ключом места (иначе плитки одного браузера делили бы ключ через localStorage и
+// отбирали место друг у друга). Клавиатуру получает только та плитка, в которой фокус — браузер
+// сам раздаёт события документу под указателем и документу с фокусом.
+const grid = document.getElementById('grid'), empty = document.getElementById('empty');
+const tiles = []; let n = 0;
+const ключ = () => [...crypto.getRandomValues(new Uint8Array(12))].map(b => b.toString(16).padStart(2, '0')).join('');
+function layout() {
+  const k = tiles.length; empty.hidden = k > 0;
+  const cols = Math.max(1, Math.ceil(Math.sqrt(k))), rows = Math.max(1, Math.ceil(k / cols));
+  grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`; grid.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+  document.getElementById('count').textContent = k ? `games: ${k}` : '';
+}
+function add() {
+  n++; const имя = `${document.getElementById('nick').value.trim() || 'player'} ${n}`;
+  // ключ места — по номеру плитки, чтобы после перезагрузки страницы плитка N вернулась на своё место
+  let k = null; try { k = localStorage.getItem('jw.плитка.' + n); if (!k) localStorage.setItem('jw.плитка.' + n, k = ключ()); } catch { k = ключ(); }
+  const q = new URLSearchParams({ name: имя, key: k });
+  const net = new URLSearchParams(location.search).get('net'); if (net) q.set('net', net);   // свой релей — как у game.html
+  if (document.getElementById('mute').checked && tiles.length > 0) q.set('mute', '1');
+  const t = document.createElement('div'); t.className = 'tile';
+  const f = document.createElement('iframe'); f.src = 'game.html?' + q; f.allow = 'autoplay; fullscreen'; t.appendChild(f);
+  const hd = document.createElement('div'); hd.className = 'hd';
+  const nm = document.createElement('span'); nm.className = 'name'; nm.textContent = имя; hd.appendChild(nm);
+  const re = document.createElement('button'); re.textContent = '↻'; re.title = 'reload'; re.onclick = () => { f.src = f.src; }; hd.appendChild(re);
+  const x = document.createElement('button'); x.textContent = '×'; x.title = 'close'; x.onclick = () => { t.remove(); tiles.splice(tiles.indexOf(t), 1); layout(); }; hd.appendChild(x);
+  t.appendChild(hd); grid.appendChild(t); tiles.push(t); layout();
+}
+document.getElementById('add').onclick = add;
+// подсветка плитки с фокусом: клик внутри iframe уводит фокус из нашего документа на сам iframe
+const focusMark = () => { const a = document.activeElement; for (const t of tiles) t.classList.toggle('focus', a && t.contains(a)); };
+addEventListener('blur', () => setTimeout(focusMark, 0)); addEventListener('focus', focusMark);
+setInterval(focusMark, 500);
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+# Original game data and everything built from it never goes into this repository.
+PWAR/
+out/
+/ui
+/audio
+/video
+*.TRC
+*.TRS
+*.TRW
+*.exe
+*.EXE
+*.img
+*.rar
+reimpl/data/boot_snap.bin.z
+reimpl/data/tribe_story.json
+reimpl/data/story_*.json
+tools/snapshot/pwar_reloc.img
+tools/snapshot/_pwar/
+__pycache__/
+node_modules/
+setup.log

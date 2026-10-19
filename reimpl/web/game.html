@@ -1,0 +1,430 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Jurassic War</title>
+<!-- Полный экран на iPad. Safari там не умеет Fullscreen API для обычных элементов (только для
+     <video>), поэтому кнопка ⛶ включает «свой» полный экран, а по-настоящему без панелей игра
+     открывается ярлыком с рабочего стола: манифест и apple-мета ниже нужны именно для него. -->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Jurassic War">
+<meta name="theme-color" content="#0b0908">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<style>
+  :root { --bg:#0b0908; --edge:#3a3229; --ink:#d8cfc2; --dim:#8d8274; --hot:#e8c07d; }
+  /* Ничего на странице не выделяется: на телефоне долгое нажатие по кнопке вызывало выделение
+     текста с синими маркерами прямо поверх игры. */
+  * { box-sizing:border-box; -webkit-tap-highlight-color:transparent;
+      -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
+  html,body { margin:0; height:100%; background:var(--bg); color:var(--ink); font:12px/1.4 ui-monospace,Menlo,Consolas,monospace; overscroll-behavior:none; }
+  /* «Свой» полный экран — для Safari на iPad, где настоящего нет. Страница прибивается к видимой
+     области (dvh, а не vh: у vh на телефонах высота считается без учёта панелей и низ уезжает
+     под них), прокрутка гасится, отступы панели ужимаются. */
+  html.своёполно, html.своёполно body { position:fixed; inset:0; width:100%; height:100vh; height:100dvh; max-height:100dvh; overflow:hidden; }
+  html.своёполно #bar { padding-top:2px; padding-bottom:calc(2px + env(safe-area-inset-bottom)); }
+  body { display:flex; flex-direction:column; }
+  #main { flex:1; display:flex; flex-direction:column; min-height:0; }
+  #main.side { flex-direction:row; }
+  /* Картинку прижимаем к верху: всё свободное место внизу достаётся тачпаду. */
+  #stage { flex:1; display:flex; align-items:flex-start; justify-content:center; min-height:0; position:relative; }
+  #main.side #stage { align-items:center; }
+  /* Область-тачпад: занимает пустое место под картинкой (в портрете его много). Оформление
+     нарочно тусклое — это подложка под палец, а не элемент интерфейса. */
+  #padwrap { flex:0 0 auto; display:none; padding:0 6px 4px; }
+  #padwrap.on { display:block; }
+  #main.side #padwrap { padding:6px 6px 6px 0; display:none; }
+  #main.side #padwrap.on { display:block; }
+  #pad { display:block; width:100%; border:1px solid var(--edge); border-radius:8px; background:#141210; touch-action:none; }
+  /* Ролики — FLI 320×200, перекодированные в 640×400. На VGA пиксель был неквадратный, поэтому
+     растягиваем видео ровно в прямоугольник канвы (4:3) — так это и выглядело в оригинале. */
+  #vid { position:absolute; background:#000; object-fit:fill; z-index:1; }
+  canvas { image-rendering:pixelated; display:block; background:#000; outline:none; touch-action:none; }
+  #bar { display:flex; gap:6px; align-items:center; flex-wrap:wrap; padding:5px 6px calc(5px + env(safe-area-inset-bottom)); border-top:1px solid var(--edge); }
+  #bar select { font:inherit; color:var(--ink); background:#262119; border:1px solid var(--edge); border-radius:5px; padding:6px 8px; }
+  @media (max-width: 560px) { button { padding:6px 8px; font-size:12px; } #dpad button { min-width:30px; padding:6px 6px; } #note { font-size:10px; } }
+  button { font:inherit; color:var(--ink); background:#262119; border:1px solid var(--edge); border-radius:5px; padding:7px 10px; cursor:pointer; touch-action:manipulation; }
+  button.on { background:var(--hot); color:#1b1815; border-color:var(--hot); }
+  /* строка состояния: своя строка под кнопками, высота зафиксирована, длинный текст режется многоточием —
+     иначе перенос строки менял высоту панели и дёргал экран */
+  /* Стенд мозгов: вместо всей панели — три строки крупных кнопок. Замысел владельца: «кликаю
+     нейронку, делаю рестарт, смотрю, переключаю нейронку, рестарт» — и так за минуты видно все
+     наши мозги на одной и той же миссии. Поэтому никаких выпадающих списков, всё в один щелчок. */
+  /* В режиме стенда прячем весь нижний ряд разом, кроме самого стенда и строки состояния.
+     Именно классом на панели, а не полем hidden у каждой кнопки: часть из них (зум, тач-кнопки)
+     показывается и прячется своим кодом по ходу партии и «всплывала» обратно поверх стенда. */
+  #bar.лаб > *:not(#lab):not(#noteline) { display:none !important; }
+  #lab { flex-basis:100%; display:flex; flex-direction:column; gap:4px; }
+  #lab .ряд { display:flex; gap:4px; align-items:center; flex-wrap:wrap; }
+  #lab .имя { color:var(--dim); font-size:11px; min-width:58px; }
+  #lab button { padding:6px 9px; }
+  #lab button.мелк { padding:5px 7px; font-size:12px; min-width:26px; }
+  #noteline { flex-basis:100%; height:18px; overflow:hidden; }
+  /* Часы миссии: слева от строки состояния, моноширинные — чтобы цифры не прыгали. */
+  #mtime { float:left; height:18px; line-height:18px; color:var(--ink); font-size:12px; padding:0 8px 0 4px;
+           font-variant-numeric:tabular-nums; }
+  #note { display:block; height:18px; line-height:18px; color:var(--dim); padding:0 4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:12px; }
+  #netbar #netinfo { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
+  #dpad { display:inline-flex; gap:3px; }
+  #dpad button { padding:7px 8px; min-width:34px; }
+
+  /* display:flex у панелей ниже перебивает браузерное правило для hidden — возвращаем его явно */
+  [hidden] { display:none !important; }
+  /* реплеи: список поверх страницы и полоса управления просмотром */
+  /* учебные сцены: тот же вид, что у списка записей */
+  #scenes { position:fixed; inset:auto 0 0 0; top:0; z-index:40; background:rgba(12,10,8,.94); color:var(--ink);
+            display:flex; flex-direction:column; padding:14px 16px; gap:10px; overflow:auto; }
+  #scenes h2 { margin:0; font-size:16px; font-weight:600; letter-spacing:.04em; }
+  #sceneshead { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  #scenessum { color:var(--dim); font-size:12px; margin-right:auto; }
+  #sceneshead label { font-size:12px; color:var(--dim); display:flex; align-items:center; gap:5px; }
+  #sceneslist { display:flex; flex-direction:column; gap:6px; }
+  .scrow { display:flex; align-items:center; gap:10px; padding:8px 10px; background:#1b1712;
+           border:1px solid var(--edge); border-radius:6px; }
+  .scname { font-size:13px; font-weight:600; }
+  .scwhat { color:var(--dim); font-size:11px; }
+  .scmeta { color:var(--dim); font-size:11px; margin-left:auto; text-align:right; white-space:nowrap; }
+  #reps { position:fixed; inset:auto 0 0 0; top:0; z-index:40; background:rgba(12,10,8,.94); color:var(--ink);
+          display:flex; flex-direction:column; padding:14px 16px; gap:10px; overflow:auto; }
+  #reps h2 { margin:0; font-size:16px; font-weight:600; letter-spacing:.04em; }
+  #repshead { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  #repssum { color:var(--dim); font-size:12px; margin-right:auto; }
+  #repslist { display:flex; flex-direction:column; gap:6px; }
+  .rphead { margin:10px 0 2px; font-size:12px; letter-spacing:.05em; text-transform:uppercase; color:#8d8274; }
+  .rphead:first-child { margin-top:0; }
+  .rprow { display:flex; align-items:center; gap:10px; padding:8px 10px; background:#1b1712;
+           border:1px solid var(--edge); border-radius:6px; }
+  .rpname { font-size:13px; }
+  .rpmeta { color:var(--dim); font-size:11px; margin-left:auto; text-align:right; }
+  .rpbtns { display:flex; gap:4px; }
+  .rpbtns button { padding:5px 9px; }
+  #netbrains { color:#b9a887; font-size:11px; }
+  #rpbar { position:fixed; left:0; right:0; bottom:0; z-index:30; display:flex; align-items:center; gap:8px;
+           padding:8px 12px; background:rgba(12,10,8,.92); border-top:1px solid var(--edge); }
+  #rpbar .tag { color:var(--hot); font-size:12px; letter-spacing:.08em; }
+  #rptime { color:var(--dim); font-size:12px; font-variant-numeric:tabular-nums; }
+  #rpseek { flex:1 1 auto; min-width:80px; accent-color:var(--hot); }
+  /* сетевая игра: лобби поверх страницы (js/net/игра.js + web/game.js) */
+  #netp { position:fixed; inset:0; z-index:41; background:rgba(12,10,8,.94); color:var(--ink);
+          display:flex; flex-direction:column; padding:14px 16px; gap:10px; overflow:auto; }
+  #netp h2 { margin:0; font-size:16px; font-weight:600; letter-spacing:.04em; }
+  #nethead { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  #netstat { color:var(--dim); font-size:12px; margin-right:auto; }
+  .netrow { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .netrow label { display:flex; align-items:center; gap:6px; font-size:13px; color:var(--dim); }
+  #netp input, #netp select { font:inherit; color:var(--ink); background:#1b1712; border:1px solid var(--edge); border-radius:5px; padding:6px 8px; }
+  #netp input { min-width:120px; }
+  #netlist { display:flex; flex-direction:column; gap:6px; }
+  .netpl { display:flex; align-items:center; gap:10px; padding:8px 10px; background:#1b1712; border:1px solid var(--edge); border-radius:6px; font-size:13px; }
+  .netpl .who { min-width:120px; }
+  .netpl .tag { color:var(--hot); font-size:11px; letter-spacing:.08em; }
+  #netmain { display:flex; gap:14px; align-items:flex-start; }
+  #netleft { flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:12px; }
+  .nethdr { font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--hot); }
+  .nethdr span + span, #netroomsum { color:var(--dim); text-transform:none; letter-spacing:0; margin-left:auto; }
+  #netrooms { flex:1 1 auto; min-width:0; }                                 /* иначе строки уезжали под карточку предпросмотра */
+  #netroomlist { display:flex; flex-direction:column; gap:6px; margin-top:6px; }
+  .netempty { color:var(--dim); font-size:12px; padding:8px 0; }
+  .netroom { display:flex; align-items:center; flex-wrap:wrap; gap:6px 10px; padding:6px 10px; background:#1b1712; border:1px solid var(--edge); border-radius:6px; font-size:13px; cursor:pointer; }
+  .netroom:hover, .netroom.sel { border-color:var(--hot); }
+  .netroom img { height:44px; width:auto; max-width:64px; image-rendering:pixelated; border:1px solid var(--edge); background:#000; }
+  .netroom .nm { font-weight:600; min-width:90px; overflow:hidden; text-overflow:ellipsis; }
+  .netroom .st { font-size:11px; padding:2px 6px; border-radius:4px; border:1px solid var(--edge); color:var(--dim); white-space:nowrap; }
+  .netroom .st.game { color:#f5d36b; border-color:#7a6320; }
+  .netroom .st.drop { color:#f08a6b; border-color:#7a3a20; }
+  .netroom .cnt { color:var(--dim); margin-left:auto; }
+  .netroom button { padding:4px 9px; }
+  .netcard { width:280px; flex:0 0 280px; background:#1b1712; border:1px solid var(--edge); border-radius:6px; padding:10px; display:flex; flex-direction:column; gap:8px; font-size:13px; }
+  .netmap { width:100%; image-rendering:pixelated; border:1px solid var(--edge); background:#000; }
+  .netdim { color:var(--dim); font-size:12px; }
+  .netseat { display:flex; gap:8px; font-size:12px; }
+  .netseat.dead { color:#f08a6b; }
+  #netlobbymain { display:flex; gap:14px; align-items:flex-start; margin-top:8px; }
+  #netlobbymain > div:first-child { flex:1 1 auto; display:flex; flex-direction:column; gap:8px; }
+  #netadv summary { color:var(--dim); font-size:12px; cursor:pointer; }
+  /* выпадающий список карт в лобби: иконка + имя, при наведении меняется большая карта справа */
+  .netdd { position:relative; display:inline-block; }
+  #netmapbtn { display:inline-flex; align-items:center; gap:8px; min-width:220px; }
+  #netmapbtn img, .netmapo img { height:22px; width:32px; object-fit:cover; image-rendering:pixelated; background:#000; border:1px solid var(--edge); }
+  #netmaplist { position:absolute; left:0; top:100%; z-index:50; margin-top:4px; background:#1b1712; border:1px solid var(--hot); border-radius:6px; max-height:60vh; overflow:auto; min-width:300px; }
+  .netmapo { display:flex; align-items:center; gap:8px; padding:5px 10px; font-size:13px; cursor:pointer; white-space:nowrap; }
+  .netmapo:hover { background:#2a231b; } .netmapo.sel { color:var(--hot); }
+  .netmapo .n { color:var(--dim); margin-left:auto; padding-left:12px; font-size:12px; }
+  .netmaph { padding:6px 10px 2px; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--hot); }
+  .netbig { font-size:16px; padding:12px 28px; background:var(--hot); color:#1b1815; border-color:var(--hot); font-weight:600; letter-spacing:.04em; }
+  .netbig.off { background:#262119; color:var(--ink); }
+  #netcreate { display:flex; justify-content:center; padding:10px 0; }
+  #netfoot { position:sticky; bottom:0; display:flex; justify-content:center; padding:10px 0 4px; background:linear-gradient(transparent, rgba(12,10,8,.95) 40%); }
+  .nethost { font-size:11px; letter-spacing:.08em; padding:2px 8px; border:1px solid var(--hot); border-radius:4px; color:var(--hot); text-transform:none; }
+  #netcountdown { font-size:22px; color:var(--hot); text-align:center; padding:8px; letter-spacing:.06em; }
+  #netnamedlg { position:fixed; inset:0; z-index:43; display:flex; align-items:center; justify-content:center; background:rgba(12,10,8,.6); }
+  #netnamedlg .box { background:#1b1712; border:1px solid var(--hot); border-radius:8px; padding:16px 20px; min-width:300px; display:flex; flex-direction:column; gap:12px; }
+  #netnamedlg h3 { margin:0; font-size:15px; color:var(--hot); } #netnamedlg label { display:flex; gap:8px; align-items:center; } #netnamedlg input { flex:1; }
+  #netnamedlg .row { display:flex; gap:8px; justify-content:flex-end; }
+  .netready { color:#7ad37a; font-size:11px; letter-spacing:.08em; }
+  /* выбор племени: иконки из выбора уровня (ui/icons) — кнопка с иконкой и список с иконками */
+  .nettr { position:relative; display:inline-block; }
+  .nettr > button { display:inline-flex; align-items:center; gap:8px; min-width:150px; padding:4px 10px; }
+  .nettr img, .nettro img, .nettrico { height:26px; width:26px; object-fit:contain; image-rendering:pixelated; filter:drop-shadow(0 1px 2px #000); }
+  .nettr .lst { position:absolute; left:0; top:100%; z-index:51; margin-top:4px; background:#1b1712; border:1px solid var(--hot); border-radius:6px; min-width:180px; }
+  .nettro { display:flex; align-items:center; gap:8px; padding:5px 10px; font-size:13px; cursor:pointer; white-space:nowrap; }
+  .nettro:hover { background:#2a231b; } .nettro.sel { color:var(--hot); }
+  .nettrname { display:inline-flex; align-items:center; gap:8px; }
+  .netsw { display:inline-block; width:14px; height:14px; border-radius:3px; border:1px solid #000; }
+  /* Правила партии: блок фиксированной ширины, каждая строка — большая кнопка-переключатель. */
+  #netlobbyside { display:flex; flex-direction:column; gap:10px; width:280px; flex:0 0 280px; }
+  .netopts { gap:8px; }
+  .netopts .nethdr { margin-bottom:2px; }
+  .optsel { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--dim); }
+  .optsel select { flex:1 1 auto; min-width:0; }
+  .opt { display:flex; align-items:center; gap:10px; width:100%; text-align:left; padding:9px 10px;
+         background:#1b1712; border:1px solid var(--edge); border-radius:6px; font:inherit; color:var(--ink); cursor:pointer; }
+  .opt:hover:not(:disabled) { border-color:var(--hot); }
+  .opt .tick { flex:0 0 16px; width:16px; height:16px; border:1px solid var(--edge); border-radius:4px;
+               display:flex; align-items:center; justify-content:center; font-size:12px; line-height:1; }
+  .opt .icn { flex:0 0 18px; text-align:center; font-size:15px; color:var(--hot); }
+  .opt .txt { display:flex; flex-direction:column; line-height:1.25; font-size:12px; }
+  .opt small { color:var(--dim); font-size:10px; }
+  .opt.on { background:var(--hot); color:#1b1815; border-color:var(--hot); box-shadow:inset 0 2px 4px rgba(0,0,0,.35); }
+  .opt.on .tick { border-color:#1b1815; }
+  .opt.on .tick::after { content:'✓'; }
+  .opt.on .icn, .opt.on small { color:#4a3a22; }
+  .opt:disabled { opacity:.45; cursor:default; }
+  .netic { width:16px; height:16px; fill:var(--dim); flex:0 0 16px; }
+  .netobs { cursor:pointer; }
+  .netobs:hover { border-color:var(--hot); }
+  .netobs.сижу { border-color:var(--hot); }
+  .netobs.сижу .netic { fill:var(--hot); }
+  .netsel { background:#241f18; color:var(--ink); border:1px solid var(--edge); border-radius:4px; font-size:12px; padding:2px 4px; }
+  .netsel:disabled { opacity:.5; }
+  /* Закрытое место гасим, но кнопки оставляем яркими: иначе кажется, что место потеряно
+     навсегда, — а его можно открыть обратно той же строкой. */
+  .netpl.closed .who, .netpl.closed .netsw, .netpl.closed .nettrname { opacity:.45; } .netpl .st { font-size:11px; color:var(--dim); min-width:90px; }
+  .netpl .ctl { margin-left:auto; display:flex; gap:4px; } .netpl .ctl button { padding:3px 8px; font-size:12px; }
+  #netside, #netlobbyside { flex:0 0 280px; display:flex; flex-direction:column; gap:12px; min-width:0; }
+  #netside .netcard, #netlobbyside .netcard { width:auto; flex:none; }
+  .nettabs { display:flex; gap:4px; }
+  .nettabs button { flex:1; padding:3px 6px; opacity:.6; }
+  /* класс «on» занят глобальным правилом кнопок (золотая заливка) — у вкладок свой «sel»,
+     иначе подпись становилась золотой по золотому и вкладка выглядела пустой */
+  .nettabs button.sel { opacity:1; background:#2a231b; border-color:var(--hot); color:var(--hot); }
+  .nettabs button.new::after { content:' •'; color:#f5d36b; }
+  #netchatwho { display:flex; flex-wrap:wrap; gap:2px 8px; font-size:11px; color:var(--dim); min-height:14px; }
+  #netchatwho .nick, #netchatlog .nick { font-weight:600; }
+  #netchatlog { height:160px; overflow-y:auto; font-size:12px; line-height:1.35; background:#141210; border:1px solid var(--edge); border-radius:4px; padding:4px 6px; overflow-wrap:anywhere; }
+  #netchatlog .nick { margin-right:5px; }
+  #netchatlog .sys { color:var(--dim); font-style:italic; }
+  #netchatin { width:100%; box-sizing:border-box; }
+  @media (max-width: 700px) { #netmain, #netlobbymain { flex-direction:column; } .netcard, #netside, #netlobbyside { width:auto; flex:none; } }
+  #netlog { color:var(--dim); font-size:11px; white-space:pre-line; max-height:6em; overflow:auto; }
+  #netbar { display:flex; align-items:center; gap:8px; padding:4px 12px; background:#141110; border-top:1px solid var(--edge); font-size:12px; }
+  #netbar button { padding:4px 8px; }
+  #netbar .tag { color:var(--hot); letter-spacing:.08em; }
+  #netbar #netinfo { color:var(--dim); margin-right:auto; }
+  /* окно ожидания вылетевшего (как в StarCraft): таймер и кнопка «не ждать» */
+  #netwait { position:fixed; inset:0; z-index:42; display:flex; align-items:center; justify-content:center; background:rgba(12,10,8,.55); }
+  #netwait .box { background:#1b1712; border:1px solid var(--hot); border-radius:8px; padding:16px 20px; min-width:280px; max-width:90vw; display:flex; flex-direction:column; gap:10px; }
+  #netwait h3 { margin:0; font-size:15px; color:var(--hot); }
+  #netwait .row { display:flex; align-items:center; gap:10px; font-size:13px; }
+  #netwait .t { font-variant-numeric:tabular-nums; color:var(--dim); margin-left:auto; }
+</style>
+<div id="main">
+  <div id="stage"><canvas id="c" width="640" height="480" tabindex="0"></canvas><video id="vid" playsinline muted preload="none" hidden></video><audio id="mus" preload="none"></audio>
+<audio id="narr-a" preload="none"></audio></div>
+  <div id="padwrap"><canvas id="pad"></canvas></div>
+</div>
+<div id="netbar" hidden><span class="tag" id="netbartag">МУЛЬТИПЛЕЕР</span><span id="netinfo"></span><span id="netbrains" title="какие мозги у компьютерных мест в этой партии"></span><label id="netfogl" hidden>туман <select id="netfog"></select></label><button id="netrestart" title="начать скирмиш заново теми же настройками" hidden>заново</button><button id="netai" title="показать, какие мозги у компьютерных мест и что они решают прямо сейчас">ИИ</button><button id="netpause" title="пауза для всех">⏸</button><button id="netsurrender" title="сдаться: войска и постройки гибнут, вы выходите; запись партии уйдёт на сервер">сдаться и сохранить реплей</button><button id="netquit" title="выйти без сдачи: остальные будут ждать вас или решат играть без вас; запись партии уйдёт на сервер">выйти и сохранить реплей</button></div>
+<style>
+  /* Демо скирмиша (/jw/battle): на экране только игра — панель, строка состояния и всё прочее
+     спрятаны, канва занимает окно целиком. */
+  body.демо #bar, body.демо #say, body.демо #lab, body.демо #netbar { display: none !important; }
+  body.демо { margin: 0; overflow: hidden; }
+</style>
+<div id="bar">
+  <button data-mb="0">LMB</button><button data-mb="2">RMB</button>
+  <button id="latch">hold</button><button id="pmode">pad</button>
+  <span id="dpad"><button data-key="ArrowLeft">◀</button><button data-key="ArrowUp">▲</button><button data-key="ArrowDown">▼</button><button data-key="ArrowRight">▶</button></span>
+  <button id="pause" title="пауза (P)">⏸</button>
+  <button id="patrolb" title="патруль отряда (V), затем щелчок по карте">патруль</button>
+  <button id="huntb" title="охотничьи угодья: нажми и обведи рамкой участок карты — отряд охотится только в нём. Если кто-то выделен, участок задаётся этой группе. Нажать ещё раз — снять участок">угодья</button>
+  <button id="brief" title="задание миссии (F2)">brief</button>
+  <select id="lang" title="язык"></select>
+  <button id="narr" title="озвучка сюжета">🔊</button>
+  <button id="musbtn" title="музыка вкл/выкл">♫</button><button id="smoothbtn" title="плавное движение: юниты двигаются между шагами игры">~</button><button id="artbtn" title="украшения: пассивные прибавки от артефактов (в кампании)">★</button><button id="schemebtn" title="управление: левая выделяет, правая приказывает">ЛКМ/ПКМ</button><button id="edgebtn" title="прокрутка карты у края экрана">край</button><button id="zoomin" title="приблизить карту" hidden>🔍+</button><button id="zoomout" title="отдалить карту" hidden>🔍−</button>
+  <button id="giveitems" title="раздать бесхозные вещи по отряду: ненадетое оружие и щиты уходят ближайшим безоружным (G)">раздать</button>
+  <button id="dropitems" title="скинуть всё ненадетое на землю под ноги (Y)">скинуть</button>
+  <button id="touchui" title="управление для пальца: выделение защищено от случайного тапа, палец тащит карту, рамка — долгим нажатием">тач</button>
+  <button id="retreat" title="отход: выделенные бросают дела и идут к базе; если никто не выделен — все свои в кадре (R)">отход</button>
+  <button id="scoreboard" title="табло соперников: очки, еда, бойцы и постройки по племенам (как в Age of Empires)">счёт</button>
+  <button id="aiplay" title="автобой: наш компьютер берёт ваше племя на себя — видно, как он проходит миссию кампании. Нажать ещё раз — управление обратно">автобой</button>
+  <button id="aidbg" title="мысли компьютера поверх карты: осанка, куда идёт армия, кого выбрал добычей">мысли</button>
+  <button id="labbtn" title="стенд мозгов: убрать всё лишнее и оставить выбор мозгов, паузу и рестарт">стенд</button>
+  <button id="repsbtn" title="записи партий">reps</button>
+  <button id="cloudsave" title="сохранить партию на сервер: то самое положение можно открыть по ссылке ?save=…">☁ сейв</button>
+  <button id="scenesbtn" title="АИ тренировка: полсотни арен, на которых учится сеть бойца">АИ тренировка</button>
+  <button id="tribescbtn" title="сцены племени: поведение компьютера на подготовленных положениях, идёт вживую">сцены племени</button>
+  <button id="skirmbtn" title="скирмиш: партия против компьютера без сети">скирмиш</button><button id="netbtn" title="сетевая игра">мультиплеер</button>
+  <button id="dino" title="Tyrannosaurus">🦖</button>
+  <button id="hudbtn" title="колонка отрядов слева и автопривязка новых юнитов к цифрам 1..9, 0">отряды</button>
+  <button id="fast3" title="ускорить игру втрое; в сетевой партии недоступно">×3</button>
+  <button id="menu">menu</button><button id="levels" title="выбор уровня и расы">levels</button><button id="fs">⛶</button>
+  <div id="lab" hidden></div>
+  <div id="noteline"><span id="mtime" title="сколько идёт эта миссия по игровому времени"></span><span id="note"></span></div>
+</div>
+<div id="netp" hidden>
+  <div id="nethead">
+    <h2 id="netphead">сетевая игра</h2>
+    <span id="netstat"></span>
+    <label>имя <input id="netname" spellcheck="false" maxlength="24"></label>
+    <label>язык <select id="lang2"></select></label>
+    <details id="netadv"><summary>релей</summary><input id="netaddr" spellcheck="false"></details>
+    <button id="netclose">закрыть</button>
+  </div>
+  <div id="netmain">
+    <div id="netleft">
+      <div id="netrooms">
+        <div class="netrow nethdr"><span>комнаты</span><span id="netroomsum"></span></div>
+        <div id="netroomlist"><div class="netempty">пока ни одной комнаты — создайте свою</div></div>
+      </div>
+      <div id="netcreate">
+        <button id="netcreatebtn" class="netbig">создать игру</button>
+        <input id="netroom" hidden><select id="netmission" hidden></select><select id="netdiff" hidden><option value="1" selected>normal</option></select>
+        <input type="checkbox" id="netopen" hidden><input type="checkbox" id="netobs" hidden checked><button id="netgo" hidden></button><button id="netwatch" hidden></button>
+      </div>
+    </div>
+    <div id="netside"><div id="netpreview" class="netcard"><div class="netempty">наведите на комнату — здесь будет карта и состав</div></div>
+      <div id="netchat" class="netcard">
+        <div class="nettabs"><button id="nettabhall" class="sel">общий</button><button id="nettabroom" hidden>комната</button></div>
+        <div id="netchatwho"></div>
+        <div id="netchatlog"></div>
+        <input id="netchatin" maxlength="300" spellcheck="false" placeholder="написать…">
+      </div>
+    </div>
+  </div>
+  <div id="netlobby" hidden>
+    <div class="netrow nethdr"><span id="netlobbytitle">комната</span><span id="nethostme" class="nethost" hidden>вы хост</span>
+      <button id="netstart" hidden>старт</button>
+      <button id="netplay" hidden>играть</button>
+      <button id="netspect" hidden>смотреть партию</button>
+      <span id="netgame" class="netdim"></span>
+      <button id="netrole" hidden>стать наблюдателем</button>
+      <button id="netleave">выйти из комнаты</button></div>
+    <div id="netcountdown" hidden></div>
+    <div id="netlobbymain">
+      <div>
+        <div class="netrow">
+          <label>карта <span id="netmapdd" class="netdd"><button id="netmapbtn"><img id="netmapico" alt=""><span id="netmapname">—</span> ▾</button><div id="netmaplist" hidden></div></span></label>
+          <select id="netmission2" hidden></select>
+          <label>сложность <select id="netdiff2"><option value="0">easy</option><option value="1">normal</option><option value="2">hard</option></select></label>
+        </div>
+        <div id="netlist"></div>
+      </div>
+      <div id="netlobbyside">
+        <div class="netcard"><img id="netlobbymap" class="netmap" alt=""><div id="netlobbymapinfo" class="netdim"></div></div>
+        <!-- Правила партии: не россыпь галочек в строке, а отдельный блок с большими кнопками.
+             Нажатая кнопка = правило включено, галочка в углу; отжатая = выключено. -->
+        <div class="netcard netopts">
+          <div class="nethdr"><span>правила партии</span></div>
+          <label class="optsel">режим <select id="netmode"><option value="наборы">стартовые наборы по местам</option><option value="армии">готовые армии карты</option></select></label>
+          <button id="netfast" class="opt" type="button"><span class="tick"></span><span class="icn">⚡</span><span class="txt">быстрый старт<small>100 000 еды и два юнита на место</small></span></button>
+          <button id="netarts" class="opt" type="button"><span class="tick"></span><span class="icn">★</span><span class="txt">украшения дают прибавки<small>артефакты в слотах работают</small></span></button>
+          <button id="netfood" class="opt" type="button"><span class="tick"></span><span class="icn">🍖</span><span class="txt">автоприрост еды<small>каждой базе 2000 еды в минуту</small></span></button>
+          <button id="netevil" class="opt" type="button"><span class="icn">🤖</span><span class="txt">все места — компьютер<small>свободные места занимает компьютер</small></span></button>
+          <button id="netopen2" class="opt" type="button"><span class="tick"></span><span class="icn">⤵</span><span class="txt">пускать незнакомцев<small>во время матча, если есть места</small></span></button>
+          <button id="netobs2" class="opt" type="button"><span class="tick"></span><span class="icn">◉</span><span class="txt">пускать наблюдателей<small>во время матча</small></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="netlog"></div>
+  <div id="netfoot" hidden><button id="netready" class="netbig">готов</button></div>
+</div>
+<div id="netnamedlg" hidden><div class="box"><h3>новая игра</h3><label>название <input id="netnewname" spellcheck="false" maxlength="40" placeholder="как назовём?"></label><div class="row"><button id="netnewok">создать</button><button id="netnewcancel">отмена</button></div></div></div>
+<div id="netwait" hidden><div class="box"><h3>игрок отключился</h3><div id="netwaitlist"></div><div class="row"><span style="color:var(--dim);font-size:12px">Игра ждёт его возвращения. Если все оставшиеся нажмут «не ждать», партия продолжится без него.</span></div></div></div>
+<div id="reps" hidden>
+  <div id="repshead">
+    <h2>Записи партий</h2>
+    <span id="repssum"></span>
+    <input id="repsfile" type="file" accept=".jwr" hidden><button id="repsimport">импорт</button>
+    <button id="repsclear">удалить все</button>
+    <button id="repsclose">закрыть</button>
+  </div>
+  <div id="repslist"></div>
+</div>
+<div id="scenes" hidden>
+  <div id="sceneshead">
+    <h2>АИ тренировка</h2>
+    <span id="scenessum"></span>
+    <label>мозги: <select id="scenesbrain">
+      <option value="скрипт">скрипт (нынешний)</option>
+      <option value="стратег">стратег (правила)</option>
+      <option value="нейронка">нейронка (бой и тактика)</option>
+      <option value="комдив">комдив (сеть групп)</option>
+    </select></label>
+    <button id="scenesclose">закрыть</button>
+  </div>
+  <div id="sceneslist"></div>
+</div>
+<div id="rpbar" hidden>
+  <span class="tag">РЕПЛЕЙ</span>
+  <button id="rpplay" title="пауза / продолжить">⏸</button>
+  <button id="rpspeed" title="скорость просмотра">×1</button>
+  <input id="rpseek" type="range" min="0" max="1" step="1" value="0" title="перемотка">
+  <span id="rptime">00:00</span>
+  <button id="rpexit" title="выйти из просмотра">выход</button>
+</div>
+<!-- ?v=6 — обход кеша Cloudflare: старые копии .js он держит 4 часа, а прав Cache Purge у токена нет.
+     Сам game.html не кешируется (DYNAMIC), поэтому смена ссылки тут сразу тянет свежий код. -->
+<script type="importmap" data-jw-versions>{"imports":{"../js/ai/act.js":"../js/ai/act.js?v=2787e897cb","../js/ai/arena.js":"../js/ai/arena.js?v=2787e897cb","../js/ai/episode.js":"../js/ai/episode.js?v=2787e897cb","../js/ai/net.js":"../js/ai/net.js?v=2787e897cb","../js/ai/obs.js":"../js/ai/obs.js?v=2787e897cb","../js/ai/params.js":"../js/ai/params.js?v=2787e897cb","../js/ai/policy_net.js":"../js/ai/policy_net.js?v=2787e897cb","../js/ai/policy_script.js":"../js/ai/policy_script.js?v=2787e897cb","../js/ai/reward.js":"../js/ai/reward.js?v=2787e897cb","../js/ai/scenes.js":"../js/ai/scenes.js?v=2787e897cb","../js/ai/strategy.js":"../js/ai/strategy.js?v=2787e897cb","../js/ai/tactic.js":"../js/ai/tactic.js?v=2787e897cb","../js/ai/вождь.js":"../js/ai/вождь.js?v=2787e897cb","../js/ai/вождь3.js":"../js/ai/вождь3.js?v=2787e897cb","../js/ai/кампания.js":"../js/ai/кампания.js?v=2787e897cb","../js/ai/комдив.js":"../js/ai/комдив.js?v=2787e897cb","../js/ai/ластхит.js":"../js/ai/ластхит.js?v=2787e897cb","../js/ai/модель.js":"../js/ai/модель.js?v=2787e897cb","../js/ai/модель_партия.js":"../js/ai/модель_партия.js?v=2787e897cb","../js/ai/нейросети.js":"../js/ai/нейросети.js?v=2787e897cb","../js/ai/образец.js":"../js/ai/образец.js?v=2787e897cb","../js/ai/отряд.js":"../js/ai/отряд.js?v=2787e897cb","../js/ai/поведенец.js":"../js/ai/поведенец.js?v=2787e897cb","../js/ai/пресеты.js":"../js/ai/пресеты.js?v=2787e897cb","../js/ai/справочник.js":"../js/ai/справочник.js?v=2787e897cb","../js/ai/стратег_правило.js":"../js/ai/стратег_правило.js?v=2787e897cb","../js/ai/стройка.js":"../js/ai/стройка.js?v=2787e897cb","../js/ai/сцены.js":"../js/ai/сцены.js?v=2787e897cb","../js/ai/тирано2.js":"../js/ai/тирано2.js?v=2787e897cb","../js/ai/угодья.js":"../js/ai/угодья.js?v=2787e897cb","../js/ai/штаб.js":"../js/ai/штаб.js?v=2787e897cb","../js/archive.js":"../js/archive.js?v=2787e897cb","../js/core.js":"../js/core.js?v=2787e897cb","../js/engine.js":"../js/engine.js?v=2787e897cb","../js/fn.js":"../js/fn.js?v=2787e897cb","../js/input.js":"../js/input.js?v=2787e897cb","../js/loader.js":"../js/loader.js?v=2787e897cb","../js/mem.js":"../js/mem.js?v=2787e897cb","../js/modules.browser.js":"../js/modules.browser.js?v=2787e897cb","../js/modules.js":"../js/modules.js?v=2787e897cb","../js/net/lockstep.js":"../js/net/lockstep.js?v=2787e897cb","../js/net/игра.js":"../js/net/игра.js?v=2787e897cb","../js/net/канал.js":"../js/net/канал.js?v=2787e897cb","../js/net/локальный.js":"../js/net/локальный.js?v=2787e897cb","../js/net/холл.js":"../js/net/холл.js?v=2787e897cb","../js/port/ai_script.js":"../js/port/ai_script.js?v=2787e897cb","../js/port/artifacts.js":"../js/port/artifacts.js?v=2787e897cb","../js/port/autofood.js":"../js/port/autofood.js?v=2787e897cb","../js/port/autogroups.js":"../js/port/autogroups.js?v=2787e897cb","../js/port/buildplan.js":"../js/port/buildplan.js?v=2787e897cb","../js/port/caster.js":"../js/port/caster.js?v=2787e897cb","../js/port/combat.js":"../js/port/combat.js?v=2787e897cb","../js/port/economy.js":"../js/port/economy.js?v=2787e897cb","../js/port/fog.js":"../js/port/fog.js?v=2787e897cb","../js/port/follow.js":"../js/port/follow.js?v=2787e897cb","../js/port/humans.js":"../js/port/humans.js?v=2787e897cb","../js/port/inject.js":"../js/port/inject.js?v=2787e897cb","../js/port/input.js":"../js/port/input.js?v=2787e897cb","../js/port/kamikaze.js":"../js/port/kamikaze.js?v=2787e897cb","../js/port/loader.js":"../js/port/loader.js?v=2787e897cb","../js/port/magic.js":"../js/port/magic.js?v=2787e897cb","../js/port/move.js":"../js/port/move.js?v=2787e897cb","../js/port/orderqueue.js":"../js/port/orderqueue.js?v=2787e897cb","../js/port/orders_ai.js":"../js/port/orders_ai.js?v=2787e897cb","../js/port/path.js":"../js/port/path.js?v=2787e897cb","../js/port/patrol.js":"../js/port/patrol.js?v=2787e897cb","../js/port/prodqueue.js":"../js/port/prodqueue.js?v=2787e897cb","../js/port/skirmish.js":"../js/port/skirmish.js?v=2787e897cb","../js/port/новые_звери.js":"../js/port/новые_звери.js?v=2787e897cb","../js/render/fb.js":"../js/render/fb.js?v=2787e897cb","../js/render/hud.js":"../js/render/hud.js?v=2787e897cb","../js/render/panel.js":"../js/render/panel.js?v=2787e897cb","../js/render/renderer.js":"../js/render/renderer.js?v=2787e897cb","../js/render/scene.js":"../js/render/scene.js?v=2787e897cb","../js/render/sprites.js":"../js/render/sprites.js?v=2787e897cb","../js/render/text.js":"../js/render/text.js?v=2787e897cb","../js/render/wide.js":"../js/render/wide.js?v=2787e897cb","../js/ui/locale.js":"../js/ui/locale.js?v=2787e897cb","../js/ui/music.js":"../js/ui/music.js?v=2787e897cb","../js/ui/narration.js":"../js/ui/narration.js?v=2787e897cb","../js/ui/pathscenes.js":"../js/ui/pathscenes.js?v=2787e897cb","../js/ui/replay.js":"../js/ui/replay.js?v=2787e897cb","../js/ui/saves.js":"../js/ui/saves.js?v=2787e897cb","../js/ui/scenebuild.js":"../js/ui/scenebuild.js?v=2787e897cb","../js/ui/screen.js":"../js/ui/screen.js?v=2787e897cb","../js/ui/sfx.js":"../js/ui/sfx.js?v=2787e897cb","../js/ui/shell.js":"../js/ui/shell.js?v=2787e897cb","../js/ui/windows.js":"../js/ui/windows.js?v=2787e897cb","./arena.js":"./arena.js?v=2787e897cb","./lang.js":"./lang.js?v=2787e897cb","./path.js":"./path.js?v=2787e897cb","./viewer.js":"./viewer.js?v=2787e897cb"}}</script>
+<script>
+// СВЕЖИЙ КОД ПОСЛЕ ПРАВОК (владелец: «если обновляешь логику — обязательно думай над кэшем»). Safari на
+// планшете, возвращаясь во вкладку, поднимает страницу из памяти со старым кодом. Поэтому: страницу из
+// памяти перезагружаем сразу; при возврате во вкладку сверяем метку game.js?v= с сервером — сцену
+// перезагружаем сама, в обычной партии показываем плашку, чтобы не потерять игру.
+(function () {
+  addEventListener('pageshow', function (e) { if (e.persisted) location.reload(); });
+  var моя = (document.currentScript && null) || null;
+  function метка(html) { var м = /game\.js\?v=([0-9a-f]+)/.exec(html); return м ? м[1] : null; }
+  var загружена = null;
+  addEventListener('DOMContentLoaded', function () { var s = document.querySelector('script[src*="game.js?v="]'); загружена = s ? метка(s.getAttribute('src')) : null; });
+  async function сверить() {
+    if (document.visibilityState !== 'visible' || !загружена) return;
+    try {
+      var т = await (await fetch(location.pathname + '?nocache=' + Date.now(), { cache: 'no-store' })).text(), св = метка(т);
+      if (!св || св === загружена) return;
+      if (/[?&]scene=/.test(location.search)) { window.jwСвойУход && window.jwСвойУход(); location.reload(); return; }
+      if (document.getElementById('jw-new-code')) return;
+      var п = document.createElement('div'); п.id = 'jw-new-code';
+      п.textContent = 'код обновился — нажми, чтобы перезагрузить';
+      п.style.cssText = 'position:fixed;top:8px;left:50%;transform:translateX(-50%);z-index:9999;background:#e8c56a;color:#111;padding:8px 14px;border-radius:6px;font:14px sans-serif;cursor:pointer';
+      п.onclick = function () { window.jwСвойУход && window.jwСвойУход(); location.reload(); };
+      document.body.appendChild(п);
+    } catch (e) {}
+  }
+  document.addEventListener('visibilitychange', сверить);
+  setInterval(сверить, 60000);
+})();
+</script>
+<script>
+// Пресеты ручек ИИ по короткому имени: ссылка остаётся латинской (/jw/scene/tyrano/2?preset=t2), а
+// длинные JW_… подставляются в адрес ДО загрузки модулей — они читают ручки при импорте.
+(function () {
+  var П = { t2: { 'JW_ОБР_ШТАБ': '1', 'JW_ШТАБ_ДОМ': '6', 'JW_ОБР_РЕАКЦИЯ': '60', 'JW_ОБР_ОХРАНА_ЛОГОВА': '1', 'JW_ОБР_ОХРАНА': '1',
+                  'JW_СТР_РЕЗЕРВ': '1', 'JW_СТР_ТОЧНО': '1', 'JW_ШТАБ_ДОМА_ВСЕ': '1', 'JW_ОБР_КАЖДЫЕ': '6', 'JW_ОБР_ГОНЕЦ': '0',
+                  'JW_СТР_КОНВОЙ': '2', 'JW_ОБР_ОТНЕСТИ': '1800', 'JW_ОБР_ОТНЕСТИ_ОТРЯДОМ': '5000' } };
+  П.t2g = Object.assign({}, П.t2, { 'JW_ОБР_ГЛАВНЫЙ': '2', 'JW_ОБР_К_ДОБЫЧЕ_ДО': '4', 'JW_ОБР_ОЦЕНКА': '1', 'JW_ОБР_РАНЕНЫЙ': '4', 'JW_ОБР_ЖДАТЬ': '90', 'JW_ОБР_НЕ_ЗА_СПИНОЙ': '1', 'JW_ОБР_ПОХОД_ВМЕСТЕ': '1', 'JW_СТР_ЗА_МОСТОМ': '1', 'JW_СТР_У_СТЕНЫ': '1', 'JW_СТР_БЕЗ_ДРАКИ': '1', 'JW_ОБР_ВРОЗЬ': '1', 'JW_ОБР_ПРОКАЧКА_2': '1', 'JW_ОБР_ОХРАНА_ПО_УГРОЗЕ': '1', 'JW_СТР_БЕЗОПАСНО': '1', 'JW_ОБР_НЕ_СПИНОЙ': '1', 'JW_СТР_СНАЧАЛА_ОХОТНИКИ': '1' });
+  П.t2o = Object.assign({}, П.t2g, { 'JW_ОБР_ОЦЕНКА': '1' });   // + оценка добычи по опасности вокруг
+  П.t2s = Object.assign({}, П.t2o, { 'JW_ОБР_ГЛАВНЫЙ': '1', 'JW_ОБР_ГЛАВНЫЙ_СОЛО': '1' });   // делимся, когда главный один бьёт пса и леопарда   // + главный: 2 убийства, он в охране, остальные охотятся смело
+  var q = new URLSearchParams(location.search);
+  // Сцена без пресета и без своих ручек — лучший общий ИИ (t2g): голый ИИ владельцу не нужен.
+  var своиРучки = false; q.forEach(function (з, к) { if (к.indexOf('JW_') === 0) своиРучки = true; });
+  if (q.get('scene') && !q.get('preset') && !своиРучки) q.set('preset', 't2g');
+  var п = П[q.get('preset')];
+  if (!п) return;
+  for (var к in п) if (!q.has(к)) q.set(к, п[к]);
+  history.replaceState(null, '', location.pathname + '?' + q.toString() + location.hash);
+})();
+</script>
+<script type="module" src="game.js?v=e5878cf8"></script>
+</html>

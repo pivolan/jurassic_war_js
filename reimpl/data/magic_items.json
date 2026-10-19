@@ -1,0 +1,615 @@
+{
+ "source": "pwar.img @0x30954 (10 байт на id), имена @0x4212c",
+ "stride": 10,
+ "layout": [
+  "+HP",
+  "+MAG",
+  "+MANA",
+  "+ATK",
+  "+DEF",
+  "+SPD",
+  "price u16",
+  "flags u16"
+ ],
+ "flags": {
+  "1": "экипируемое/не «редкое»",
+  "2": "оружие (слоты 0-2)",
+  "4": "щит (слоты 3-5)",
+  "8": "товар арсенала (покупается/продаётся)",
+  "0x10": "редкая вещь/артефакт"
+ },
+ "items": [
+  {
+   "id": 0,
+   "name": "None",
+   "addr": "0x30954",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 0,
+   "dfn": 0,
+   "spd": 0,
+   "price": 0,
+   "flags": 0,
+   "flag_names": [],
+   "slot_group": "food(6-8)",
+   "sound": 68
+  },
+  {
+   "id": 1,
+   "name": "Sword",
+   "addr": "0x3095e",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 28,
+   "dfn": 0,
+   "spd": 0,
+   "price": 2000,
+   "flags": 11,
+   "flag_names": [
+    "equipable",
+    "weapon",
+    "armory"
+   ],
+   "slot_group": "weapon(0-2)",
+   "sound": 69
+  },
+  {
+   "id": 2,
+   "name": "Spear",
+   "addr": "0x30968",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 24,
+   "dfn": 0,
+   "spd": 0,
+   "price": 1400,
+   "flags": 11,
+   "flag_names": [
+    "equipable",
+    "weapon",
+    "armory"
+   ],
+   "slot_group": "weapon(0-2)",
+   "sound": 70
+  },
+  {
+   "id": 3,
+   "name": "Stone-Ax",
+   "addr": "0x30972",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 20,
+   "dfn": 0,
+   "spd": 0,
+   "price": 1000,
+   "flags": 11,
+   "flag_names": [
+    "equipable",
+    "weapon",
+    "armory"
+   ],
+   "slot_group": "weapon(0-2)",
+   "sound": 69
+  },
+  {
+   "id": 4,
+   "name": "Boomerang",
+   "addr": "0x3097c",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 15,
+   "dfn": 0,
+   "spd": 0,
+   "price": 600,
+   "flags": 11,
+   "flag_names": [
+    "equipable",
+    "weapon",
+    "armory"
+   ],
+   "slot_group": "weapon(0-2)",
+   "sound": 71
+  },
+  {
+   "id": 5,
+   "name": "Poison-Arrow",
+   "addr": "0x30986",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 9,
+   "dfn": 0,
+   "spd": 0,
+   "price": 200,
+   "flags": 11,
+   "flag_names": [
+    "equipable",
+    "weapon",
+    "armory"
+   ],
+   "slot_group": "weapon(0-2)",
+   "sound": 72
+  },
+  {
+   "id": 6,
+   "name": "Fire-Arrow",
+   "addr": "0x30990",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 7,
+   "dfn": 0,
+   "spd": 0,
+   "price": 200,
+   "flags": 11,
+   "flag_names": [
+    "equipable",
+    "weapon",
+    "armory"
+   ],
+   "slot_group": "weapon(0-2)",
+   "sound": 73
+  },
+  {
+   "id": 7,
+   "name": "Arrow",
+   "addr": "0x3099a",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 5,
+   "dfn": 0,
+   "spd": 0,
+   "price": 100,
+   "flags": 11,
+   "flag_names": [
+    "equipable",
+    "weapon",
+    "armory"
+   ],
+   "slot_group": "weapon(0-2)",
+   "sound": 74
+  },
+  {
+   "id": 8,
+   "name": "Wood-Shield",
+   "addr": "0x309a4",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 2,
+   "dfn": 0,
+   "spd": 0,
+   "price": 40,
+   "flags": 13,
+   "flag_names": [
+    "equipable",
+    "shield",
+    "armory"
+   ],
+   "slot_group": "shield(3-5)",
+   "sound": 0
+  },
+  {
+   "id": 9,
+   "name": "Iron-Shield",
+   "addr": "0x309ae",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 0,
+   "dfn": 0,
+   "spd": 0,
+   "price": 2,
+   "flags": 13,
+   "flag_names": [
+    "equipable",
+    "shield",
+    "armory"
+   ],
+   "slot_group": "shield(3-5)",
+   "sound": 0
+  },
+  {
+   "id": 10,
+   "name": "Wather-Shield",
+   "addr": "0x309b8",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 0,
+   "dfn": 15,
+   "spd": 0,
+   "price": 600,
+   "flags": 13,
+   "flag_names": [
+    "equipable",
+    "shield",
+    "armory"
+   ],
+   "slot_group": "shield(3-5)",
+   "sound": 0
+  },
+  {
+   "id": 11,
+   "name": "Water pail",
+   "addr": "0x309c2",
+   "hp": 10,
+   "mag": 0,
+   "mana": 5,
+   "atk": 0,
+   "dfn": 0,
+   "spd": 0,
+   "price": 50,
+   "flags": 9,
+   "flag_names": [
+    "equipable",
+    "armory"
+   ],
+   "slot_group": "food(6-8)",
+   "sound": 80
+  },
+  {
+   "id": 12,
+   "name": "Apple",
+   "addr": "0x309cc",
+   "hp": 20,
+   "mag": 0,
+   "mana": 10,
+   "atk": 0,
+   "dfn": 0,
+   "spd": 0,
+   "price": 100,
+   "flags": 9,
+   "flag_names": [
+    "equipable",
+    "armory"
+   ],
+   "slot_group": "food(6-8)",
+   "sound": 81
+  },
+  {
+   "id": 13,
+   "name": "Herb",
+   "addr": "0x309d6",
+   "hp": 30,
+   "mag": 0,
+   "mana": 15,
+   "atk": 0,
+   "dfn": 0,
+   "spd": 0,
+   "price": 200,
+   "flags": 9,
+   "flag_names": [
+    "equipable",
+    "armory"
+   ],
+   "slot_group": "food(6-8)",
+   "sound": 82
+  },
+  {
+   "id": 14,
+   "name": "Ginseng",
+   "addr": "0x309e0",
+   "hp": 40,
+   "mag": 0,
+   "mana": 20,
+   "atk": 0,
+   "dfn": 0,
+   "spd": 0,
+   "price": 300,
+   "flags": 9,
+   "flag_names": [
+    "equipable",
+    "armory"
+   ],
+   "slot_group": "food(6-8)",
+   "sound": 83
+  },
+  {
+   "id": 15,
+   "name": "Celestial Sword",
+   "addr": "0x309ea",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 52,
+   "dfn": 20,
+   "spd": 10,
+   "price": 0,
+   "flags": 19,
+   "flag_names": [
+    "equipable",
+    "weapon",
+    "rare"
+   ],
+   "slot_group": "weapon(0-2)",
+   "sound": 75
+  },
+  {
+   "id": 16,
+   "name": "Moonlight Sword",
+   "addr": "0x309f4",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 45,
+   "dfn": 10,
+   "spd": 5,
+   "price": 0,
+   "flags": 19,
+   "flag_names": [
+    "equipable",
+    "weapon",
+    "rare"
+   ],
+   "slot_group": "weapon(0-2)",
+   "sound": 75
+  },
+  {
+   "id": 17,
+   "name": "Mystical Liquor",
+   "addr": "0x309fe",
+   "hp": 0,
+   "mag": 10,
+   "mana": 0,
+   "atk": 0,
+   "dfn": 0,
+   "spd": 0,
+   "price": 0,
+   "flags": 16,
+   "flag_names": [
+    "rare"
+   ],
+   "slot_group": "rare(9-11)",
+   "sound": 0
+  },
+  {
+   "id": 18,
+   "name": "Ax of Darkness",
+   "addr": "0x30a08",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 40,
+   "dfn": 0,
+   "spd": 10,
+   "price": 0,
+   "flags": 19,
+   "flag_names": [
+    "equipable",
+    "weapon",
+    "rare"
+   ],
+   "slot_group": "weapon(0-2)",
+   "sound": 75
+  },
+  {
+   "id": 19,
+   "name": "Rock crystal",
+   "addr": "0x30a12",
+   "hp": 0,
+   "mag": 20,
+   "mana": 0,
+   "atk": 0,
+   "dfn": 0,
+   "spd": 0,
+   "price": 0,
+   "flags": 16,
+   "flag_names": [
+    "rare"
+   ],
+   "slot_group": "rare(9-11)",
+   "sound": 0
+  },
+  {
+   "id": 20,
+   "name": "Dragon's Eye",
+   "addr": "0x30a1c",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 0,
+   "dfn": 10,
+   "spd": 30,
+   "price": 0,
+   "flags": 16,
+   "flag_names": [
+    "rare"
+   ],
+   "slot_group": "rare(9-11)",
+   "sound": 0
+  },
+  {
+   "id": 21,
+   "name": "Moon Shield",
+   "addr": "0x30a26",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 0,
+   "dfn": 25,
+   "spd": 10,
+   "price": 0,
+   "flags": 21,
+   "flag_names": [
+    "equipable",
+    "shield",
+    "rare"
+   ],
+   "slot_group": "shield(3-5)",
+   "sound": 0
+  },
+  {
+   "id": 22,
+   "name": "Hammer of Darkness",
+   "addr": "0x30a30",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 35,
+   "dfn": 0,
+   "spd": 0,
+   "price": 0,
+   "flags": 19,
+   "flag_names": [
+    "equipable",
+    "weapon",
+    "rare"
+   ],
+   "slot_group": "weapon(0-2)",
+   "sound": 75
+  },
+  {
+   "id": 23,
+   "name": "Volcano Spear",
+   "addr": "0x30a3a",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 35,
+   "dfn": 0,
+   "spd": 0,
+   "price": 0,
+   "flags": 19,
+   "flag_names": [
+    "equipable",
+    "weapon",
+    "rare"
+   ],
+   "slot_group": "weapon(0-2)",
+   "sound": 75
+  },
+  {
+   "id": 24,
+   "name": "Sun Shield",
+   "addr": "0x30a44",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 10,
+   "dfn": 25,
+   "spd": 0,
+   "price": 0,
+   "flags": 21,
+   "flag_names": [
+    "equipable",
+    "shield",
+    "rare"
+   ],
+   "slot_group": "shield(3-5)",
+   "sound": 0
+  },
+  {
+   "id": 25,
+   "name": "Leather Shoes",
+   "addr": "0x30a4e",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 0,
+   "dfn": 5,
+   "spd": 20,
+   "price": 0,
+   "flags": 16,
+   "flag_names": [
+    "rare"
+   ],
+   "slot_group": "rare(9-11)",
+   "sound": 0
+  },
+  {
+   "id": 26,
+   "name": "Bone Necklace",
+   "addr": "0x30a58",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 0,
+   "dfn": 15,
+   "spd": 0,
+   "price": 0,
+   "flags": 16,
+   "flag_names": [
+    "rare"
+   ],
+   "slot_group": "rare(9-11)",
+   "sound": 0
+  },
+  {
+   "id": 27,
+   "name": "Bone-Bracelet",
+   "addr": "0x30a62",
+   "hp": 0,
+   "mag": 5,
+   "mana": 0,
+   "atk": 0,
+   "dfn": 10,
+   "spd": 0,
+   "price": 0,
+   "flags": 16,
+   "flag_names": [
+    "rare"
+   ],
+   "slot_group": "rare(9-11)",
+   "sound": 0
+  },
+  {
+   "id": 28,
+   "name": "Gloves",
+   "addr": "0x30a6c",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 5,
+   "dfn": 10,
+   "spd": 0,
+   "price": 0,
+   "flags": 16,
+   "flag_names": [
+    "rare"
+   ],
+   "slot_group": "rare(9-11)",
+   "sound": 0
+  },
+  {
+   "id": 29,
+   "name": "Skull Stick",
+   "addr": "0x30a76",
+   "hp": 0,
+   "mag": 15,
+   "mana": 0,
+   "atk": 5,
+   "dfn": 5,
+   "spd": 0,
+   "price": 0,
+   "flags": 16,
+   "flag_names": [
+    "rare"
+   ],
+   "slot_group": "rare(9-11)",
+   "sound": 0
+  },
+  {
+   "id": 30,
+   "name": "Foods=00000000",
+   "addr": "0x30a80",
+   "hp": 0,
+   "mag": 0,
+   "mana": 0,
+   "atk": 0,
+   "dfn": 0,
+   "spd": 0,
+   "price": 0,
+   "flags": 0,
+   "flag_names": [],
+   "slot_group": "food(6-8)",
+   "sound": 0
+  }
+ ]
+}

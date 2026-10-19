@@ -1,0 +1,117 @@
+{
+ "note": "три независимых цены на один предмет",
+ "rows": [
+  {
+   "menu_idx": 0,
+   "item_id": 1,
+   "name": "Sword",
+   "build_cost": 350,
+   "sell_via_order": 165,
+   "panel_price": 2000
+  },
+  {
+   "menu_idx": 1,
+   "item_id": 2,
+   "name": "Spear",
+   "build_cost": 330,
+   "sell_via_order": 155,
+   "panel_price": 1400
+  },
+  {
+   "menu_idx": 2,
+   "item_id": 3,
+   "name": "Stone-Ax",
+   "build_cost": 310,
+   "sell_via_order": 250,
+   "panel_price": 1000
+  },
+  {
+   "menu_idx": 3,
+   "item_id": 4,
+   "name": "Boomerang",
+   "build_cost": 500,
+   "sell_via_order": 200,
+   "panel_price": 600
+  },
+  {
+   "menu_idx": 4,
+   "item_id": 5,
+   "name": "Poison-Arrow",
+   "build_cost": 400,
+   "sell_via_order": 175,
+   "panel_price": 200
+  },
+  {
+   "menu_idx": 5,
+   "item_id": 6,
+   "name": "Fire-Arrow",
+   "build_cost": 350,
+   "sell_via_order": 175,
+   "panel_price": 200
+  },
+  {
+   "menu_idx": 6,
+   "item_id": 7,
+   "name": "Arrow",
+   "build_cost": 350,
+   "sell_via_order": 175,
+   "panel_price": 100
+  },
+  {
+   "menu_idx": 7,
+   "item_id": 8,
+   "name": "Wood-Shield",
+   "build_cost": 350,
+   "sell_via_order": 200,
+   "panel_price": 40
+  },
+  {
+   "menu_idx": 8,
+   "item_id": 9,
+   "name": "Iron-Shield",
+   "build_cost": 400,
+   "sell_via_order": 190,
+   "panel_price": 2
+  },
+  {
+   "menu_idx": 9,
+   "item_id": 10,
+   "name": "Wather-Shield",
+   "build_cost": 380,
+   "sell_via_order": 105,
+   "panel_price": 600
+  },
+  {
+   "menu_idx": 10,
+   "item_id": 11,
+   "name": "Water pail",
+   "build_cost": 210,
+   "sell_via_order": 125,
+   "panel_price": 50
+  },
+  {
+   "menu_idx": 11,
+   "item_id": 12,
+   "name": "Apple",
+   "build_cost": 250,
+   "sell_via_order": 175,
+   "panel_price": 100
+  },
+  {
+   "menu_idx": 12,
+   "item_id": 13,
+   "name": "Herb",
+   "build_cost": 350,
+   "sell_via_order": 225,
+   "panel_price": 200
+  },
+  {
+   "menu_idx": 13,
+   "item_id": 14,
+   "name": "Ginseng",
+   "build_cost": 450,
+   "sell_via_order": 175,
+   "panel_price": 300
+  }
+ ]
+}

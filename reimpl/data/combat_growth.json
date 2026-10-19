@@ -1,0 +1,697 @@
+{
+ "_": "Потолки статов: [0x30dd8 + slot*4] + [0x30dfc + type*4]; блок 12 байт (u16 HP, MAG, ATK, DEF, SPD, pad). Ниже — блок по умолчанию 0x31c68 (игрок 0).",
+ "stat_caps_default_0x31c68": {
+  "0": {
+   "name": "",
+   "HP": 70,
+   "MAG": 60,
+   "ATK": 60,
+   "DEF": 100,
+   "SPD": 80
+  },
+  "1": {
+   "name": "Commoner",
+   "HP": 70,
+   "MAG": 0,
+   "ATK": 70,
+   "DEF": 100,
+   "SPD": 100
+  },
+  "2": {
+   "name": "Muscle-man",
+   "HP": 254,
+   "MAG": 0,
+   "ATK": 254,
+   "DEF": 254,
+   "SPD": 254
+  },
+  "3": {
+   "name": "Warrior",
+   "HP": 254,
+   "MAG": 0,
+   "ATK": 254,
+   "DEF": 254,
+   "SPD": 254
+  },
+  "4": {
+   "name": "Constructor",
+   "HP": 100,
+   "MAG": 0,
+   "ATK": 100,
+   "DEF": 100,
+   "SPD": 100
+  },
+  "5": {
+   "name": "Elf",
+   "HP": 254,
+   "MAG": 200,
+   "ATK": 254,
+   "DEF": 254,
+   "SPD": 254
+  },
+  "6": {
+   "name": "Wizard",
+   "HP": 254,
+   "MAG": 200,
+   "ATK": 254,
+   "DEF": 254,
+   "SPD": 254
+  },
+  "7": {
+   "name": "Warlock",
+   "HP": 254,
+   "MAG": 200,
+   "ATK": 254,
+   "DEF": 254,
+   "SPD": 254
+  },
+  "8": {
+   "name": "Ranger",
+   "HP": 254,
+   "MAG": 254,
+   "ATK": 254,
+   "DEF": 254,
+   "SPD": 254
+  },
+  "9": {
+   "name": "Velociraptor",
+   "HP": 254,
+   "MAG": 0,
+   "ATK": 254,
+   "DEF": 254,
+   "SPD": 254
+  },
+  "10": {
+   "name": "Carrnotaurous",
+   "HP": 254,
+   "MAG": 0,
+   "ATK": 254,
+   "DEF": 254,
+   "SPD": 254
+  },
+  "11": {
+   "name": "Rhamphorhynchus",
+   "HP": 254,
+   "MAG": 0,
+   "ATK": 254,
+   "DEF": 254,
+   "SPD": 254
+  },
+  "12": {
+   "name": "Triceratops",
+   "HP": 254,
+   "MAG": 0,
+   "ATK": 254,
+   "DEF": 254,
+   "SPD": 254
+  },
+  "13": {
+   "name": "Diloposaurus",
+   "HP": 254,
+   "MAG": 0,
+   "ATK": 254,
+   "DEF": 254,
+   "SPD": 254
+  },
+  "14": {
+   "name": "Tyrannosaurus",
+   "HP": 220,
+   "MAG": 0,
+   "ATK": 220,
+   "DEF": 200,
+   "SPD": 120
+  },
+  "15": {
+   "name": "Brachiosaurus",
+   "HP": 250,
+   "MAG": 0,
+   "ATK": 170,
+   "DEF": 180,
+   "SPD": 140
+  },
+  "16": {
+   "name": "Centrosaurus",
+   "HP": 180,
+   "MAG": 0,
+   "ATK": 130,
+   "DEF": 120,
+   "SPD": 180
+  },
+  "17": {
+   "name": "Stauricosaurus",
+   "HP": 170,
+   "MAG": 0,
+   "ATK": 100,
+   "DEF": 100,
+   "SPD": 160
+  },
+  "18": {
+   "name": "Daemon",
+   "HP": 70,
+   "MAG": 0,
+   "ATK": 60,
+   "DEF": 100,
+   "SPD": 80
+  },
+  "19": {
+   "name": "Mammoth",
+   "HP": 140,
+   "MAG": 0,
+   "ATK": 80,
+   "DEF": 110,
+   "SPD": 80
+  },
+  "20": {
+   "name": "Musso",
+   "HP": 110,
+   "MAG": 0,
+   "ATK": 70,
+   "DEF": 100,
+   "SPD": 80
+  },
+  "21": {
+   "name": "Tiger",
+   "HP": 100,
+   "MAG": 0,
+   "ATK": 70,
+   "DEF": 100,
+   "SPD": 140
+  },
+  "22": {
+   "name": "Leopard",
+   "HP": 60,
+   "MAG": 0,
+   "ATK": 60,
+   "DEF": 50,
+   "SPD": 100
+  },
+  "23": {
+   "name": "Cur",
+   "HP": 50,
+   "MAG": 0,
+   "ATK": 40,
+   "DEF": 45,
+   "SPD": 80
+  },
+  "24": {
+   "name": "Nexious Weed",
+   "HP": 70,
+   "MAG": 0,
+   "ATK": 0,
+   "DEF": 0,
+   "SPD": 80
+  },
+  "25": {
+   "name": "Poisonous Mushroom",
+   "HP": 70,
+   "MAG": 0,
+   "ATK": 0,
+   "DEF": 0,
+   "SPD": 80
+  }
+ },
+ "player_cap_blocks_0x30dd8": [
+  "0x31c68",
+  "0x31da0",
+  "0x31ed8",
+  "0x32010",
+  "0x32148",
+  "0x32280",
+  "0x323b8",
+  "0x324f0",
+  "0x32628"
+ ],
+ "type_offset_0x30dfc": [
+  0,
+  12,
+  24,
+  36,
+  48,
+  60,
+  72,
+  84,
+  96,
+  108,
+  120,
+  132,
+  144,
+  156,
+  168,
+  180,
+  192,
+  204,
+  216,
+  228,
+  240,
+  252,
+  264,
+  276,
+  288,
+  300
+ ],
+ "base_stats_0x37654": {
+  "0": {
+   "name": "",
+   "HP": 0,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 0,
+   "DEF": 0,
+   "SPD": 0,
+   "food": 0
+  },
+  "1": {
+   "name": "Commoner",
+   "HP": 30,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 20,
+   "DEF": 30,
+   "SPD": 20,
+   "food": 30
+  },
+  "2": {
+   "name": "Muscle-man",
+   "HP": 70,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 35,
+   "DEF": 70,
+   "SPD": 30,
+   "food": 30
+  },
+  "3": {
+   "name": "Warrior",
+   "HP": 50,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 70,
+   "DEF": 35,
+   "SPD": 40,
+   "food": 30
+  },
+  "4": {
+   "name": "Constructor",
+   "HP": 20,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 10,
+   "DEF": 10,
+   "SPD": 10,
+   "food": 30
+  },
+  "5": {
+   "name": "Elf",
+   "HP": 35,
+   "MAG": 30,
+   "mana": 30,
+   "ATK": 25,
+   "DEF": 25,
+   "SPD": 30,
+   "food": 30
+  },
+  "6": {
+   "name": "Wizard",
+   "HP": 45,
+   "MAG": 30,
+   "mana": 30,
+   "ATK": 25,
+   "DEF": 25,
+   "SPD": 30,
+   "food": 30
+  },
+  "7": {
+   "name": "Warlock",
+   "HP": 40,
+   "MAG": 30,
+   "mana": 30,
+   "ATK": 25,
+   "DEF": 25,
+   "SPD": 40,
+   "food": 30
+  },
+  "8": {
+   "name": "Ranger",
+   "HP": 40,
+   "MAG": 30,
+   "mana": 30,
+   "ATK": 25,
+   "DEF": 25,
+   "SPD": 70,
+   "food": 30
+  },
+  "9": {
+   "name": "Velociraptor",
+   "HP": 80,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 50,
+   "DEF": 80,
+   "SPD": 90,
+   "food": 30
+  },
+  "10": {
+   "name": "Carrnotaurous",
+   "HP": 45,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 40,
+   "DEF": 60,
+   "SPD": 60,
+   "food": 30
+  },
+  "11": {
+   "name": "Rhamphorhynchus",
+   "HP": 50,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 30,
+   "DEF": 40,
+   "SPD": 120,
+   "food": 30
+  },
+  "12": {
+   "name": "Triceratops",
+   "HP": 130,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 70,
+   "DEF": 60,
+   "SPD": 50,
+   "food": 30
+  },
+  "13": {
+   "name": "Diloposaurus",
+   "HP": 50,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 50,
+   "DEF": 40,
+   "SPD": 50,
+   "food": 30
+  },
+  "14": {
+   "name": "Tyrannosaurus",
+   "HP": 200,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 150,
+   "DEF": 150,
+   "SPD": 200,
+   "food": 1000
+  },
+  "15": {
+   "name": "Brachiosaurus",
+   "HP": 250,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 100,
+   "DEF": 120,
+   "SPD": 120,
+   "food": 950
+  },
+  "16": {
+   "name": "Centrosaurus",
+   "HP": 150,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 80,
+   "DEF": 100,
+   "SPD": 150,
+   "food": 900
+  },
+  "17": {
+   "name": "Stauricosaurus",
+   "HP": 120,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 70,
+   "DEF": 80,
+   "SPD": 140,
+   "food": 800
+  },
+  "18": {
+   "name": "Daemon",
+   "HP": 100,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 70,
+   "DEF": 70,
+   "SPD": 130,
+   "food": 750
+  },
+  "19": {
+   "name": "Mammoth",
+   "HP": 80,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 55,
+   "DEF": 45,
+   "SPD": 120,
+   "food": 700
+  },
+  "20": {
+   "name": "Musso",
+   "HP": 70,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 50,
+   "DEF": 45,
+   "SPD": 70,
+   "food": 400
+  },
+  "21": {
+   "name": "Tiger",
+   "HP": 50,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 50,
+   "DEF": 40,
+   "SPD": 120,
+   "food": 350
+  },
+  "22": {
+   "name": "Leopard",
+   "HP": 22,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 24,
+   "DEF": 24,
+   "SPD": 100,
+   "food": 200
+  },
+  "23": {
+   "name": "Cur",
+   "HP": 18,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 20,
+   "DEF": 20,
+   "SPD": 80,
+   "food": 150
+  },
+  "24": {
+   "name": "Nexious Weed",
+   "HP": 40,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 15,
+   "DEF": 10,
+   "SPD": 0,
+   "food": 30
+  },
+  "25": {
+   "name": "Poisonous Mushroom",
+   "HP": 25,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 10,
+   "DEF": 10,
+   "SPD": 0,
+   "food": 20
+  },
+  "26": {
+   "name": "Sanctuary",
+   "HP": 255,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 0,
+   "DEF": 255,
+   "SPD": 200,
+   "food": 0
+  },
+  "27": {
+   "name": "Barracks",
+   "HP": 200,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 0,
+   "DEF": 255,
+   "SPD": 150,
+   "food": 0
+  },
+  "28": {
+   "name": "Armory",
+   "HP": 230,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 0,
+   "DEF": 255,
+   "SPD": 180,
+   "food": 0
+  },
+  "29": {
+   "name": "Armory",
+   "HP": 230,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 0,
+   "DEF": 255,
+   "SPD": 180,
+   "food": 0
+  },
+  "30": {
+   "name": "Food-storage",
+   "HP": 160,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 0,
+   "DEF": 255,
+   "SPD": 160,
+   "food": 0
+  },
+  "31": {
+   "name": "Elf trainning",
+   "HP": 180,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 0,
+   "DEF": 255,
+   "SPD": 170,
+   "food": 0
+  },
+  "32": {
+   "name": "Wizard trainning",
+   "HP": 190,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 0,
+   "DEF": 255,
+   "SPD": 180,
+   "food": 0
+  },
+  "33": {
+   "name": "Warlock trainning",
+   "HP": 190,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 0,
+   "DEF": 255,
+   "SPD": 180,
+   "food": 0
+  },
+  "34": {
+   "name": "Ranger trainning",
+   "HP": 190,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 0,
+   "DEF": 255,
+   "SPD": 255,
+   "food": 0
+  },
+  "35": {
+   "name": "Velociraptor trainning",
+   "HP": 220,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 0,
+   "DEF": 255,
+   "SPD": 180,
+   "food": 0
+  },
+  "36": {
+   "name": "Carrnotaurous trainning",
+   "HP": 210,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 0,
+   "DEF": 255,
+   "SPD": 180,
+   "food": 0
+  },
+  "37": {
+   "name": "Rhamphorhynchus trainning",
+   "HP": 200,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 0,
+   "DEF": 255,
+   "SPD": 240,
+   "food": 0
+  },
+  "38": {
+   "name": "Triceratops trainning",
+   "HP": 240,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 0,
+   "DEF": 255,
+   "SPD": 200,
+   "food": 0
+  },
+  "39": {
+   "name": "Diloposaurus trainning",
+   "HP": 190,
+   "MAG": 0,
+   "mana": 0,
+   "ATK": 0,
+   "DEF": 255,
+   "SPD": 200,
+   "food": 0
+  }
+ },
+ "stat_grow_mask_0x0b_note": "маска растущих статов лежит в записи юнита +0x0b: 1 HP, 2 ATK, 4 DEF, 8 MAG, 0x10 SPD",
+ "respawn_timer_0x36d82": {
+  "0": 0,
+  "1": 360,
+  "2": 540,
+  "3": 540,
+  "4": 720,
+  "5": 540,
+  "6": 540,
+  "7": 540,
+  "8": 540,
+  "9": 1080,
+  "10": 1080,
+  "11": 1080,
+  "12": 1080,
+  "13": 1080,
+  "14": 6480,
+  "15": 5400,
+  "16": 5400,
+  "17": 5400,
+  "18": 5400,
+  "19": 8100,
+  "20": 2880,
+  "21": 1800,
+  "22": 1080,
+  "23": 720,
+  "24": 4500,
+  "25": 7200,
+  "26": 540,
+  "27": 540,
+  "28": 1080,
+  "29": 1080,
+  "30": 540,
+  "31": 1080,
+  "32": 1080,
+  "33": 1080,
+  "34": 1080,
+  "35": 1080,
+  "36": 1080,
+  "37": 1080,
+  "38": 1080,
+  "39": 1080
+ }
+}

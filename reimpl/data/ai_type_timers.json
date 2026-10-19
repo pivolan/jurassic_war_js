@@ -1,0 +1,167 @@
+{
+ "addr": "0x36d82 (индекс = тип, тип 1 по адресу 0x36d84)",
+ "unit": "игровые шаги",
+ "note": "для типов 14..23 порог = значение + [0x33358 + тип*4] (счётчик убитых особей этого вида)",
+ "timer_by_type": {
+  "0": {
+   "name": "(пусто)",
+   "timer": 0
+  },
+  "1": {
+   "name": "Commoner",
+   "timer": 360
+  },
+  "2": {
+   "name": "Muscle-man",
+   "timer": 540
+  },
+  "3": {
+   "name": "Warrior",
+   "timer": 540
+  },
+  "4": {
+   "name": "Constructor",
+   "timer": 720
+  },
+  "5": {
+   "name": "Elf",
+   "timer": 540
+  },
+  "6": {
+   "name": "Wizard",
+   "timer": 540
+  },
+  "7": {
+   "name": "Warlock",
+   "timer": 540
+  },
+  "8": {
+   "name": "Ranger",
+   "timer": 540
+  },
+  "9": {
+   "name": "Velociraptor",
+   "timer": 1080
+  },
+  "10": {
+   "name": "Carnotaurus",
+   "timer": 1080
+  },
+  "11": {
+   "name": "Rhamphorhynchus",
+   "timer": 1080
+  },
+  "12": {
+   "name": "Triceratops",
+   "timer": 1080
+  },
+  "13": {
+   "name": "Dilophosaurus",
+   "timer": 1080
+  },
+  "14": {
+   "name": "Tyrannosaurus",
+   "timer": 6480
+  },
+  "15": {
+   "name": "Brachiosaurus",
+   "timer": 5400
+  },
+  "16": {
+   "name": "Centrosaurus",
+   "timer": 5400
+  },
+  "17": {
+   "name": "Stauricosaurus",
+   "timer": 5400
+  },
+  "18": {
+   "name": "Daemon",
+   "timer": 5400
+  },
+  "19": {
+   "name": "Mammoth",
+   "timer": 8100
+  },
+  "20": {
+   "name": "Musso",
+   "timer": 2880
+  },
+  "21": {
+   "name": "Tiger",
+   "timer": 1800
+  },
+  "22": {
+   "name": "Leopard",
+   "timer": 1080
+  },
+  "23": {
+   "name": "Cur",
+   "timer": 720
+  },
+  "24": {
+   "name": "Nexious Weed",
+   "timer": 4500
+  },
+  "25": {
+   "name": "Poisonous Mushroom",
+   "timer": 7200
+  },
+  "26": {
+   "name": "Sanctuary",
+   "timer": 540
+  },
+  "27": {
+   "name": "Barracks",
+   "timer": 540
+  },
+  "28": {
+   "name": "Armory",
+   "timer": 1080
+  },
+  "29": {
+   "name": "Armory",
+   "timer": 1080
+  },
+  "30": {
+   "name": "Food-storage",
+   "timer": 540
+  },
+  "31": {
+   "name": "Elf training",
+   "timer": 1080
+  },
+  "32": {
+   "name": "Wizard training",
+   "timer": 1080
+  },
+  "33": {
+   "name": "Warlock training",
+   "timer": 1080
+  },
+  "34": {
+   "name": "Ranger training",
+   "timer": 1080
+  },
+  "35": {
+   "name": "Velociraptor training",
+   "timer": 1080
+  },
+  "36": {
+   "name": "Carnotaurus training",
+   "timer": 1080
+  },
+  "37": {
+   "name": "Rhamphorhynchus training",
+   "timer": 1080
+  },
+  "38": {
+   "name": "Triceratops training",
+   "timer": 1080
+  },
+  "39": {
+   "name": "Dilophosaurus training",
+   "timer": 1080
+  }
+ }
+}

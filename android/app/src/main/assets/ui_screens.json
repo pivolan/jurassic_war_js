@@ -1,0 +1,2913 @@
+{
+ "_": "Каталог экранов и элементов интерфейса Jurassic War (V1.05E). Координаты — пиксели экрана 640x480, начало в левом верхнем углу. Ссылки на ресурсы: pack — номер архива _PWARnn.TR?, entry — индекс записи (как в out/extract/<пак>/). Разметка снята по самим картинкам, метод и точность описаны в notes/ui-screens.md.",
+ "_generated_by": "python3 tools/ui_catalog.py json",
+ "screen": [
+  640,
+  480
+ ],
+ "tribes": {
+  "_": "Внутренняя нумерация племён 0..7 (строки 'Tribe of ...' @0x31a95 в pwar.img). Ей же следуют семейства по 8 записей в паке 02 и блоки по 19 записей в паке 05.",
+  "names": [
+   "Tyrano",
+   "Kanoose",
+   "Romack",
+   "Masai",
+   "Moospell",
+   "Koomba",
+   "Radumba",
+   "Koaka"
+  ]
+ },
+ "palettes": {
+  "_": "Файлы .PAL — 768 байт, по 3 байта на цвет, компоненты УЖЕ 8-битные (в DAC уходят >>2, домножать на 255/63 не надо). Индекс 0 в спрайтах пака 02 — прозрачный.",
+  "MAIN": {
+   "pack": "01C",
+   "entry": 4,
+   "used_by": "весь пак 02, MAIN.SCR, игра"
+  },
+  "SETUP": {
+   "pack": "01C",
+   "entry": 6,
+   "used_by": "SETUP.SCR (фон SETUP.EXE)"
+  },
+  "LOGOTRIC": {
+   "pack": "01C",
+   "entry": 9
+  },
+  "LOGOSKC": {
+   "pack": "01C",
+   "entry": 11
+  },
+  "HELP1": {
+   "pack": "03C",
+   "entry": 0,
+   "used_by": "HELP1.SCR и HELP2.SCR (палитры совпадают байт в байт)"
+  },
+  "HELP2": {
+   "pack": "03C",
+   "entry": 2
+  },
+  "HELP3": {
+   "pack": "03C",
+   "entry": 4
+  },
+  "story_win": {
+   "_": "у каждого экрана пака 09 своя палитра — запись непосредственно перед .SPR"
+  }
+ },
+ "screens": {
+  "logo_tric": {
+   "_": "Логотип разработчика T.R.I.C. (Tranquil Revolt In Computer). Полноэкранная картинка.",
+   "name": "TRIC logo",
+   "pack": "01C",
+   "entry": 10,
+   "palette_entry": 9,
+   "size": [
+    640,
+    480
+   ],
+   "format": "SCR (сырые 640x480 8bpp, без заголовка)",
+   "hotspots": [],
+   "advance": "по клику/клавише или по таймеру (код не реверсили)"
+  },
+  "logo_skc": {
+   "_": "Логотип издателя SKC Softland.",
+   "name": "SKC Softland logo",
+   "pack": "01C",
+   "entry": 12,
+   "palette_entry": 11,
+   "size": [
+    640,
+    480
+   ],
+   "format": "SCR",
+   "hotspots": [],
+   "advance": "по клику/клавише или по таймеру"
+  },
+  "loading": {
+   "_": "Титульный фон с надписью Loading... в красном круге. Тот же файл служит фоном главного меню: колесо меню перекрывает круг целиком.",
+   "name": "Loading screen",
+   "pack": "01C",
+   "entry": 5,
+   "palette_entry": 4,
+   "size": [
+    640,
+    480
+   ],
+   "format": "SCR",
+   "hotspots": []
+  },
+  "setup_bg": {
+   "_": "Фон внешней утилиты SETUP.EXE. В самой игре не показывается.",
+   "name": "SETUP.EXE background",
+   "pack": "01C",
+   "entry": 7,
+   "palette_entry": 6,
+   "size": [
+    640,
+    480
+   ],
+   "format": "SCR",
+   "hotspots": []
+  },
+  "title_menu": {
+   "_": "Главное меню. Фон — MAIN.SCR (пак 01, запись 5), поверх него в (207,188) рисуется колесо из 7 кусков пака 02 (записи 19..32: чётная — обычная, нечётная — подсвеченная). Плюс 4 анимированных участка фона (см. animations). Колесо ровно накрывает красный круг с надписью Loading... . Проверено: собранная композиция пиксель в пиксель повторяет кадр ref/video/frames/f_0018.jpg (там русская пиратка, геометрия та же).",
+   "name": "Main menu",
+   "background": {
+    "pack": "01C",
+    "entry": 5
+   },
+   "palette": "MAIN",
+   "size": [
+    640,
+    480
+   ],
+   "wheel": {
+    "x": 207,
+    "y": 188,
+    "w": 225,
+    "h": 226,
+    "cx": 319.0,
+    "cy": 300.0,
+    "r_outer": 112.0,
+    "r_hub": 34.0,
+    "_": "Хит-тест: dist(cx,cy) <= 34 -> центр (Help); 34..111 -> сектор по углу. Угол в градусах, 0 = вправо, против часовой стрелки (экранный y вниз).",
+    "sector_bounds_deg": [
+     -40.5,
+     -1.9,
+     40.0,
+     140.0,
+     181.9,
+     220.5
+    ]
+   },
+   "hotspots": [
+    {
+     "id": "multiplayer_game",
+     "label": "Multiplayer Game",
+     "kind": "sector",
+     "x": 238,
+     "y": 191,
+     "w": 162,
+     "h": 87,
+     "r0": 32.0,
+     "r1": 109.4,
+     "a0": 40.0,
+     "a1": 140.2,
+     "sprite_normal": 19,
+     "sprite_over": 20,
+     "sprite_xy": [
+      233,
+      188
+     ],
+     "sprite_wh": [
+      171,
+      92
+     ]
+    },
+    {
+     "id": "load_game",
+     "label": "Load",
+     "kind": "sector",
+     "x": 349,
+     "y": 229,
+     "w": 81,
+     "h": 72,
+     "r0": 34.0,
+     "r1": 110.8,
+     "a0": 0.0,
+     "a1": 39.8,
+     "sprite_normal": 21,
+     "sprite_over": 22,
+     "sprite_xy": [
+      347,
+      225
+     ],
+     "sprite_wh": [
+      85,
+      78
+     ]
+    },
+    {
+     "id": "quit",
+     "label": "Quit",
+     "kind": "sector",
+     "x": 349,
+     "y": 305,
+     "w": 81,
+     "h": 65,
+     "r0": 34.7,
+     "r1": 110.4,
+     "a0": -40.8,
+     "a1": -3.4,
+     "sprite_normal": 23,
+     "sprite_over": 24,
+     "sprite_xy": [
+      347,
+      303
+     ],
+     "sprite_wh": [
+      85,
+      69
+     ]
+    },
+    {
+     "id": "replay_introduction",
+     "label": "Replay Introduction",
+     "kind": "sector",
+     "x": 238,
+     "y": 326,
+     "w": 163,
+     "h": 86,
+     "r0": 32.3,
+     "r1": 111.3,
+     "a0": -140.1,
+     "a1": -40.3,
+     "sprite_normal": 25,
+     "sprite_over": 26,
+     "sprite_xy": [
+      230,
+      324
+     ],
+     "sprite_wh": [
+      177,
+      90
+     ]
+    },
+    {
+     "id": "option",
+     "label": "Option",
+     "kind": "sector",
+     "x": 210,
+     "y": 304,
+     "w": 81,
+     "h": 65,
+     "r0": 35.2,
+     "r1": 110.4,
+     "a0": -177.3,
+     "a1": -139.7,
+     "sprite_normal": 27,
+     "sprite_over": 28,
+     "sprite_xy": [
+      207,
+      302
+     ],
+     "sprite_wh": [
+      86,
+      69
+     ]
+    },
+    {
+     "id": "new_game",
+     "label": "New",
+     "kind": "sector",
+     "x": 209,
+     "y": 233,
+     "w": 82,
+     "h": 68,
+     "r0": 33.7,
+     "r1": 109.7,
+     "a0": 139.3,
+     "a1": 180.0,
+     "sprite_normal": 29,
+     "sprite_over": 30,
+     "sprite_xy": [
+      207,
+      225
+     ],
+     "sprite_wh": [
+      86,
+      78
+     ]
+    },
+    {
+     "id": "help",
+     "label": "Help",
+     "kind": "sector",
+     "x": 289,
+     "y": 270,
+     "w": 62,
+     "h": 63,
+     "r0": 2.8,
+     "r1": 34.4,
+     "a0": -175.3,
+     "a1": 180.0,
+     "sprite_normal": 31,
+     "sprite_over": 32,
+     "sprite_xy": [
+      287,
+      268
+     ],
+     "sprite_wh": [
+      66,
+      67
+     ]
+    }
+   ],
+   "animations": [
+    {
+     "id": "anim_head",
+     "x": 482,
+     "y": 132,
+     "w": 35,
+     "h": 29,
+     "pack": "02S",
+     "entries": [
+      0,
+      1,
+      2,
+      3,
+      4
+     ],
+     "_": "морда динозавра справа вверху, 5 кадров (0 = фон)"
+    },
+    {
+     "id": "anim_neck",
+     "x": 476,
+     "y": 254,
+     "w": 19,
+     "h": 54,
+     "pack": "02S",
+     "entries": [
+      5,
+      6,
+      7,
+      8,
+      9
+     ],
+     "_": "узкая полоса на шее/лапе, 5 кадров"
+    },
+    {
+     "id": "anim_body",
+     "x": 489,
+     "y": 307,
+     "w": 117,
+     "h": 127,
+     "pack": "02S",
+     "entries": [
+      10,
+      11,
+      12,
+      13,
+      14
+     ],
+     "_": "тело/хвост динозавра, 5 кадров"
+    },
+    {
+     "id": "anim_petro",
+     "x": 131,
+     "y": 102,
+     "w": 110,
+     "h": 116,
+     "pack": "02S",
+     "entries": [
+      15,
+      16,
+      17,
+      18
+     ],
+     "_": "красная наскальная роспись слева, 4 кадра"
+    }
+   ],
+   "footer_text": {
+    "_": "«Tranquil Revolt In Computer 1996» и версия 1.05 запечены в MAIN.SCR"
+   }
+  },
+  "difficulty": {
+   "_": "Выбор сложности. Такое же колесо на том же месте (207,188), центр и радиус совпадают с главным меню. Верхняя половина — статичная плашка «Choose Game Difficulty» (запись 154), нижняя разбита на 3 сектора по 72 градуса, в центре CANCEL.",
+   "name": "Choose Game Difficulty",
+   "background": {
+    "pack": "01C",
+    "entry": 5
+   },
+   "palette": "MAIN",
+   "size": [
+    640,
+    480
+   ],
+   "wheel": {
+    "x": 207,
+    "y": 188,
+    "w": 225,
+    "h": 234,
+    "cx": 319.0,
+    "cy": 300.0,
+    "r_outer": 112.0,
+    "r_hub": 34.0,
+    "sector_bounds_deg": [
+     18.0,
+     -54.0,
+     -125.0,
+     -198.0
+    ],
+    "static_banner": {
+     "pack": "02S",
+     "entry": 154,
+     "x": 207,
+     "y": 188,
+     "w": 225,
+     "h": 81
+    }
+   },
+   "hotspots": [
+    {
+     "id": "easy",
+     "label": "EASY",
+     "kind": "sector",
+     "x": 209,
+     "y": 271,
+     "w": 85,
+     "h": 116,
+     "r0": 34.2,
+     "r1": 110.0,
+     "a0": -198.2,
+     "a1": -125.5,
+     "sprite_normal": 155,
+     "sprite_over": 156,
+     "sprite_xy": [
+      207,
+      269
+     ],
+     "sprite_wh": [
+      89,
+      120
+     ]
+    },
+    {
+     "id": "medium",
+     "label": "MEDIUM",
+     "kind": "sector",
+     "x": 260,
+     "y": 329,
+     "w": 122,
+     "h": 84,
+     "r0": 32.0,
+     "r1": 111.3,
+     "a0": -124.4,
+     "a1": -54.6,
+     "sprite_normal": 157,
+     "sprite_over": 158,
+     "sprite_xy": [
+      248,
+      327
+     ],
+     "sprite_wh": [
+      143,
+      95
+     ]
+    },
+    {
+     "id": "hard",
+     "label": "HARD",
+     "kind": "sector",
+     "x": 343,
+     "y": 271,
+     "w": 87,
+     "h": 115,
+     "r0": 34.0,
+     "r1": 110.8,
+     "a0": -53.7,
+     "a1": 18.2,
+     "sprite_normal": 159,
+     "sprite_over": 160,
+     "sprite_xy": [
+      341,
+      269
+     ],
+     "sprite_wh": [
+      91,
+      119
+     ]
+    },
+    {
+     "id": "cancel",
+     "label": "CANCEL",
+     "kind": "sector",
+     "x": 290,
+     "y": 267,
+     "w": 60,
+     "h": 66,
+     "r0": 2.8,
+     "r1": 33.9,
+     "a0": -172.9,
+     "a1": 178.2,
+     "sprite_normal": 161,
+     "sprite_over": 162,
+     "sprite_xy": [
+      285,
+      265
+     ],
+     "sprite_wh": [
+      71,
+      70
+     ]
+    }
+   ]
+  },
+  "tribe_select": {
+   "_": "Выбор клана: 8 каменных медальонов с именами. Запись 163 — никто не выбран; записи 164..171 — тот же экран целиком, но один медальон красный. Прямоугольники медальонов получены как область различия 163 и 164..171 (точно, до пикселя). Соответствие «позиция на экране -> номер племени» — по подписям на картинке и порядку строк 'Tribe of ...' в pwar.img.",
+   "name": "Tribe select",
+   "pack": "02S",
+   "entry": 163,
+   "palette": "MAIN",
+   "size": [
+    640,
+    480
+   ],
+   "highlight_screens": {
+    "1": 164,
+    "7": 165,
+    "6": 166,
+    "2": 167,
+    "0": 168,
+    "3": 169,
+    "4": 170,
+    "5": 171
+   },
+   "hotspots": [
+    {
+     "id": "kanoose",
+     "label": "Kanoose",
+     "x": 33,
+     "y": 17,
+     "w": 133,
+     "h": 125,
+     "kind": "ellipse",
+     "cx": 99,
+     "cy": 79,
+     "rx": 66,
+     "ry": 62,
+     "tribe": 1,
+     "screen_variant": 164,
+     "_": "запись 164 — тот же экран с подсвеченным (красным) медальоном"
+    },
+    {
+     "id": "koaka",
+     "label": "Koaka",
+     "x": 246,
+     "y": 19,
+     "w": 95,
+     "h": 94,
+     "kind": "ellipse",
+     "cx": 293,
+     "cy": 66,
+     "rx": 47,
+     "ry": 47,
+     "tribe": 7,
+     "screen_variant": 165,
+     "_": "запись 165 — тот же экран с подсвеченным (красным) медальоном"
+    },
+    {
+     "id": "radumba",
+     "label": "Radumba",
+     "x": 447,
+     "y": 16,
+     "w": 117,
+     "h": 115,
+     "kind": "ellipse",
+     "cx": 505,
+     "cy": 73,
+     "rx": 58,
+     "ry": 57,
+     "tribe": 6,
+     "screen_variant": 166,
+     "_": "запись 166 — тот же экран с подсвеченным (красным) медальоном"
+    },
+    {
+     "id": "romack",
+     "label": "Romack",
+     "x": 94,
+     "y": 196,
+     "w": 106,
+     "h": 102,
+     "kind": "ellipse",
+     "cx": 147,
+     "cy": 247,
+     "rx": 53,
+     "ry": 51,
+     "tribe": 2,
+     "screen_variant": 167,
+     "_": "запись 167 — тот же экран с подсвеченным (красным) медальоном"
+    },
+    {
+     "id": "tyrano",
+     "label": "Tyrano",
+     "x": 283,
+     "y": 168,
+     "w": 124,
+     "h": 122,
+     "kind": "ellipse",
+     "cx": 345,
+     "cy": 229,
+     "rx": 62,
+     "ry": 61,
+     "tribe": 0,
+     "screen_variant": 168,
+     "_": "запись 168 — тот же экран с подсвеченным (красным) медальоном"
+    },
+    {
+     "id": "masai",
+     "label": "Masai",
+     "x": 490,
+     "y": 193,
+     "w": 121,
+     "h": 115,
+     "kind": "ellipse",
+     "cx": 550,
+     "cy": 250,
+     "rx": 60,
+     "ry": 57,
+     "tribe": 3,
+     "screen_variant": 169,
+     "_": "запись 169 — тот же экран с подсвеченным (красным) медальоном"
+    },
+    {
+     "id": "moospell",
+     "label": "Moospell",
+     "x": 54,
+     "y": 331,
+     "w": 121,
+     "h": 120,
+     "kind": "ellipse",
+     "cx": 114,
+     "cy": 391,
+     "rx": 60,
+     "ry": 60,
+     "tribe": 4,
+     "screen_variant": 170,
+     "_": "запись 170 — тот же экран с подсвеченным (красным) медальоном"
+    },
+    {
+     "id": "koomba",
+     "label": "Koomba",
+     "x": 304,
+     "y": 345,
+     "w": 111,
+     "h": 107,
+     "kind": "ellipse",
+     "cx": 359,
+     "cy": 398,
+     "rx": 55,
+     "ry": 53,
+     "tribe": 5,
+     "screen_variant": 171,
+     "_": "запись 171 — тот же экран с подсвеченным (красным) медальоном"
+    },
+    {
+     "id": "select",
+     "label": "SELECT",
+     "x": 455,
+     "y": 394,
+     "w": 78,
+     "h": 66,
+     "kind": "ellipse",
+     "cx": 494,
+     "cy": 427,
+     "rx": 39,
+     "ry": 33,
+     "_": "координаты сняты на глаз по сетке, +-2 px"
+    },
+    {
+     "id": "cancel",
+     "label": "CANCEL",
+     "x": 541,
+     "y": 394,
+     "w": 78,
+     "h": 66,
+     "kind": "ellipse",
+     "cx": 580,
+     "cy": 427,
+     "rx": 39,
+     "ry": 33,
+     "_": "координаты сняты на глаз по сетке, +-2 px"
+    }
+   ]
+  },
+  "multiplayer": {
+   "_": "Экран выбора типа сетевой игры. Четыре круглые кнопки — отдельные записи пака 02 (чётная = обычная, нечётная = подсвеченная), позиции найдены точным совпадением индексов палитры внутри записи 33.",
+   "name": "Multiplayer Game",
+   "pack": "02S",
+   "entry": 33,
+   "palette": "MAIN",
+   "size": [
+    640,
+    480
+   ],
+   "hotspots": [
+    {
+     "id": "com_setting",
+     "label": "Com Setting",
+     "x": 115,
+     "y": 127,
+     "w": 100,
+     "h": 100,
+     "kind": "ellipse",
+     "cx": 165,
+     "cy": 177,
+     "rx": 45,
+     "ry": 45,
+     "sprite_normal": 34,
+     "sprite_over": 35
+    },
+    {
+     "id": "null_modem",
+     "label": "Null Modem",
+     "x": 327,
+     "y": 179,
+     "w": 102,
+     "h": 100,
+     "kind": "ellipse",
+     "cx": 378,
+     "cy": 229,
+     "rx": 45,
+     "ry": 45,
+     "sprite_normal": 36,
+     "sprite_over": 37
+    },
+    {
+     "id": "modem",
+     "label": "Modem",
+     "x": 149,
+     "y": 323,
+     "w": 105,
+     "h": 104,
+     "kind": "ellipse",
+     "cx": 201,
+     "cy": 375,
+     "rx": 47,
+     "ry": 47,
+     "sprite_normal": 38,
+     "sprite_over": 39
+    },
+    {
+     "id": "previous",
+     "label": "Previous",
+     "x": 435,
+     "y": 287,
+     "w": 103,
+     "h": 103,
+     "kind": "ellipse",
+     "cx": 486,
+     "cy": 338,
+     "rx": 46,
+     "ry": 46,
+     "sprite_normal": 40,
+     "sprite_over": 41
+    }
+   ]
+  },
+  "modem_setup": {
+   "_": "Настройки модема. Строки-«поля» (263x19, 102x19, 398x19, 288x19) — это подсвечиваемые полосы списков, по 5/5/3/3 штуки; позиции точные (совпадение индексов).",
+   "name": "Modem setup",
+   "pack": "02S",
+   "entry": 42,
+   "palette": "MAIN",
+   "size": [
+    640,
+    480
+   ],
+   "hotspots": [
+    {
+     "id": "com_info_0",
+     "label": "Com & Info row 0",
+     "x": 118,
+     "y": 96,
+     "w": 263,
+     "h": 19,
+     "sprite_normal": 43
+    },
+    {
+     "id": "com_info_1",
+     "label": "Com & Info row 1",
+     "x": 118,
+     "y": 115,
+     "w": 263,
+     "h": 19,
+     "sprite_normal": 44
+    },
+    {
+     "id": "com_info_2",
+     "label": "Com & Info row 2",
+     "x": 118,
+     "y": 134,
+     "w": 263,
+     "h": 19,
+     "sprite_normal": 45
+    },
+    {
+     "id": "com_info_3",
+     "label": "Com & Info row 3",
+     "x": 118,
+     "y": 153,
+     "w": 263,
+     "h": 19,
+     "sprite_normal": 46
+    },
+    {
+     "id": "com_info_4",
+     "label": "Com & Info row 4",
+     "x": 118,
+     "y": 172,
+     "w": 263,
+     "h": 19,
+     "sprite_normal": 47
+    },
+    {
+     "id": "baud_rate_0",
+     "label": "Baud Rate row 0",
+     "x": 413,
+     "y": 96,
+     "w": 102,
+     "h": 19,
+     "sprite_normal": 48
+    },
+    {
+     "id": "baud_rate_1",
+     "label": "Baud Rate row 1",
+     "x": 413,
+     "y": 115,
+     "w": 102,
+     "h": 19,
+     "sprite_normal": 49
+    },
+    {
+     "id": "baud_rate_2",
+     "label": "Baud Rate row 2",
+     "x": 413,
+     "y": 134,
+     "w": 102,
+     "h": 19,
+     "sprite_normal": 50
+    },
+    {
+     "id": "baud_rate_3",
+     "label": "Baud Rate row 3",
+     "x": 413,
+     "y": 153,
+     "w": 102,
+     "h": 19,
+     "sprite_normal": 51
+    },
+    {
+     "id": "baud_rate_4",
+     "label": "Baud Rate row 4",
+     "x": 413,
+     "y": 172,
+     "w": 102,
+     "h": 19,
+     "sprite_normal": 52
+    },
+    {
+     "id": "init_string_0",
+     "label": "Modem INIT String row 0",
+     "x": 118,
+     "y": 234,
+     "w": 398,
+     "h": 19,
+     "sprite_normal": 53
+    },
+    {
+     "id": "init_string_1",
+     "label": "Modem INIT String row 1",
+     "x": 118,
+     "y": 253,
+     "w": 398,
+     "h": 19,
+     "sprite_normal": 54
+    },
+    {
+     "id": "init_string_2",
+     "label": "Modem INIT String row 2",
+     "x": 118,
+     "y": 272,
+     "w": 398,
+     "h": 19,
+     "sprite_normal": 55
+    },
+    {
+     "id": "call_waiting_0",
+     "label": "Modem Call Waiting String row 0",
+     "x": 118,
+     "y": 337,
+     "w": 288,
+     "h": 19,
+     "sprite_normal": 56
+    },
+    {
+     "id": "call_waiting_1",
+     "label": "Modem Call Waiting String row 1",
+     "x": 118,
+     "y": 356,
+     "w": 288,
+     "h": 19,
+     "sprite_normal": 57
+    },
+    {
+     "id": "call_waiting_2",
+     "label": "Modem Call Waiting String row 2",
+     "x": 118,
+     "y": 375,
+     "w": 288,
+     "h": 19,
+     "sprite_normal": 58
+    },
+    {
+     "id": "tone",
+     "label": "TONE",
+     "x": 428,
+     "y": 340,
+     "w": 95,
+     "h": 23,
+     "sprite_normal": 59,
+     "sprite_over": 60
+    },
+    {
+     "id": "pulse",
+     "label": "PULSE",
+     "x": 428,
+     "y": 368,
+     "w": 95,
+     "h": 22,
+     "sprite_normal": 61,
+     "sprite_over": 62
+    },
+    {
+     "id": "save",
+     "label": "SAVE",
+     "x": 173,
+     "y": 411,
+     "w": 63,
+     "h": 28,
+     "sprite_normal": 63,
+     "sprite_over": 64
+    },
+    {
+     "id": "default",
+     "label": "DEFAULT",
+     "x": 287,
+     "y": 412,
+     "w": 74,
+     "h": 27,
+     "sprite_normal": 65,
+     "sprite_over": 66
+    },
+    {
+     "id": "ok",
+     "label": "OK",
+     "x": 406,
+     "y": 412,
+     "w": 65,
+     "h": 27,
+     "sprite_normal": 67,
+     "sprite_over": 68
+    }
+   ]
+  },
+  "phone_list": {
+   "_": "Телефонная книга для игры по модему: 10 строк «имя» + 10 строк «номер» + 4 кнопки.",
+   "name": "Phone list",
+   "pack": "02S",
+   "entry": 69,
+   "palette": "MAIN",
+   "size": [
+    640,
+    480
+   ],
+   "hotspots": [
+    {
+     "id": "name_0",
+     "label": "Name row 0",
+     "x": 136,
+     "y": 140,
+     "w": 127,
+     "h": 19,
+     "sprite_normal": 70
+    },
+    {
+     "id": "name_1",
+     "label": "Name row 1",
+     "x": 136,
+     "y": 160,
+     "w": 127,
+     "h": 19,
+     "sprite_normal": 71
+    },
+    {
+     "id": "name_2",
+     "label": "Name row 2",
+     "x": 136,
+     "y": 180,
+     "w": 127,
+     "h": 19,
+     "sprite_normal": 72
+    },
+    {
+     "id": "name_3",
+     "label": "Name row 3",
+     "x": 136,
+     "y": 200,
+     "w": 127,
+     "h": 19,
+     "sprite_normal": 73
+    },
+    {
+     "id": "name_4",
+     "label": "Name row 4",
+     "x": 136,
+     "y": 220,
+     "w": 127,
+     "h": 19,
+     "sprite_normal": 74
+    },
+    {
+     "id": "name_5",
+     "label": "Name row 5",
+     "x": 136,
+     "y": 240,
+     "w": 127,
+     "h": 19,
+     "sprite_normal": 75
+    },
+    {
+     "id": "name_6",
+     "label": "Name row 6",
+     "x": 136,
+     "y": 260,
+     "w": 127,
+     "h": 19,
+     "sprite_normal": 76
+    },
+    {
+     "id": "name_7",
+     "label": "Name row 7",
+     "x": 136,
+     "y": 280,
+     "w": 127,
+     "h": 119,
+     "sprite_normal": 77,
+     "_": "запись 77 нарисована высотой 119 вместо 19 — артефакт исходников, по месту совпадает точно"
+    },
+    {
+     "id": "name_8",
+     "label": "Name row 8",
+     "x": 136,
+     "y": 300,
+     "w": 127,
+     "h": 19,
+     "sprite_normal": 78
+    },
+    {
+     "id": "name_9",
+     "label": "Name row 9",
+     "x": 136,
+     "y": 320,
+     "w": 127,
+     "h": 19,
+     "sprite_normal": 79
+    },
+    {
+     "id": "phone_0",
+     "label": "Phone no row 0",
+     "x": 277,
+     "y": 140,
+     "w": 227,
+     "h": 19,
+     "sprite_normal": 80
+    },
+    {
+     "id": "phone_1",
+     "label": "Phone no row 1",
+     "x": 277,
+     "y": 160,
+     "w": 227,
+     "h": 19,
+     "sprite_normal": 81
+    },
+    {
+     "id": "phone_2",
+     "label": "Phone no row 2",
+     "x": 277,
+     "y": 180,
+     "w": 227,
+     "h": 19,
+     "sprite_normal": 82
+    },
+    {
+     "id": "phone_3",
+     "label": "Phone no row 3",
+     "x": 277,
+     "y": 200,
+     "w": 227,
+     "h": 19,
+     "sprite_normal": 83
+    },
+    {
+     "id": "phone_4",
+     "label": "Phone no row 4",
+     "x": 277,
+     "y": 220,
+     "w": 227,
+     "h": 19,
+     "sprite_normal": 84
+    },
+    {
+     "id": "phone_5",
+     "label": "Phone no row 5",
+     "x": 277,
+     "y": 240,
+     "w": 227,
+     "h": 19,
+     "sprite_normal": 85
+    },
+    {
+     "id": "phone_6",
+     "label": "Phone no row 6",
+     "x": 277,
+     "y": 260,
+     "w": 227,
+     "h": 19,
+     "sprite_normal": 86
+    },
+    {
+     "id": "phone_7",
+     "label": "Phone no row 7",
+     "x": 277,
+     "y": 280,
+     "w": 227,
+     "h": 119,
+     "sprite_normal": 87,
+     "_": "запись 87 нарисована высотой 119 вместо 19"
+    },
+    {
+     "id": "phone_8",
+     "label": "Phone no row 8",
+     "x": 277,
+     "y": 300,
+     "w": 227,
+     "h": 19,
+     "sprite_normal": 88
+    },
+    {
+     "id": "phone_9",
+     "label": "Phone no row 9",
+     "x": 277,
+     "y": 320,
+     "w": 227,
+     "h": 19,
+     "sprite_normal": 89
+    },
+    {
+     "id": "dialing",
+     "label": "DIALING",
+     "x": 141,
+     "y": 357,
+     "w": 81,
+     "h": 27,
+     "sprite_normal": 90,
+     "sprite_over": 91
+    },
+    {
+     "id": "receive",
+     "label": "RECEIVE",
+     "x": 230,
+     "y": 357,
+     "w": 81,
+     "h": 27,
+     "sprite_normal": 92,
+     "sprite_over": 93
+    },
+    {
+     "id": "save",
+     "label": "SAVE",
+     "x": 346,
+     "y": 357,
+     "w": 66,
+     "h": 27,
+     "sprite_normal": 94,
+     "sprite_over": 95
+    },
+    {
+     "id": "cancel",
+     "label": "CANCEL",
+     "x": 420,
+     "y": 357,
+     "w": 77,
+     "h": 27,
+     "sprite_normal": 96,
+     "sprite_over": 97
+    }
+   ]
+  },
+  "mp_game_control": {
+   "_": "Экран настройки сетевой партии. Надпись «(You are HOST)» запечена в картинке; запись 152 «(You are SUB)» (150x23) — её замена для ведомого, точное место не найдено (текст HOST занимает примерно 420,64..570,86).",
+   "name": "Multiplayer Game Control",
+   "pack": "02S",
+   "entry": 98,
+   "palette": "MAIN",
+   "size": [
+    640,
+    480
+   ],
+   "hotspots": [
+    {
+     "id": "mode_opponent",
+     "label": "OPPONENT",
+     "x": 60,
+     "y": 116,
+     "w": 103,
+     "h": 20,
+     "sprite_normal": 99,
+     "sprite_over": 100
+    },
+    {
+     "id": "mode_company",
+     "label": "COMPANY",
+     "x": 60,
+     "y": 141,
+     "w": 103,
+     "h": 20,
+     "sprite_normal": 101,
+     "sprite_over": 102
+    },
+    {
+     "id": "name_host",
+     "label": "HOST name field",
+     "x": 250,
+     "y": 116,
+     "w": 127,
+     "h": 21,
+     "sprite_normal": 103
+    },
+    {
+     "id": "name_sub",
+     "label": "SUB name field",
+     "x": 250,
+     "y": 141,
+     "w": 127,
+     "h": 20,
+     "sprite_normal": 104
+    },
+    {
+     "id": "group_host_1",
+     "label": "Group Select HOST 1",
+     "x": 394,
+     "y": 116,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 105
+    },
+    {
+     "id": "group_host_2",
+     "label": "Group Select HOST 2",
+     "x": 418,
+     "y": 116,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 106
+    },
+    {
+     "id": "group_host_3",
+     "label": "Group Select HOST 3",
+     "x": 442,
+     "y": 116,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 107
+    },
+    {
+     "id": "group_host_4",
+     "label": "Group Select HOST 4",
+     "x": 466,
+     "y": 116,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 108
+    },
+    {
+     "id": "group_host_5",
+     "label": "Group Select HOST 5",
+     "x": 490,
+     "y": 116,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 109
+    },
+    {
+     "id": "group_host_6",
+     "label": "Group Select HOST 6",
+     "x": 514,
+     "y": 116,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 110
+    },
+    {
+     "id": "group_host_7",
+     "label": "Group Select HOST 7",
+     "x": 538,
+     "y": 116,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 111
+    },
+    {
+     "id": "group_host_8",
+     "label": "Group Select HOST 8",
+     "x": 562,
+     "y": 116,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 112
+    },
+    {
+     "id": "group_sub_1",
+     "label": "Group Select SUB 1",
+     "x": 394,
+     "y": 140,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 113
+    },
+    {
+     "id": "group_sub_2",
+     "label": "Group Select SUB 2",
+     "x": 418,
+     "y": 140,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 114
+    },
+    {
+     "id": "group_sub_3",
+     "label": "Group Select SUB 3",
+     "x": 442,
+     "y": 140,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 115
+    },
+    {
+     "id": "group_sub_4",
+     "label": "Group Select SUB 4",
+     "x": 466,
+     "y": 140,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 116
+    },
+    {
+     "id": "group_sub_5",
+     "label": "Group Select SUB 5",
+     "x": 490,
+     "y": 140,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 117
+    },
+    {
+     "id": "group_sub_6",
+     "label": "Group Select SUB 6",
+     "x": 514,
+     "y": 140,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 118
+    },
+    {
+     "id": "group_sub_7",
+     "label": "Group Select SUB 7",
+     "x": 538,
+     "y": 140,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 119
+    },
+    {
+     "id": "group_sub_8",
+     "label": "Group Select SUB 8",
+     "x": 562,
+     "y": 140,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 120
+    },
+    {
+     "id": "group_ai_1",
+     "label": "Group Select AI 1",
+     "x": 394,
+     "y": 165,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 121
+    },
+    {
+     "id": "group_ai_2",
+     "label": "Group Select AI 2",
+     "x": 418,
+     "y": 165,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 122
+    },
+    {
+     "id": "group_ai_3",
+     "label": "Group Select AI 3",
+     "x": 442,
+     "y": 165,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 123
+    },
+    {
+     "id": "group_ai_4",
+     "label": "Group Select AI 4",
+     "x": 466,
+     "y": 165,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 124
+    },
+    {
+     "id": "group_ai_5",
+     "label": "Group Select AI 5",
+     "x": 490,
+     "y": 165,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 125
+    },
+    {
+     "id": "group_ai_6",
+     "label": "Group Select AI 6",
+     "x": 514,
+     "y": 165,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 126
+    },
+    {
+     "id": "group_ai_7",
+     "label": "Group Select AI 7",
+     "x": 538,
+     "y": 165,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 127
+    },
+    {
+     "id": "group_ai_8",
+     "label": "Group Select AI 8",
+     "x": 562,
+     "y": 165,
+     "w": 20,
+     "h": 20,
+     "sprite_normal": 128
+    },
+    {
+     "id": "start_unit",
+     "label": "START UNIT value",
+     "x": 168,
+     "y": 191,
+     "w": 59,
+     "h": 19,
+     "sprite_normal": 129
+    },
+    {
+     "id": "food",
+     "label": "FOOD value",
+     "x": 345,
+     "y": 191,
+     "w": 67,
+     "h": 19,
+     "sprite_normal": 130
+    },
+    {
+     "id": "event",
+     "label": "EVENT ON/OFF",
+     "x": 523,
+     "y": 191,
+     "w": 59,
+     "h": 19,
+     "sprite_on": 131,
+     "sprite_off": 132
+    },
+    {
+     "id": "map_row_0",
+     "label": "Select Map row 0",
+     "x": 71,
+     "y": 243,
+     "w": 498,
+     "h": 19,
+     "sprite_normal": 133
+    },
+    {
+     "id": "map_row_1",
+     "label": "Select Map row 1",
+     "x": 71,
+     "y": 262,
+     "w": 498,
+     "h": 19,
+     "sprite_normal": 134
+    },
+    {
+     "id": "map_row_2",
+     "label": "Select Map row 2",
+     "x": 71,
+     "y": 281,
+     "w": 498,
+     "h": 19,
+     "sprite_normal": 135
+    },
+    {
+     "id": "map_row_3",
+     "label": "Select Map row 3",
+     "x": 71,
+     "y": 300,
+     "w": 498,
+     "h": 19,
+     "sprite_normal": 136
+    },
+    {
+     "id": "map_row_4",
+     "label": "Select Map row 4",
+     "x": 71,
+     "y": 319,
+     "w": 498,
+     "h": 19,
+     "sprite_normal": 137
+    },
+    {
+     "id": "message",
+     "label": "MESSAGE",
+     "x": 98,
+     "y": 351,
+     "w": 72,
+     "h": 22,
+     "sprite_normal": 138,
+     "sprite_over": 139
+    },
+    {
+     "id": "start",
+     "label": "START",
+     "x": 239,
+     "y": 351,
+     "w": 73,
+     "h": 22,
+     "sprite_normal": 140,
+     "sprite_over": 141
+    },
+    {
+     "id": "cancel",
+     "label": "CANCEL",
+     "x": 373,
+     "y": 351,
+     "w": 72,
+     "h": 22,
+     "sprite_normal": 142,
+     "sprite_over": 143
+    },
+    {
+     "id": "scroll_up",
+     "label": "scroll up",
+     "x": 502,
+     "y": 351,
+     "w": 23,
+     "h": 22,
+     "sprite_normal": 144,
+     "sprite_over": 145
+    },
+    {
+     "id": "scroll_down",
+     "label": "scroll down",
+     "x": 537,
+     "y": 351,
+     "w": 23,
+     "h": 22,
+     "sprite_normal": 146,
+     "sprite_over": 147
+    },
+    {
+     "id": "chat_row_0",
+     "label": "message log row 0",
+     "x": 71,
+     "y": 385,
+     "w": 498,
+     "h": 19,
+     "sprite_normal": 148
+    },
+    {
+     "id": "chat_row_1",
+     "label": "message log row 1",
+     "x": 71,
+     "y": 404,
+     "w": 498,
+     "h": 19,
+     "sprite_normal": 149
+    },
+    {
+     "id": "chat_row_2",
+     "label": "message log row 2",
+     "x": 71,
+     "y": 423,
+     "w": 498,
+     "h": 19,
+     "sprite_normal": 150
+    },
+    {
+     "id": "chat_row_3",
+     "label": "message log row 3",
+     "x": 71,
+     "y": 442,
+     "w": 498,
+     "h": 19,
+     "sprite_normal": 151
+    }
+   ],
+   "extras": [
+    {
+     "id": "you_are_sub",
+     "pack": "02S",
+     "entry": 152,
+     "w": 150,
+     "h": 23,
+     "x_approx": 420,
+     "y_approx": 64,
+     "_": "позиция приблизительная (+-6 px)"
+    }
+   ]
+  },
+  "ingame_menu": {
+   "_": "Игровое меню — колесо поверх карты. Скин зависит от племени игрока: 8 семейств по 14 записей, база = 172 + племя*14, внутри пары (обычная, подсвеченная). Положение колеса на экране снято с картинки-подсказки (запись 153) сопоставлением яркости, точность +-3 px; относительная геометрия секторов точная. ВНИМАНИЕ: на картинке 153 левый верхний сектор подписан «New Game», а в спрайтах пака 02 на этом месте «Pause» — картинка-подсказка отстала от игры.",
+   "name": "In-game menu wheel",
+   "pack": "02S",
+   "entry_base": 172,
+   "tribe_stride": 14,
+   "palette": "MAIN",
+   "wheel": {
+    "x": 143,
+    "y": 100,
+    "w": 234,
+    "h": 231,
+    "cx": 259.8,
+    "cy": 215.2,
+    "r_outer": 114.1,
+    "r_hub": 34.0,
+    "pos_accuracy_px": 3,
+    "sector_bounds_deg": [
+     -41.0,
+     -2.0,
+     59.0,
+     120.5,
+     182.0,
+     221.0
+    ]
+   },
+   "hotspots": [
+    {
+     "id": "save_game",
+     "label": "Save Game",
+     "kind": "sector",
+     "x": 209,
+     "y": 106,
+     "w": 103,
+     "h": 81,
+     "r0": 32.0,
+     "r1": 108.9,
+     "a0": 60.0,
+     "a1": 119.0,
+     "sprite_normal": 172,
+     "sprite_over": 173,
+     "sprite_xy": [
+      207,
+      100
+     ],
+     "sprite_wh": [
+      109,
+      89
+     ],
+     "tribe_stride": 14
+    },
+    {
+     "id": "load_game",
+     "label": "Load Game",
+     "kind": "sector",
+     "x": 282,
+     "y": 124,
+     "w": 88,
+     "h": 92,
+     "r0": 34.2,
+     "r1": 109.2,
+     "a0": 0.2,
+     "a1": 58.1,
+     "sprite_normal": 174,
+     "sprite_over": 175,
+     "sprite_xy": [
+      280,
+      114
+     ],
+     "sprite_wh": [
+      97,
+      104
+     ],
+     "tribe_stride": 14
+    },
+    {
+     "id": "exit",
+     "label": "Exit",
+     "kind": "sector",
+     "x": 288,
+     "y": 220,
+     "w": 83,
+     "h": 66,
+     "r0": 35.2,
+     "r1": 111.9,
+     "a0": -39.9,
+     "a1": -3.1,
+     "sprite_normal": 176,
+     "sprite_over": 177,
+     "sprite_xy": [
+      280,
+      218
+     ],
+     "sprite_wh": [
+      97,
+      70
+     ],
+     "tribe_stride": 14
+    },
+    {
+     "id": "restart_scenario",
+     "label": "Restart Scenario",
+     "kind": "sector",
+     "x": 179,
+     "y": 241,
+     "w": 163,
+     "h": 88,
+     "r0": 35.6,
+     "r1": 112.9,
+     "a0": -137.8,
+     "a1": -42.4,
+     "sprite_normal": 178,
+     "sprite_over": 179,
+     "sprite_xy": [
+      168,
+      239
+     ],
+     "sprite_wh": [
+      184,
+      92
+     ],
+     "tribe_stride": 14
+    },
+    {
+     "id": "option",
+     "label": "Option",
+     "kind": "sector",
+     "x": 151,
+     "y": 220,
+     "w": 81,
+     "h": 68,
+     "r0": 35.6,
+     "r1": 110.2,
+     "a0": -176.8,
+     "a1": -139.2,
+     "sprite_normal": 180,
+     "sprite_over": 181,
+     "sprite_xy": [
+      143,
+      218
+     ],
+     "sprite_wh": [
+      91,
+      72
+     ],
+     "tribe_stride": 14
+    },
+    {
+     "id": "pause",
+     "label": "Pause",
+     "kind": "sector",
+     "x": 152,
+     "y": 124,
+     "w": 89,
+     "h": 92,
+     "r0": 33.3,
+     "r1": 108.3,
+     "a0": 121.8,
+     "a1": 179.8,
+     "sprite_normal": 182,
+     "sprite_over": 183,
+     "sprite_xy": [
+      143,
+      113
+     ],
+     "sprite_wh": [
+      101,
+      105
+     ],
+     "tribe_stride": 14
+    },
+    {
+     "id": "center",
+     "label": "череп (закрыть)",
+     "kind": "sector",
+     "x": 230,
+     "y": 185,
+     "w": 61,
+     "h": 65,
+     "r0": 2.7,
+     "r1": 33.5,
+     "a0": -175.9,
+     "a1": 178.5,
+     "sprite_normal": 184,
+     "sprite_over": 185,
+     "sprite_xy": [
+      223,
+      179
+     ],
+     "sprite_wh": [
+      73,
+      73
+     ],
+     "tribe_stride": 14
+    }
+   ],
+   "entry_layout": {
+    "_": "смещения внутри блока племени",
+    "save_game": [
+     0,
+     1
+    ],
+    "load_game": [
+     2,
+     3
+    ],
+    "exit": [
+     4,
+     5
+    ],
+    "restart_scenario": [
+     6,
+     7
+    ],
+    "option": [
+     8,
+     9
+    ],
+    "pause": [
+     10,
+     11
+    ],
+    "center_skull": [
+     12,
+     13
+    ]
+   }
+  },
+  "help_menu_page": {
+   "_": "Страница помощи: скриншот геймплея с колесом игрового меню и стрелками листания внизу. Стрелки и надпись «help menu» запечены в картинке; отдельных спрайтов для них в паке 02 нет, поэтому как они рисуются на HELP1..3 — не выяснено.",
+   "name": "Help: game menu",
+   "pack": "02S",
+   "entry": 153,
+   "palette": "MAIN",
+   "size": [
+    640,
+    480
+   ],
+   "hotspots": [
+    {
+     "id": "prev",
+     "label": "стрелка влево",
+     "x": 124,
+     "y": 440,
+     "w": 90,
+     "h": 24,
+     "_": "снято на глаз по сетке, +-3 px"
+    },
+    {
+     "id": "next",
+     "label": "стрелка вправо",
+     "x": 300,
+     "y": 439,
+     "w": 92,
+     "h": 27,
+     "_": "снято на глаз по сетке, +-3 px"
+    }
+   ]
+  },
+  "help_1": {
+   "_": "Страница помощи 1: слева текст, справа копия боковой панели с пронумерованными элементами. Стрелок листания в картинке нет.",
+   "name": "Help page 1",
+   "pack": "03C",
+   "entry": 1,
+   "palette_entry": 0,
+   "size": [
+    640,
+    480
+   ],
+   "format": "SCR",
+   "hotspots": []
+  },
+  "help_2": {
+   "_": "Страница помощи 2: слева текст, справа копия боковой панели с пронумерованными элементами. Стрелок листания в картинке нет.",
+   "name": "Help page 2",
+   "pack": "03C",
+   "entry": 3,
+   "palette_entry": 2,
+   "size": [
+    640,
+    480
+   ],
+   "format": "SCR",
+   "hotspots": []
+  },
+  "help_3": {
+   "_": "Страница помощи 3: слева текст, справа копия боковой панели с пронумерованными элементами. Стрелок листания в картинке нет.",
+   "name": "Help page 3",
+   "pack": "03C",
+   "entry": 5,
+   "palette_entry": 4,
+   "size": [
+    640,
+    480
+   ],
+   "format": "SCR",
+   "hotspots": []
+  },
+  "story": {
+   "_": "Сюжетный экран перед миссией: щит-череп с картинкой стадии и кнопкой OK. Запись = 14 + стадия*2 (.PAL), +1 (.SPR). Формат .SPR: заголовок 12 байт (u16 w, u16 h, u32 0, u32 0), далее w*h байт.",
+   "name": "Story screen",
+   "size": [
+    640,
+    480
+   ],
+   "variants": [
+    {
+     "stage": 1,
+     "pack": "09C",
+     "entry": 15,
+     "palette_entry": 14,
+     "name": "ST-01"
+    },
+    {
+     "stage": 2,
+     "pack": "09C",
+     "entry": 17,
+     "palette_entry": 16,
+     "name": "ST-02"
+    },
+    {
+     "stage": 3,
+     "pack": "09C",
+     "entry": 19,
+     "palette_entry": 18,
+     "name": "ST-03"
+    },
+    {
+     "stage": 4,
+     "pack": "09C",
+     "entry": 21,
+     "palette_entry": 20,
+     "name": "ST-04"
+    },
+    {
+     "stage": 5,
+     "pack": "09C",
+     "entry": 23,
+     "palette_entry": 22,
+     "name": "ST-05"
+    },
+    {
+     "stage": 6,
+     "pack": "09C",
+     "entry": 25,
+     "palette_entry": 24,
+     "name": "ST-06"
+    },
+    {
+     "stage": 7,
+     "pack": "09C",
+     "entry": 27,
+     "palette_entry": 26,
+     "name": "ST-07"
+    },
+    {
+     "stage": 8,
+     "pack": "09C",
+     "entry": 29,
+     "palette_entry": 28,
+     "name": "ST-08"
+    },
+    {
+     "stage": 9,
+     "pack": "09C",
+     "entry": 31,
+     "palette_entry": 30,
+     "name": "ST-09"
+    },
+    {
+     "stage": 10,
+     "pack": "09C",
+     "entry": 33,
+     "palette_entry": 32,
+     "name": "ST-10"
+    },
+    {
+     "stage": 11,
+     "pack": "09C",
+     "entry": 35,
+     "palette_entry": 34,
+     "name": "ST-11"
+    },
+    {
+     "stage": 12,
+     "pack": "09C",
+     "entry": 37,
+     "palette_entry": 36,
+     "name": "ST-12"
+    }
+   ],
+   "hotspots": [
+    {
+     "id": "ok",
+     "label": "OK",
+     "x": 531,
+     "y": 431,
+     "w": 64,
+     "h": 39,
+     "_": "плашка OK одинакова на всех экранах пака 09; сама надпись занимает 551..575 x 441..457"
+    }
+   ]
+  },
+  "group_end": {
+   "_": "Экран после миссии (вождь у костра). 8 одинаковых копий GRPEND1 — по одной на племя (записи 39,41,43,45,47,49,51,53; палитра — предыдущая запись). Картинки идентичны, различаются только палитрами.",
+   "name": "GRPEND1",
+   "size": [
+    640,
+    480
+   ],
+   "variants": [
+    {
+     "tribe": 0,
+     "pack": "09C",
+     "entry": 39,
+     "palette_entry": 38
+    },
+    {
+     "tribe": 1,
+     "pack": "09C",
+     "entry": 41,
+     "palette_entry": 40
+    },
+    {
+     "tribe": 2,
+     "pack": "09C",
+     "entry": 43,
+     "palette_entry": 42
+    },
+    {
+     "tribe": 3,
+     "pack": "09C",
+     "entry": 45,
+     "palette_entry": 44
+    },
+    {
+     "tribe": 4,
+     "pack": "09C",
+     "entry": 47,
+     "palette_entry": 46
+    },
+    {
+     "tribe": 5,
+     "pack": "09C",
+     "entry": 49,
+     "palette_entry": 48
+    },
+    {
+     "tribe": 6,
+     "pack": "09C",
+     "entry": 51,
+     "palette_entry": 50
+    },
+    {
+     "tribe": 7,
+     "pack": "09C",
+     "entry": 53,
+     "palette_entry": 52
+    }
+   ],
+   "hotspots": [
+    {
+     "id": "ok",
+     "label": "OK",
+     "x": 531,
+     "y": 431,
+     "w": 64,
+     "h": 39,
+     "_": "плашка OK одинакова на всех экранах пака 09; сама надпись занимает 551..575 x 441..457"
+    }
+   ]
+  },
+  "win": {
+   "_": "Экран победы стадии там, где нет FLI-ролика (в паке 11 на этом месте NULLDAT). Стадии 2,4,6,7,8,9,10.",
+   "name": "WIN screens",
+   "size": [
+    640,
+    480
+   ],
+   "variants": [
+    {
+     "stage": 2,
+     "pack": "09C",
+     "entry": 57,
+     "palette_entry": 56,
+     "name": "WIN02"
+    },
+    {
+     "stage": 4,
+     "pack": "09C",
+     "entry": 61,
+     "palette_entry": 60,
+     "name": "WIN04"
+    },
+    {
+     "stage": 6,
+     "pack": "09C",
+     "entry": 65,
+     "palette_entry": 64,
+     "name": "WIN06"
+    },
+    {
+     "stage": 7,
+     "pack": "09C",
+     "entry": 67,
+     "palette_entry": 66,
+     "name": "WIN07"
+    },
+    {
+     "stage": 8,
+     "pack": "09C",
+     "entry": 69,
+     "palette_entry": 68,
+     "name": "WIN08"
+    },
+    {
+     "stage": 9,
+     "pack": "09C",
+     "entry": 71,
+     "palette_entry": 70,
+     "name": "WIN09"
+    },
+    {
+     "stage": 10,
+     "pack": "09C",
+     "entry": 73,
+     "palette_entry": 72,
+     "name": "WIN10"
+    }
+   ],
+   "hotspots": [
+    {
+     "id": "ok",
+     "label": "OK",
+     "x": 531,
+     "y": 431,
+     "w": 64,
+     "h": 39,
+     "_": "плашка OK одинакова на всех экранах пака 09; сама надпись занимает 551..575 x 441..457"
+    }
+   ]
+  },
+  "defeat": {
+   "_": "Экран поражения.",
+   "name": "DEFEAT",
+   "pack": "09C",
+   "entry": 79,
+   "palette_entry": 78,
+   "size": [
+    640,
+    480
+   ],
+   "hotspots": [
+    {
+     "id": "ok",
+     "label": "OK",
+     "x": 531,
+     "y": 431,
+     "w": 64,
+     "h": 39,
+     "_": "плашка OK одинакова на всех экранах пака 09; сама надпись занимает 551..575 x 441..457"
+    }
+   ]
+  }
+ },
+ "families": {
+  "_": "Диалоги и полосы кнопок, у которых есть по одному варианту на племя. База = entry_base + племя*stride. Внутри блока порядок записей фиксирован. Координаты кнопок — ЛОКАЛЬНЫЕ, от левого верхнего угла окна; проверены точным совпадением индексов внутри картинки окна и одинаковы у всех восьми племён. Куда окно ставится на экране — в данных не записано; поле screen_xy_guess — центрирование на 640x480, это ГИПОТЕЗА.",
+  "load_dialog": {
+   "_": "Окно Load Game: заголовок, список сейвов, кнопки.",
+   "entry_base": 284,
+   "stride": 9,
+   "size": [
+    238,
+    218
+   ],
+   "screen_xy_guess": [
+    201,
+    131
+   ],
+   "entries": {
+    "window": 0,
+    "load": [
+     1,
+     2
+    ],
+    "cancel": [
+     3,
+     4
+    ],
+    "page_up": [
+     5,
+     6
+    ],
+    "page_down": [
+     7,
+     8
+    ]
+   },
+   "hotspots": [
+    {
+     "id": "load",
+     "label": "Load",
+     "x": 21,
+     "y": 196,
+     "w": 49,
+     "h": 19
+    },
+    {
+     "id": "cancel",
+     "label": "Cancel",
+     "x": 112,
+     "y": 196,
+     "w": 48,
+     "h": 19
+    },
+    {
+     "id": "page_up",
+     "label": "страница вверх",
+     "x": 184,
+     "y": 196,
+     "w": 19,
+     "h": 18
+    },
+    {
+     "id": "page_down",
+     "label": "страница вниз",
+     "x": 207,
+     "y": 196,
+     "w": 19,
+     "h": 17
+    },
+    {
+     "id": "list",
+     "label": "список слотов",
+     "x": 12,
+     "y": 34,
+     "w": 214,
+     "h": 152,
+     "rows": 7,
+     "_": "7 строк на страницу — из io-formats.md (шаг страницы слотов 7); разбиение на строки в картинке не нарисовано"
+    }
+   ]
+  },
+  "save_dialog": {
+   "_": "Окно Save Game: то же плюс кнопка Delete.",
+   "entry_base": 356,
+   "stride": 11,
+   "size": [
+    238,
+    218
+   ],
+   "screen_xy_guess": [
+    201,
+    131
+   ],
+   "entries": {
+    "window": 0,
+    "save": [
+     1,
+     2
+    ],
+    "delete": [
+     3,
+     4
+    ],
+    "cancel": [
+     5,
+     6
+    ],
+    "page_up": [
+     7,
+     8
+    ],
+    "page_down": [
+     9,
+     10
+    ]
+   },
+   "hotspots": [
+    {
+     "id": "save",
+     "label": "Save",
+     "x": 10,
+     "y": 195,
+     "w": 49,
+     "h": 19
+    },
+    {
+     "id": "delete",
+     "label": "Delete",
+     "x": 69,
+     "y": 195,
+     "w": 48,
+     "h": 19
+    },
+    {
+     "id": "cancel",
+     "label": "Cancel",
+     "x": 127,
+     "y": 195,
+     "w": 49,
+     "h": 19
+    },
+    {
+     "id": "page_up",
+     "label": "страница вверх",
+     "x": 186,
+     "y": 195,
+     "w": 19,
+     "h": 19
+    },
+    {
+     "id": "page_down",
+     "label": "страница вниз",
+     "x": 209,
+     "y": 195,
+     "w": 19,
+     "h": 19
+    },
+    {
+     "id": "list",
+     "label": "список слотов",
+     "x": 12,
+     "y": 34,
+     "w": 214,
+     "h": 152,
+     "rows": 7
+    }
+   ]
+  },
+  "game_option": {
+   "_": "Окно Game Option: четыре ползунка и кнопка перехода в Sound Controls. Запись 5 в блоке — движок ползунка 1x10.",
+   "entry_base": 444,
+   "stride": 6,
+   "size": [
+    312,
+    156
+   ],
+   "screen_xy": [
+    162,
+    179
+   ],
+   "entries": {
+    "window": 0,
+    "sound_controls": [
+     1,
+     2
+    ],
+    "ok": [
+     3,
+     4
+    ],
+    "slider_knob": 5
+   },
+   "hotspots": [
+    {
+     "id": "ok",
+     "label": "OK",
+     "x": 254,
+     "y": 9,
+     "w": 36,
+     "h": 20
+    },
+    {
+     "id": "sound_controls",
+     "label": "Sound Controls",
+     "x": 81,
+     "y": 130,
+     "w": 151,
+     "h": 21
+    },
+    {
+     "id": "game_speed",
+     "label": "Game Speed",
+     "x": 166,
+     "y": 34,
+     "w": 128,
+     "h": 11,
+     "kind": "slider"
+    },
+    {
+     "id": "scroll_speed",
+     "label": "Scroll Speed",
+     "x": 166,
+     "y": 59,
+     "w": 128,
+     "h": 11,
+     "kind": "slider"
+    },
+    {
+     "id": "scroll_auto_speed",
+     "label": "Scroll Auto Speed",
+     "x": 166,
+     "y": 83,
+     "w": 128,
+     "h": 11,
+     "kind": "slider"
+    },
+    {
+     "id": "mouse_sensitive",
+     "label": "Mouse Sensitive",
+     "x": 166,
+     "y": 109,
+     "w": 128,
+     "h": 10,
+     "kind": "slider"
+    }
+   ],
+   "_sliders": "экранные прямоугольники виджетов прошиты в образе (записи по 32 байта с 0x397f3: тип, x1, y1, x2, y2, спрайт, спрайт-подсветка); отсюда же получен левый верхний угол окна"
+  },
+  "sound_controls": {
+   "_": "Окно Sound Controls: громкость музыки и эффектов, список треков (пак 07), управление проигрывателем. Запись 15 в блоке — движок ползунка 5x10.",
+   "entry_base": 492,
+   "stride": 16,
+   "size": [
+    312,
+    237
+   ],
+   "screen_xy": [
+    162,
+    153
+   ],
+   "entries": {
+    "window": 0,
+    "stop": [
+     1,
+     2
+    ],
+    "play": [
+     3,
+     4
+    ],
+    "shuffle": [
+     5,
+     6
+    ],
+    "repeat": [
+     7,
+     8
+    ],
+    "ok": [
+     9,
+     10
+    ],
+    "page_up": [
+     11,
+     12
+    ],
+    "page_down": [
+     13,
+     14
+    ],
+    "slider_knob": 15
+   },
+   "hotspots": [
+    {
+     "id": "ok",
+     "label": "OK",
+     "x": 254,
+     "y": 7,
+     "w": 34,
+     "h": 21
+    },
+    {
+     "id": "music_volume",
+     "label": "Music Volume",
+     "x": 166,
+     "y": 35,
+     "w": 128,
+     "h": 11,
+     "kind": "slider"
+    },
+    {
+     "id": "sound_volume",
+     "label": "Sound Volume",
+     "x": 166,
+     "y": 62,
+     "w": 123,
+     "h": 11,
+     "kind": "slider"
+    },
+    {
+     "id": "playlist",
+     "label": "список треков",
+     "x": 22,
+     "y": 92,
+     "w": 268,
+     "h": 102
+    },
+    {
+     "id": "stop",
+     "label": "стоп",
+     "x": 22,
+     "y": 208,
+     "w": 24,
+     "h": 21
+    },
+    {
+     "id": "play",
+     "label": "играть",
+     "x": 59,
+     "y": 208,
+     "w": 31,
+     "h": 21
+    },
+    {
+     "id": "shuffle",
+     "label": "Shuffle",
+     "x": 110,
+     "y": 208,
+     "w": 70,
+     "h": 21
+    },
+    {
+     "id": "repeat",
+     "label": "Repeat",
+     "x": 192,
+     "y": 208,
+     "w": 70,
+     "h": 21
+    },
+    {
+     "id": "page_up",
+     "label": "список вверх",
+     "x": 271,
+     "y": 202,
+     "w": 22,
+     "h": 16
+    },
+    {
+     "id": "page_down",
+     "label": "список вниз",
+     "x": 271,
+     "y": 218,
+     "w": 22,
+     "h": 15
+    }
+   ],
+   "_widgets": "как и у game_option, прямоугольники сняты с записей образа (с 0x39924)"
+  },
+  "ok_cancel_bar": {
+   "_": "Полоса кнопок OK / CANCEL (167x35) — по одной на племя.",
+   "entry_base": 636,
+   "stride": 5,
+   "size": [
+    167,
+    35
+   ],
+   "entries": {
+    "bar": 0,
+    "ok": [
+     1,
+     2
+    ],
+    "cancel": [
+     3,
+     4
+    ]
+   },
+   "hotspots": [
+    {
+     "id": "ok",
+     "label": "OK",
+     "x": 10,
+     "y": 5,
+     "w": 71,
+     "h": 28
+    },
+    {
+     "id": "cancel",
+     "label": "CANCEL",
+     "x": 88,
+     "y": 5,
+     "w": 70,
+     "h": 28
+    }
+   ]
+  },
+  "yes_no_bar": {
+   "_": "Полоса кнопок YES / NO (167x35) — подтверждения «RESTART GAME ?» / «EXIT GAME ?» (строки в pwar.img @0x3383a..).",
+   "entry_base": 676,
+   "stride": 5,
+   "size": [
+    167,
+    35
+   ],
+   "entries": {
+    "bar": 0,
+    "yes": [
+     1,
+     2
+    ],
+    "no": [
+     3,
+     4
+    ]
+   },
+   "hotspots": [
+    {
+     "id": "yes",
+     "label": "YES",
+     "x": 10,
+     "y": 6,
+     "w": 71,
+     "h": 27
+    },
+    {
+     "id": "no",
+     "label": "NO",
+     "x": 88,
+     "y": 6,
+     "w": 70,
+     "h": 27
+    }
+   ]
+  },
+  "message_plate": {
+   "_": "Пустая каменная плашка 283x68 — фон под текст сообщения/вопроса. Кнопок на ней нет; вероятно под неё подкладывается yes_no_bar или ok_cancel_bar, но это не проверено.",
+   "entry_base": 620,
+   "stride": 1,
+   "size": [
+    283,
+    68
+   ],
+   "entries": {
+    "plate": 0
+   },
+   "hotspots": []
+  },
+  "big_panel": {
+   "_": "Пустая каменная панель 392x229 — фон под длинный текст. Назначение точно не установлено; правдоподобно — окно текста брифинга (FUN_00014c90, высота строки 22 px: 229/22 ~ 10 строк).",
+   "entry_base": 628,
+   "stride": 1,
+   "size": [
+    392,
+    229
+   ],
+   "entries": {
+    "panel": 0
+   },
+   "hotspots": []
+  }
+ },
+ "flow": {
+  "_": "Связи между экранами. confidence: proven — видно в данных/видео; likely — следует из подписей и логики; guess — предположение.",
+  "edges": [
+   {
+    "from": "logo_tric",
+    "on": "any",
+    "to": "logo_skc",
+    "confidence": "guess"
+   },
+   {
+    "from": "logo_skc",
+    "on": "any",
+    "to": "title_menu",
+    "confidence": "guess"
+   },
+   {
+    "from": "title_menu",
+    "on": "new_game",
+    "to": "difficulty",
+    "confidence": "likely"
+   },
+   {
+    "from": "difficulty",
+    "on": "easy|medium|hard",
+    "to": "tribe_select",
+    "confidence": "likely"
+   },
+   {
+    "from": "difficulty",
+    "on": "cancel",
+    "to": "title_menu",
+    "confidence": "likely"
+   },
+   {
+    "from": "tribe_select",
+    "on": "select",
+    "to": "story",
+    "confidence": "likely"
+   },
+   {
+    "from": "tribe_select",
+    "on": "cancel",
+    "to": "title_menu",
+    "confidence": "likely"
+   },
+   {
+    "from": "story",
+    "on": "ok",
+    "to": "briefing_text",
+    "confidence": "likely",
+    "_": "текст брифинга — запись 80 + стадия*8 + племя пака 09 (T{S}_{G}.TXT)"
+   },
+   {
+    "from": "title_menu",
+    "on": "multiplayer_game",
+    "to": "multiplayer",
+    "confidence": "proven"
+   },
+   {
+    "from": "multiplayer",
+    "on": "com_setting",
+    "to": "modem_setup",
+    "confidence": "likely"
+   },
+   {
+    "from": "multiplayer",
+    "on": "modem",
+    "to": "phone_list",
+    "confidence": "likely"
+   },
+   {
+    "from": "multiplayer",
+    "on": "null_modem",
+    "to": "mp_game_control",
+    "confidence": "likely"
+   },
+   {
+    "from": "multiplayer",
+    "on": "previous",
+    "to": "title_menu",
+    "confidence": "proven"
+   },
+   {
+    "from": "phone_list",
+    "on": "dialing|receive",
+    "to": "mp_game_control",
+    "confidence": "guess"
+   },
+   {
+    "from": "mp_game_control",
+    "on": "start",
+    "to": "game",
+    "confidence": "likely"
+   },
+   {
+    "from": "mp_game_control",
+    "on": "cancel",
+    "to": "multiplayer",
+    "confidence": "likely"
+   },
+   {
+    "from": "title_menu",
+    "on": "load_game",
+    "to": "load_dialog",
+    "confidence": "likely"
+   },
+   {
+    "from": "title_menu",
+    "on": "option",
+    "to": "game_option",
+    "confidence": "likely"
+   },
+   {
+    "from": "title_menu",
+    "on": "help",
+    "to": "help_menu_page",
+    "confidence": "likely"
+   },
+   {
+    "from": "help_menu_page",
+    "on": "next",
+    "to": "help_1",
+    "confidence": "likely"
+   },
+   {
+    "from": "help_1",
+    "on": "next",
+    "to": "help_2",
+    "confidence": "likely"
+   },
+   {
+    "from": "help_2",
+    "on": "next",
+    "to": "help_3",
+    "confidence": "likely"
+   },
+   {
+    "from": "title_menu",
+    "on": "replay_introduction",
+    "to": "intro_fli",
+    "confidence": "proven",
+    "_": "пак 11, запись 0 — WIN00-EN.FLI"
+   },
+   {
+    "from": "title_menu",
+    "on": "quit",
+    "to": "yes_no_bar",
+    "confidence": "likely"
+   },
+   {
+    "from": "game",
+    "on": "MENU",
+    "to": "ingame_menu",
+    "confidence": "proven"
+   },
+   {
+    "from": "ingame_menu",
+    "on": "save_game",
+    "to": "save_dialog",
+    "confidence": "proven"
+   },
+   {
+    "from": "ingame_menu",
+    "on": "load_game",
+    "to": "load_dialog",
+    "confidence": "proven"
+   },
+   {
+    "from": "ingame_menu",
+    "on": "option",
+    "to": "game_option",
+    "confidence": "proven"
+   },
+   {
+    "from": "ingame_menu",
+    "on": "restart_scenario",
+    "to": "yes_no_bar",
+    "confidence": "likely"
+   },
+   {
+    "from": "ingame_menu",
+    "on": "exit",
+    "to": "yes_no_bar",
+    "confidence": "likely"
+   },
+   {
+    "from": "ingame_menu",
+    "on": "pause",
+    "to": "game",
+    "confidence": "guess"
+   },
+   {
+    "from": "ingame_menu",
+    "on": "center",
+    "to": "game",
+    "confidence": "guess",
+    "_": "центр — череп; вероятно «закрыть меню»"
+   },
+   {
+    "from": "game_option",
+    "on": "sound_controls",
+    "to": "sound_controls",
+    "confidence": "proven"
+   },
+   {
+    "from": "game",
+    "on": "victory",
+    "to": "win|group_end",
+    "confidence": "proven"
+   },
+   {
+    "from": "game",
+    "on": "defeat",
+    "to": "defeat",
+    "confidence": "proven"
+   }
+  ]
+ },
+ "unidentified": {
+  "_": "Что осталось неопознанным или непроверенным.",
+  "items": [
+   "Экранные координаты всех всплывающих окон (load/save/option/sound/подтверждения) — в картинках их нет, код меню не реверсили. В JSON стоит screen_xy_guess (центрирование).",
+   "Назначение пустой панели 392x229 (записи 628..635) — предположительно окно брифинга.",
+   "Как связаны плашка 283x68 и полосы кнопок 167x35 (кто внутри кого).",
+   "Точное место надписи «(You are SUB)» (запись 152) на экране 98.",
+   "Как рисуются стрелки листания на страницах HELP1..3 пака 03 — отдельных спрайтов нет.",
+   "Записи 77 (127x119) и 87 (227x119) в телефонной книге нарисованы выше, чем строка списка; по месту совпадают точно, зачем такая высота — неясно.",
+   "Расхождение: на картинке-подсказке 153 сектор подписан «New Game», в спрайтах — «Pause».",
+   "Положение игрового колеса на экране снято с картинки 153 (точность +-3 px), а не из кода."
+  ]
+ }
+}

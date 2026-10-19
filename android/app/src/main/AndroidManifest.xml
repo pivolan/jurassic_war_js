@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Ролики и музыка тянутся из сети, поэтому нужен интернет; в APK они не лежат. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application android:label="Jurassic War" android:largeHeap="true" android:supportsRtl="false" android:hardwareAccelerated="true">
+        <activity android:name="jw.android.GameActivity"
+                  android:exported="true"
+                  android:screenOrientation="portrait"
+                  android:configChanges="orientation|screenSize|keyboardHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

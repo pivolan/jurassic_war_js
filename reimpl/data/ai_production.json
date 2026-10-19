@@ -1,0 +1,328 @@
+{
+ "dispatch_0x180b4": {
+  "0": {
+   "name": "(пусто)",
+   "handler": "0x180b0",
+   "what": "ret (ничего)"
+  },
+  "1": {
+   "name": "Commoner",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "2": {
+   "name": "Muscle-man",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "3": {
+   "name": "Warrior",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "4": {
+   "name": "Constructor",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "5": {
+   "name": "Elf",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "6": {
+   "name": "Wizard",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "7": {
+   "name": "Warlock",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "8": {
+   "name": "Ranger",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "9": {
+   "name": "Velociraptor",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "10": {
+   "name": "Carnotaurus",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "11": {
+   "name": "Rhamphorhynchus",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "12": {
+   "name": "Triceratops",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "13": {
+   "name": "Dilophosaurus",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "14": {
+   "name": "Tyrannosaurus",
+   "handler": "0x1cfcb",
+   "what": "0x1cfcb — респавн дикого зверя на точке спавна"
+  },
+  "15": {
+   "name": "Brachiosaurus",
+   "handler": "0x1cfcb",
+   "what": "0x1cfcb — респавн дикого зверя на точке спавна"
+  },
+  "16": {
+   "name": "Centrosaurus",
+   "handler": "0x1cfcb",
+   "what": "0x1cfcb — респавн дикого зверя на точке спавна"
+  },
+  "17": {
+   "name": "Stauricosaurus",
+   "handler": "0x1cfcb",
+   "what": "0x1cfcb — респавн дикого зверя на точке спавна"
+  },
+  "18": {
+   "name": "Daemon",
+   "handler": "0x1cfcb",
+   "what": "0x1cfcb — респавн дикого зверя на точке спавна"
+  },
+  "19": {
+   "name": "Mammoth",
+   "handler": "0x1cfcb",
+   "what": "0x1cfcb — респавн дикого зверя на точке спавна"
+  },
+  "20": {
+   "name": "Musso",
+   "handler": "0x1cfcb",
+   "what": "0x1cfcb — респавн дикого зверя на точке спавна"
+  },
+  "21": {
+   "name": "Tiger",
+   "handler": "0x1cfcb",
+   "what": "0x1cfcb — респавн дикого зверя на точке спавна"
+  },
+  "22": {
+   "name": "Leopard",
+   "handler": "0x1cfcb",
+   "what": "0x1cfcb — респавн дикого зверя на точке спавна"
+  },
+  "23": {
+   "name": "Cur",
+   "handler": "0x1cfcb",
+   "what": "0x1cfcb — респавн дикого зверя на точке спавна"
+  },
+  "24": {
+   "name": "Nexious Weed",
+   "handler": "0x1d12e",
+   "what": "0x1d12e — отрастание растения на месте"
+  },
+  "25": {
+   "name": "Poisonous Mushroom",
+   "handler": "0x1d12e",
+   "what": "0x1d12e — отрастание растения на месте"
+  },
+  "26": {
+   "name": "Sanctuary",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "27": {
+   "name": "Barracks",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "28": {
+   "name": "Armory",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "29": {
+   "name": "Armory",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "30": {
+   "name": "Food-storage",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "31": {
+   "name": "Elf training",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "32": {
+   "name": "Wizard training",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "33": {
+   "name": "Warlock training",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "34": {
+   "name": "Ranger training",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "35": {
+   "name": "Velociraptor training",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "36": {
+   "name": "Carnotaurus training",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "37": {
+   "name": "Rhamphorhynchus training",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "38": {
+   "name": "Triceratops training",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  },
+  "39": {
+   "name": "Dilophosaurus training",
+   "handler": "0x1ced8",
+   "what": "0x1ced8 — перезаказ копии в своём здании"
+  }
+ },
+ "reorder_price": {
+  "1": {
+   "name": "Commoner",
+   "home_building": 27,
+   "home_name": "Barracks",
+   "food_per_step": 10,
+   "steps": 120,
+   "total_food": 1200,
+   "timer": 360
+  },
+  "2": {
+   "name": "Muscle-man",
+   "home_building": 27,
+   "home_name": "Barracks",
+   "food_per_step": 10,
+   "steps": 100,
+   "total_food": 1000,
+   "timer": 540
+  },
+  "3": {
+   "name": "Warrior",
+   "home_building": 27,
+   "home_name": "Barracks",
+   "food_per_step": 10,
+   "steps": 80,
+   "total_food": 800,
+   "timer": 540
+  },
+  "4": {
+   "name": "Constructor",
+   "home_building": 26,
+   "home_name": "Sanctuary",
+   "food_per_step": 10,
+   "steps": 100,
+   "total_food": 1000,
+   "timer": 720
+  },
+  "5": {
+   "name": "Elf",
+   "home_building": 31,
+   "home_name": "Elf training",
+   "food_per_step": 10,
+   "steps": 110,
+   "total_food": 1100,
+   "timer": 540
+  },
+  "6": {
+   "name": "Wizard",
+   "home_building": 32,
+   "home_name": "Wizard training",
+   "food_per_step": 10,
+   "steps": 80,
+   "total_food": 800,
+   "timer": 540
+  },
+  "7": {
+   "name": "Warlock",
+   "home_building": 33,
+   "home_name": "Warlock training",
+   "food_per_step": 10,
+   "steps": 80,
+   "total_food": 800,
+   "timer": 540
+  },
+  "8": {
+   "name": "Ranger",
+   "home_building": 34,
+   "home_name": "Ranger training",
+   "food_per_step": 10,
+   "steps": 80,
+   "total_food": 800,
+   "timer": 540
+  },
+  "9": {
+   "name": "Velociraptor",
+   "home_building": 35,
+   "home_name": "Velociraptor training",
+   "food_per_step": 10,
+   "steps": 150,
+   "total_food": 1500,
+   "timer": 1080
+  },
+  "10": {
+   "name": "Carnotaurus",
+   "home_building": 36,
+   "home_name": "Carnotaurus training",
+   "food_per_step": 10,
+   "steps": 100,
+   "total_food": 1000,
+   "timer": 1080
+  },
+  "11": {
+   "name": "Rhamphorhynchus",
+   "home_building": 37,
+   "home_name": "Rhamphorhynchus training",
+   "food_per_step": 10,
+   "steps": 120,
+   "total_food": 1200,
+   "timer": 1080
+  },
+  "12": {
+   "name": "Triceratops",
+   "home_building": 38,
+   "home_name": "Triceratops training",
+   "food_per_step": 10,
+   "steps": 180,
+   "total_food": 1800,
+   "timer": 1080
+  },
+  "13": {
+   "name": "Dilophosaurus",
+   "home_building": 39,
+   "home_name": "Dilophosaurus training",
+   "food_per_step": 10,
+   "steps": 100,
+   "total_food": 1000,
+   "timer": 1080
+  }
+ },
+ "price_tables": {
+  "food_per_step": "0x30eac + (здание-26)*128 + тип*4 (u32, берётся младший байт)",
+  "steps": "0x315ac + (здание-26)*32 + тип (u8)"
+ },
+ "home_building_table": "cs:0x1cfa3[тип]"
+}

@@ -1,0 +1,30 @@
+// Снимок лобби скирмиша: строка наблюдателя пустая и занятая.
+//   node tools/lobby_shot.mjs [out/img/лобби]
+import { chromium } from '/usr/lib/node_modules/playwright/index.mjs';
+import { spawn } from 'node:child_process';
+import fs from 'node:fs';
+const КУДА = process.argv[2] || '../out/img/лобби';
+const ПОРТ = 8809;
+fs.mkdirSync(КУДА, { recursive: true });
+const сервер = spawn('python3', ['-m', 'http.server', String(ПОРТ), '--bind', '127.0.0.1'], { cwd: '<web root>', stdio: 'ignore' });
+await new Promise(r => setTimeout(r, 800));
+const бр = await chromium.launch(); const стр = await бр.newPage({ viewport: { width: 1100, height: 900 } });
+const ош = []; стр.on('pageerror', e => ош.push(e.message));
+await стр.goto(`http://127.0.0.1:${ПОРТ}/reimpl/web/game.html`, { waitUntil: 'load' });
+await стр.waitForFunction(() => window.__jw && window.__jw.net, null, { timeout: 30000 });
+await стр.click('#skirmbtn');
+await стр.waitForFunction(() => window.__jw.net.фаза === 'лобби' && window.__jw.net.лобби.места.length, null, { timeout: 30000 });
+await new Promise(r => setTimeout(r, 800));
+await стр.screenshot({ path: КУДА + '/лобби-игрок.png', clip: { x: 0, y: 0, width: 1100, height: 900 } });
+await стр.evaluate(() => document.getElementById('netarts').click());
+await new Promise(r => setTimeout(r, 500));
+await стр.evaluate(() => document.getElementById('netfast').click());
+await new Promise(r => setTimeout(r, 900));
+console.log('состояние правил:', JSON.stringify(await стр.evaluate(() => ({ быстрый: window.__jw.net.лобби.быстрый, украшения: window.__jw.net.лобби.украшения, классы: document.getElementById('netfast').className }))));
+await стр.screenshot({ path: КУДА + '/правила-включены.png', clip: { x: 795, y: 440, width: 305, height: 240 } });
+await стр.evaluate(() => document.querySelector('.netobs')?.click());
+await new Promise(r => setTimeout(r, 1200));
+await стр.screenshot({ path: КУДА + '/лобби-наблюдатель.png', clip: { x: 0, y: 0, width: 1100, height: 900 } });
+console.log('роль:', await стр.evaluate(() => window.__jw.net.роль));
+console.log(ош.length ? 'ОШИБКИ: ' + ош.slice(0, 4).join(' | ') : 'ошибок нет');
+await бр.close(); сервер.kill();

@@ -1,0 +1,1099 @@
+{
+ "addr": "цена 0x30eac (u32) / шаги 0x315ac (u8), 32 на здание; меню 0x4273c; футпринт 0x3176c/0x31770",
+ "rows": [
+  {
+   "type": 26,
+   "name": "Sanctuary",
+   "hpmax": 255,
+   "sprite_w": 96,
+   "sprite_h": 64,
+   "footprint_cells": 6,
+   "footprint_px": [
+    [
+     0,
+     0
+    ],
+    [
+     32,
+     0
+    ],
+    [
+     0,
+     32
+    ],
+    [
+     32,
+     32
+    ],
+    [
+     64,
+     0
+    ],
+    [
+     64,
+     32
+    ]
+   ],
+   "menu_count": 15,
+   "menu_first_sprite": 2587,
+   "menu_mask_slot0": 32767,
+   "menu": [
+    {
+     "idx": 0,
+     "steps": 250,
+     "food_per_step": 20,
+     "total": 5000,
+     "produces": "Constructor -> Sanctuary"
+    },
+    {
+     "idx": 1,
+     "steps": 200,
+     "food_per_step": 10,
+     "total": 2000,
+     "produces": "Constructor -> Barracks"
+    },
+    {
+     "idx": 2,
+     "steps": 250,
+     "food_per_step": 14,
+     "total": 3500,
+     "produces": "Constructor -> Armory"
+    },
+    {
+     "idx": 3,
+     "steps": 250,
+     "food_per_step": 14,
+     "total": 3500,
+     "produces": "Constructor -> Armory"
+    },
+    {
+     "idx": 4,
+     "steps": 100,
+     "food_per_step": 10,
+     "total": 1000,
+     "produces": "Constructor -> Food-storage"
+    },
+    {
+     "idx": 5,
+     "steps": 250,
+     "food_per_step": 10,
+     "total": 2500,
+     "produces": "Constructor -> Elf trainning"
+    },
+    {
+     "idx": 6,
+     "steps": 250,
+     "food_per_step": 10,
+     "total": 2500,
+     "produces": "Constructor -> Wizard trainning"
+    },
+    {
+     "idx": 7,
+     "steps": 250,
+     "food_per_step": 10,
+     "total": 2500,
+     "produces": "Constructor -> Warlock trainning"
+    },
+    {
+     "idx": 8,
+     "steps": 250,
+     "food_per_step": 10,
+     "total": 2500,
+     "produces": "Constructor -> Ranger trainning"
+    },
+    {
+     "idx": 9,
+     "steps": 250,
+     "food_per_step": 10,
+     "total": 2500,
+     "produces": "Constructor -> Velociraptor trainning"
+    },
+    {
+     "idx": 10,
+     "steps": 250,
+     "food_per_step": 12,
+     "total": 3000,
+     "produces": "Constructor -> Carrnotaurous trainning"
+    },
+    {
+     "idx": 11,
+     "steps": 250,
+     "food_per_step": 10,
+     "total": 2500,
+     "produces": "Constructor -> Rhamphorhynchus trainning"
+    },
+    {
+     "idx": 12,
+     "steps": 250,
+     "food_per_step": 14,
+     "total": 3500,
+     "produces": "Constructor -> Triceratops trainning"
+    },
+    {
+     "idx": 13,
+     "steps": 250,
+     "food_per_step": 12,
+     "total": 3000,
+     "produces": "Constructor -> Diloposaurus trainning"
+    },
+    {
+     "idx": 14,
+     "steps": 250,
+     "food_per_step": 8,
+     "total": 2000,
+     "produces": "Constructor (capture, +0x59=14)"
+    }
+   ]
+  },
+  {
+   "type": 27,
+   "name": "Barracks",
+   "hpmax": 200,
+   "sprite_w": 64,
+   "sprite_h": 64,
+   "footprint_cells": 4,
+   "footprint_px": [
+    [
+     0,
+     0
+    ],
+    [
+     32,
+     0
+    ],
+    [
+     0,
+     32
+    ],
+    [
+     32,
+     32
+    ]
+   ],
+   "menu_count": 3,
+   "menu_first_sprite": 2600,
+   "menu_mask_slot0": 32767,
+   "menu": [
+    {
+     "idx": 0,
+     "steps": 50,
+     "food_per_step": 10,
+     "total": 500,
+     "produces": "Commoner"
+    },
+    {
+     "idx": 1,
+     "steps": 120,
+     "food_per_step": 10,
+     "total": 1200,
+     "produces": "Muscle-man"
+    },
+    {
+     "idx": 2,
+     "steps": 100,
+     "food_per_step": 10,
+     "total": 1000,
+     "produces": "Warrior"
+    }
+   ]
+  },
+  {
+   "type": 28,
+   "name": "Armory",
+   "hpmax": 230,
+   "sprite_w": 96,
+   "sprite_h": 64,
+   "footprint_cells": 6,
+   "footprint_px": [
+    [
+     0,
+     0
+    ],
+    [
+     32,
+     0
+    ],
+    [
+     0,
+     32
+    ],
+    [
+     32,
+     32
+    ],
+    [
+     64,
+     0
+    ],
+    [
+     64,
+     32
+    ]
+   ],
+   "menu_count": 14,
+   "menu_first_sprite": 2527,
+   "menu_mask_slot0": 32767,
+   "menu": [
+    {
+     "idx": 0,
+     "steps": 70,
+     "food_per_step": 5,
+     "total": 350,
+     "produces": "Sword"
+    },
+    {
+     "idx": 1,
+     "steps": 66,
+     "food_per_step": 5,
+     "total": 330,
+     "produces": "Spear"
+    },
+    {
+     "idx": 2,
+     "steps": 62,
+     "food_per_step": 5,
+     "total": 310,
+     "produces": "Stone-Ax"
+    },
+    {
+     "idx": 3,
+     "steps": 100,
+     "food_per_step": 5,
+     "total": 500,
+     "produces": "Boomerang"
+    },
+    {
+     "idx": 4,
+     "steps": 80,
+     "food_per_step": 5,
+     "total": 400,
+     "produces": "Poison-Arrow"
+    },
+    {
+     "idx": 5,
+     "steps": 70,
+     "food_per_step": 5,
+     "total": 350,
+     "produces": "Fire-Arrow"
+    },
+    {
+     "idx": 6,
+     "steps": 70,
+     "food_per_step": 5,
+     "total": 350,
+     "produces": "Arrow"
+    },
+    {
+     "idx": 7,
+     "steps": 70,
+     "food_per_step": 5,
+     "total": 350,
+     "produces": "Wood-Shield"
+    },
+    {
+     "idx": 8,
+     "steps": 80,
+     "food_per_step": 5,
+     "total": 400,
+     "produces": "Iron-Shield"
+    },
+    {
+     "idx": 9,
+     "steps": 76,
+     "food_per_step": 5,
+     "total": 380,
+     "produces": "Wather-Shield"
+    },
+    {
+     "idx": 10,
+     "steps": 42,
+     "food_per_step": 5,
+     "total": 210,
+     "produces": "Water pail"
+    },
+    {
+     "idx": 11,
+     "steps": 50,
+     "food_per_step": 5,
+     "total": 250,
+     "produces": "Apple"
+    },
+    {
+     "idx": 12,
+     "steps": 70,
+     "food_per_step": 5,
+     "total": 350,
+     "produces": "Herb"
+    },
+    {
+     "idx": 13,
+     "steps": 90,
+     "food_per_step": 5,
+     "total": 450,
+     "produces": "Ginseng"
+    }
+   ]
+  },
+  {
+   "type": 29,
+   "name": "Armory",
+   "hpmax": 230,
+   "sprite_w": 96,
+   "sprite_h": 64,
+   "footprint_cells": 6,
+   "footprint_px": [
+    [
+     0,
+     0
+    ],
+    [
+     32,
+     0
+    ],
+    [
+     0,
+     32
+    ],
+    [
+     32,
+     32
+    ],
+    [
+     64,
+     0
+    ],
+    [
+     64,
+     32
+    ]
+   ],
+   "menu_count": 14,
+   "menu_first_sprite": 2527,
+   "menu_mask_slot0": 32767,
+   "menu": [
+    {
+     "idx": 0,
+     "steps": 70,
+     "food_per_step": 5,
+     "total": 350,
+     "produces": "Sword"
+    },
+    {
+     "idx": 1,
+     "steps": 66,
+     "food_per_step": 5,
+     "total": 330,
+     "produces": "Spear"
+    },
+    {
+     "idx": 2,
+     "steps": 62,
+     "food_per_step": 5,
+     "total": 310,
+     "produces": "Stone-Ax"
+    },
+    {
+     "idx": 3,
+     "steps": 100,
+     "food_per_step": 5,
+     "total": 500,
+     "produces": "Boomerang"
+    },
+    {
+     "idx": 4,
+     "steps": 80,
+     "food_per_step": 5,
+     "total": 400,
+     "produces": "Poison-Arrow"
+    },
+    {
+     "idx": 5,
+     "steps": 70,
+     "food_per_step": 5,
+     "total": 350,
+     "produces": "Fire-Arrow"
+    },
+    {
+     "idx": 6,
+     "steps": 70,
+     "food_per_step": 5,
+     "total": 350,
+     "produces": "Arrow"
+    },
+    {
+     "idx": 7,
+     "steps": 70,
+     "food_per_step": 5,
+     "total": 350,
+     "produces": "Wood-Shield"
+    },
+    {
+     "idx": 8,
+     "steps": 80,
+     "food_per_step": 5,
+     "total": 400,
+     "produces": "Iron-Shield"
+    },
+    {
+     "idx": 9,
+     "steps": 76,
+     "food_per_step": 5,
+     "total": 380,
+     "produces": "Wather-Shield"
+    },
+    {
+     "idx": 10,
+     "steps": 42,
+     "food_per_step": 5,
+     "total": 210,
+     "produces": "Water pail"
+    },
+    {
+     "idx": 11,
+     "steps": 50,
+     "food_per_step": 5,
+     "total": 250,
+     "produces": "Apple"
+    },
+    {
+     "idx": 12,
+     "steps": 70,
+     "food_per_step": 5,
+     "total": 350,
+     "produces": "Herb"
+    },
+    {
+     "idx": 13,
+     "steps": 90,
+     "food_per_step": 5,
+     "total": 450,
+     "produces": "Ginseng"
+    }
+   ]
+  },
+  {
+   "type": 30,
+   "name": "Food-storage",
+   "hpmax": 160,
+   "sprite_w": 64,
+   "sprite_h": 64,
+   "footprint_cells": 4,
+   "footprint_px": [
+    [
+     0,
+     0
+    ],
+    [
+     32,
+     0
+    ],
+    [
+     0,
+     32
+    ],
+    [
+     32,
+     32
+    ]
+   ],
+   "menu_count": 4,
+   "menu_first_sprite": 2603,
+   "menu_mask_slot0": 32767,
+   "menu": [
+    {
+     "idx": 0,
+     "steps": 5,
+     "food_per_step": 0,
+     "total": 0,
+     "produces": "выдать 10 еды"
+    },
+    {
+     "idx": 1,
+     "steps": 10,
+     "food_per_step": 0,
+     "total": 0,
+     "produces": "выдать 100 еды"
+    },
+    {
+     "idx": 2,
+     "steps": 15,
+     "food_per_step": 0,
+     "total": 0,
+     "produces": "выдать 1000 еды"
+    },
+    {
+     "idx": 3,
+     "steps": 20,
+     "food_per_step": 0,
+     "total": 0,
+     "produces": "выдать 10000 еды"
+    }
+   ]
+  },
+  {
+   "type": 31,
+   "name": "Elf trainning",
+   "hpmax": 180,
+   "sprite_w": 64,
+   "sprite_h": 64,
+   "footprint_cells": 4,
+   "footprint_px": [
+    [
+     0,
+     0
+    ],
+    [
+     32,
+     0
+    ],
+    [
+     0,
+     32
+    ],
+    [
+     32,
+     32
+    ]
+   ],
+   "menu_count": 4,
+   "menu_first_sprite": 2607,
+   "menu_mask_slot0": 32767,
+   "menu": [
+    {
+     "idx": 0,
+     "steps": 90,
+     "food_per_step": 10,
+     "total": 900,
+     "produces": "Elf",
+     "bonus": {
+      "hp": 0,
+      "mag": 0,
+      "atk_def": 0,
+      "spd": 0
+     }
+    },
+    {
+     "idx": 1,
+     "steps": 130,
+     "food_per_step": 10,
+     "total": 1300,
+     "produces": "Elf",
+     "bonus": {
+      "hp": 20,
+      "mag": 20,
+      "atk_def": 10,
+      "spd": 10
+     }
+    },
+    {
+     "idx": 2,
+     "steps": 170,
+     "food_per_step": 10,
+     "total": 1700,
+     "produces": "Elf",
+     "bonus": {
+      "hp": 25,
+      "mag": 40,
+      "atk_def": 20,
+      "spd": 20
+     }
+    },
+    {
+     "idx": 3,
+     "steps": 230,
+     "food_per_step": 10,
+     "total": 2300,
+     "produces": "Elf",
+     "bonus": {
+      "hp": 30,
+      "mag": 60,
+      "atk_def": 25,
+      "spd": 30
+     }
+    }
+   ]
+  },
+  {
+   "type": 32,
+   "name": "Wizard trainning",
+   "hpmax": 190,
+   "sprite_w": 64,
+   "sprite_h": 64,
+   "footprint_cells": 4,
+   "footprint_px": [
+    [
+     0,
+     0
+    ],
+    [
+     32,
+     0
+    ],
+    [
+     0,
+     32
+    ],
+    [
+     32,
+     32
+    ]
+   ],
+   "menu_count": 3,
+   "menu_first_sprite": 2611,
+   "menu_mask_slot0": 32767,
+   "menu": [
+    {
+     "idx": 0,
+     "steps": 100,
+     "food_per_step": 10,
+     "total": 1000,
+     "produces": "Wizard",
+     "bonus": {
+      "hp": 0,
+      "mag": 0,
+      "atk_def": 0,
+      "spd": 0
+     }
+    },
+    {
+     "idx": 1,
+     "steps": 150,
+     "food_per_step": 10,
+     "total": 1500,
+     "produces": "Wizard",
+     "bonus": {
+      "hp": 20,
+      "mag": 20,
+      "atk_def": 20,
+      "spd": 10
+     }
+    },
+    {
+     "idx": 2,
+     "steps": 230,
+     "food_per_step": 10,
+     "total": 2300,
+     "produces": "Wizard",
+     "bonus": {
+      "hp": 30,
+      "mag": 40,
+      "atk_def": 25,
+      "spd": 20
+     }
+    }
+   ]
+  },
+  {
+   "type": 33,
+   "name": "Warlock trainning",
+   "hpmax": 190,
+   "sprite_w": 64,
+   "sprite_h": 64,
+   "footprint_cells": 4,
+   "footprint_px": [
+    [
+     0,
+     0
+    ],
+    [
+     32,
+     0
+    ],
+    [
+     0,
+     32
+    ],
+    [
+     32,
+     32
+    ]
+   ],
+   "menu_count": 3,
+   "menu_first_sprite": 2614,
+   "menu_mask_slot0": 32767,
+   "menu": [
+    {
+     "idx": 0,
+     "steps": 200,
+     "food_per_step": 10,
+     "total": 2000,
+     "produces": "Warlock",
+     "bonus": {
+      "hp": 0,
+      "mag": 0,
+      "atk_def": 0,
+      "spd": 0
+     }
+    },
+    {
+     "idx": 1,
+     "steps": 250,
+     "food_per_step": 12,
+     "total": 3000,
+     "produces": "Warlock",
+     "bonus": {
+      "hp": 20,
+      "mag": 20,
+      "atk_def": 20,
+      "spd": 10
+     }
+    },
+    {
+     "idx": 2,
+     "steps": 250,
+     "food_per_step": 15,
+     "total": 3750,
+     "produces": "Warlock",
+     "bonus": {
+      "hp": 30,
+      "mag": 40,
+      "atk_def": 25,
+      "spd": 20
+     }
+    }
+   ]
+  },
+  {
+   "type": 34,
+   "name": "Ranger trainning",
+   "hpmax": 190,
+   "sprite_w": 64,
+   "sprite_h": 64,
+   "footprint_cells": 4,
+   "footprint_px": [
+    [
+     0,
+     0
+    ],
+    [
+     32,
+     0
+    ],
+    [
+     0,
+     32
+    ],
+    [
+     32,
+     32
+    ]
+   ],
+   "menu_count": 2,
+   "menu_first_sprite": 2617,
+   "menu_mask_slot0": 32767,
+   "menu": [
+    {
+     "idx": 0,
+     "steps": 90,
+     "food_per_step": 10,
+     "total": 900,
+     "produces": "Ranger",
+     "bonus": {
+      "hp": 0,
+      "mag": 0,
+      "atk_def": 0,
+      "spd": 0
+     }
+    },
+    {
+     "idx": 1,
+     "steps": 140,
+     "food_per_step": 10,
+     "total": 1400,
+     "produces": "Ranger",
+     "bonus": {
+      "hp": 20,
+      "mag": 40,
+      "atk_def": 20,
+      "spd": 20
+     }
+    }
+   ]
+  },
+  {
+   "type": 35,
+   "name": "Velociraptor trainning",
+   "hpmax": 220,
+   "sprite_w": 64,
+   "sprite_h": 64,
+   "footprint_cells": 4,
+   "footprint_px": [
+    [
+     0,
+     0
+    ],
+    [
+     32,
+     0
+    ],
+    [
+     0,
+     32
+    ],
+    [
+     32,
+     32
+    ]
+   ],
+   "menu_count": 2,
+   "menu_first_sprite": 2619,
+   "menu_mask_slot0": 32767,
+   "menu": [
+    {
+     "idx": 0,
+     "steps": 140,
+     "food_per_step": 10,
+     "total": 1400,
+     "produces": "Velociraptor",
+     "bonus": {
+      "hp": 0,
+      "mag": 0,
+      "atk_def": 0,
+      "spd": 0
+     }
+    },
+    {
+     "idx": 1,
+     "steps": 190,
+     "food_per_step": 10,
+     "total": 1900,
+     "produces": "Velociraptor",
+     "bonus": {
+      "hp": 40,
+      "mag": 0,
+      "atk_def": 30,
+      "spd": 50
+     }
+    }
+   ]
+  },
+  {
+   "type": 36,
+   "name": "Carrnotaurous trainning",
+   "hpmax": 210,
+   "sprite_w": 64,
+   "sprite_h": 64,
+   "footprint_cells": 4,
+   "footprint_px": [
+    [
+     0,
+     0
+    ],
+    [
+     32,
+     0
+    ],
+    [
+     0,
+     32
+    ],
+    [
+     32,
+     32
+    ]
+   ],
+   "menu_count": 2,
+   "menu_first_sprite": 2621,
+   "menu_mask_slot0": 32767,
+   "menu": [
+    {
+     "idx": 0,
+     "steps": 180,
+     "food_per_step": 10,
+     "total": 1800,
+     "produces": "Carrnotaurous",
+     "bonus": {
+      "hp": 0,
+      "mag": 0,
+      "atk_def": 0,
+      "spd": 0
+     }
+    },
+    {
+     "idx": 1,
+     "steps": 230,
+     "food_per_step": 10,
+     "total": 2300,
+     "produces": "Carrnotaurous",
+     "bonus": {
+      "hp": 40,
+      "mag": 0,
+      "atk_def": 30,
+      "spd": 50
+     }
+    }
+   ]
+  },
+  {
+   "type": 37,
+   "name": "Rhamphorhynchus trainning",
+   "hpmax": 200,
+   "sprite_w": 64,
+   "sprite_h": 64,
+   "footprint_cells": 4,
+   "footprint_px": [
+    [
+     0,
+     0
+    ],
+    [
+     32,
+     0
+    ],
+    [
+     0,
+     32
+    ],
+    [
+     32,
+     32
+    ]
+   ],
+   "menu_count": 2,
+   "menu_first_sprite": 2623,
+   "menu_mask_slot0": 32767,
+   "menu": [
+    {
+     "idx": 0,
+     "steps": 180,
+     "food_per_step": 10,
+     "total": 1800,
+     "produces": "Rhamphorhynchus",
+     "bonus": {
+      "hp": 0,
+      "mag": 0,
+      "atk_def": 0,
+      "spd": 0
+     }
+    },
+    {
+     "idx": 1,
+     "steps": 230,
+     "food_per_step": 10,
+     "total": 2300,
+     "produces": "Rhamphorhynchus",
+     "bonus": {
+      "hp": 40,
+      "mag": 0,
+      "atk_def": 30,
+      "spd": 50
+     }
+    }
+   ]
+  },
+  {
+   "type": 38,
+   "name": "Triceratops trainning",
+   "hpmax": 240,
+   "sprite_w": 64,
+   "sprite_h": 64,
+   "footprint_cells": 4,
+   "footprint_px": [
+    [
+     0,
+     0
+    ],
+    [
+     32,
+     0
+    ],
+    [
+     0,
+     32
+    ],
+    [
+     32,
+     32
+    ]
+   ],
+   "menu_count": 2,
+   "menu_first_sprite": 2625,
+   "menu_mask_slot0": 32767,
+   "menu": [
+    {
+     "idx": 0,
+     "steps": 210,
+     "food_per_step": 10,
+     "total": 2100,
+     "produces": "Triceratops",
+     "bonus": {
+      "hp": 0,
+      "mag": 0,
+      "atk_def": 0,
+      "spd": 0
+     }
+    },
+    {
+     "idx": 1,
+     "steps": 250,
+     "food_per_step": 12,
+     "total": 3000,
+     "produces": "Triceratops",
+     "bonus": {
+      "hp": 40,
+      "mag": 0,
+      "atk_def": 30,
+      "spd": 50
+     }
+    }
+   ]
+  },
+  {
+   "type": 39,
+   "name": "Diloposaurus trainning",
+   "hpmax": 190,
+   "sprite_w": 64,
+   "sprite_h": 64,
+   "footprint_cells": 4,
+   "footprint_px": [
+    [
+     0,
+     0
+    ],
+    [
+     32,
+     0
+    ],
+    [
+     0,
+     32
+    ],
+    [
+     32,
+     32
+    ]
+   ],
+   "menu_count": 2,
+   "menu_first_sprite": 2627,
+   "menu_mask_slot0": 32767,
+   "menu": [
+    {
+     "idx": 0,
+     "steps": 190,
+     "food_per_step": 10,
+     "total": 1900,
+     "produces": "Diloposaurus",
+     "bonus": {
+      "hp": 0,
+      "mag": 0,
+      "atk_def": 0,
+      "spd": 0
+     }
+    },
+    {
+     "idx": 1,
+     "steps": 250,
+     "food_per_step": 10,
+     "total": 2500,
+     "produces": "Diloposaurus",
+     "bonus": {
+      "hp": 40,
+      "mag": 0,
+      "atk_def": 30,
+      "spd": 50
+     }
+    }
+   ]
+  }
+ ]
+}

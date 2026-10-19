@@ -1,0 +1,202 @@
+{
+ "table": "0x36a60[миссия*8 + владелец-человека], 96 указателей",
+ "handlers": {
+  "m1": {
+   "Tyrano": "0x17989",
+   "Ka-Noo-Se": "0x17989",
+   "Romack": "0x17989",
+   "Masai": "0x17989",
+   "Moospell": "0x17989",
+   "KoomBa": "0x17989",
+   "RaDumBa": "0x179d6",
+   "KoaKa": "0x17989"
+  },
+  "m2": {
+   "Tyrano": "0x17a19",
+   "Ka-Noo-Se": "0x17a3d",
+   "Romack": "0x17a61",
+   "Masai": "0x17a85",
+   "Moospell": "0x17aaf",
+   "KoomBa": "0x17ad3",
+   "RaDumBa": "0x17afd",
+   "KoaKa": "0x17b27"
+  },
+  "m3": {
+   "Tyrano": "0x17b42",
+   "Ka-Noo-Se": "0x17b59",
+   "Romack": "0x17b70",
+   "Masai": "0x17b87",
+   "Moospell": "0x17b9e",
+   "KoomBa": "0x17bb5",
+   "RaDumBa": "0x17bcc",
+   "KoaKa": "0x17be3"
+  },
+  "m4": {
+   "Tyrano": "0x17b42",
+   "Ka-Noo-Se": "0x17b59",
+   "Romack": "0x17b70",
+   "Masai": "0x17b87",
+   "Moospell": "0x17b9e",
+   "KoomBa": "0x17bb5",
+   "RaDumBa": "0x17bcc",
+   "KoaKa": "0x17be3"
+  },
+  "m5": {
+   "Tyrano": "0x17bfa",
+   "Ka-Noo-Se": "0x17bfa",
+   "Romack": "0x17bfa",
+   "Masai": "0x17bfa",
+   "Moospell": "0x17bfa",
+   "KoomBa": "0x17bfa",
+   "RaDumBa": "0x17bfa",
+   "KoaKa": "0x17bfa"
+  },
+  "m6": {
+   "Tyrano": "0x17c79",
+   "Ka-Noo-Se": "0x17c79",
+   "Romack": "0x17c79",
+   "Masai": "0x17c79",
+   "Moospell": "0x17c79",
+   "KoomBa": "0x17c79",
+   "RaDumBa": "0x17c79",
+   "KoaKa": "0x17c79"
+  },
+  "m7": {
+   "Tyrano": "0x17ca9",
+   "Ka-Noo-Se": "0x17ca9",
+   "Romack": "0x17ca9",
+   "Masai": "0x17ca9",
+   "Moospell": "0x17ca9",
+   "KoomBa": "0x17ca9",
+   "RaDumBa": "0x17ca9",
+   "KoaKa": "0x17ca9"
+  },
+  "m8": {
+   "Tyrano": "0x17cde",
+   "Ka-Noo-Se": "0x17cde",
+   "Romack": "0x17cde",
+   "Masai": "0x17cde",
+   "Moospell": "0x17cde",
+   "KoomBa": "0x17cde",
+   "RaDumBa": "0x17cde",
+   "KoaKa": "0x17cde"
+  },
+  "m9": {
+   "Tyrano": "0x17d26",
+   "Ka-Noo-Se": "0x17d26",
+   "Romack": "0x17d26",
+   "Masai": "0x17d26",
+   "Moospell": "0x17d26",
+   "KoomBa": "0x17d26",
+   "RaDumBa": "0x17d26",
+   "KoaKa": "0x17d26"
+  },
+  "m10": {
+   "Tyrano": "0x17d28",
+   "Ka-Noo-Se": "0x17d28",
+   "Romack": "0x17d28",
+   "Masai": "0x17d28",
+   "Moospell": "0x17d28",
+   "KoomBa": "0x17d28",
+   "RaDumBa": "0x17d28",
+   "KoaKa": "0x17d28"
+  },
+  "m11": {
+   "Tyrano": "0x17d59",
+   "Ka-Noo-Se": "0x17d59",
+   "Romack": "0x17d59",
+   "Masai": "0x17d59",
+   "Moospell": "0x17d59",
+   "KoomBa": "0x17d59",
+   "RaDumBa": "0x17d59",
+   "KoaKa": "0x17d59"
+  },
+  "m12": {
+   "Tyrano": "0x17d5c",
+   "Ka-Noo-Se": "0x17d5c",
+   "Romack": "0x17d5c",
+   "Masai": "0x17d5c",
+   "Moospell": "0x17d5c",
+   "KoomBa": "0x17d5c",
+   "RaDumBa": "0x17d5c",
+   "KoaKa": "0x17d5c"
+  }
+ },
+ "mission5_artifact_0x36c54": {
+  "Tyrano": {
+   "item_id": 15,
+   "name": "Celestial Sword"
+  },
+  "Ka-Noo-Se": {
+   "item_id": 17,
+   "name": "Mystical Liquor"
+  },
+  "Romack": {
+   "item_id": 20,
+   "name": "Dragon's Eye"
+  },
+  "Masai": {
+   "item_id": 22,
+   "name": "Hammer of Darkness"
+  },
+  "Moospell": {
+   "item_id": 19,
+   "name": "Rock crystal"
+  },
+  "KoomBa": {
+   "item_id": 21,
+   "name": "Moon Shield"
+  },
+  "RaDumBa": {
+   "item_id": 23,
+   "name": "Volcano Spear"
+  },
+  "KoaKa": {
+   "item_id": 16,
+   "name": "Moonlight Sword"
+  }
+ },
+ "mission3_4_target_owner": {
+  "Tyrano": 1,
+  "Ka-Noo-Se": 0,
+  "Romack": 3,
+  "Masai": 2,
+  "Moospell": 5,
+  "KoomBa": 4,
+  "RaDumBa": 7,
+  "KoaKa": 6
+ },
+ "mission7_types": [
+  14,
+  16,
+  17,
+  19
+ ],
+ "goal_text": {
+  "m1": "сумма +0x13 (запас еды) по живым юнитам человека, включая здания, >= 3000; RaDumBa дополнительно: у владельца 0 не осталось живых юнитов",
+  "m2": {
+   "Tyrano": "27>=3 и 35>=3",
+   "Ka-Noo-Se": "27>=2 и 31>=2",
+   "Romack": "34>=2 и 30>=4",
+   "Masai": "(28+29)>=4 и 27>=3",
+   "Moospell": "27>=3 и 32>=3",
+   "KoomBa": "27>=3 и (28+29)>=2",
+   "RaDumBa": "(28+29)>=3 и 30>=4",
+   "KoaKa": "37>=3"
+  },
+  "m3": "уничтожить всех живых юнитов владельца по таблице mission3_4_target_owner",
+  "m4": "то же, что m3",
+  "m5": "любой живой юнит человека держит артефакт mission5_artifact в слотах +0x1b..+0x20, +0x24..+0x26",
+  "m6": "здание [0x36c5c + владелец*4] перешло к человеку; его гибель = поражение",
+  "m7": "нет живых юнитов типов 14, 16, 17, 19 ни у кого",
+  "m8": "оба здания [0x36c7c + владелец*8] и [0x36c80 + владелец*8] у человека; гибель любого = поражение",
+  "m9_m12": "у всех слотов с владельцем != владельца человека счётчик живых u16[0x36bf0 + СЛОТ*2] == 0"
+ },
+ "endcode_0x30349": {
+  "1": "поражение",
+  "2": "победа",
+  "4": "соперник вышел",
+  "5": "рассинхрон"
+ },
+ "check_period": "из главного цикла 0x100fe: при [0x30349]!=0 или (word[0x31ab4] & 0x1f)==0"
+}

@@ -1,0 +1,71 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Jurassic War JS</title>
+<style>
+  :root { --bg:#0e0d0b; --panel:#1b1815; --edge:#3a3229; --ink:#d8cfc2; --dim:#8d8274; --hot:#e8c07d; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html,body { margin:0; height:100%; background:var(--bg); color:var(--ink); font:12px/1.4 ui-monospace,Menlo,Consolas,monospace; overscroll-behavior:none; }
+  body { display:flex; flex-direction:column; }
+  #hud { padding:4px 62px 4px 8px; color:var(--dim); font-size:11px; border-bottom:1px solid var(--edge);
+         white-space:nowrap; overflow-x:auto; scrollbar-width:none; }
+  #hud::-webkit-scrollbar { display:none; }
+  #stage { flex:1; display:flex; align-items:center; justify-content:center; min-height:0; padding:4px; }
+  /* Размер канвы считает viewer.js (fit): так рамка элемента точно совпадает с картинкой 640×480
+     и пересчёт координат в мышь остаётся точным — object-fit тут не годится, он даёт поля внутри элемента. */
+  canvas { image-rendering:pixelated; display:block; background:#000; outline:none; touch-action:none; border:1px solid var(--edge); }
+  canvas:focus { border-color:var(--hot); }
+  #bar { border-top:1px solid var(--edge); background:var(--panel); padding:5px 6px calc(5px + env(safe-area-inset-bottom)); display:flex; flex-direction:column; gap:4px; }
+  .row { display:flex; gap:4px; flex-wrap:wrap; align-items:center; }
+  .lbl { color:var(--dim); font-size:10px; min-width:52px; }
+  button { font:inherit; font-size:12px; color:var(--ink); background:#262119; border:1px solid var(--edge); border-radius:5px;
+           padding:7px 9px; min-width:34px; cursor:pointer; user-select:none; touch-action:manipulation; }
+  button:active { background:#3a3229; }
+  button.on { background:var(--hot); color:#1b1815; border-color:var(--hot); }
+  button.wide { min-width:56px; }
+  #toggle { position:fixed; right:6px; top:4px; z-index:2; padding:3px 7px; font-size:11px; }
+  body.hidebar #bar { display:none; }
+  /* Телефон: кнопок много, места мало — жмём отступы и прячем подписи рядов. */
+  @media (max-width: 560px) {
+    button { padding:6px 6px; min-width:29px; font-size:11px; }
+    button.wide { min-width:44px; }
+    .lbl { min-width:0; font-size:9px; }
+    .row { gap:3px; }
+    #bar { padding:3px 4px calc(3px + env(safe-area-inset-bottom)); gap:3px; }
+  }
+</style>
+<div id="hud">загрузка…</div>
+<button id="toggle">кнопки</button>
+<div id="stage"><canvas id="c" width="640" height="480"></canvas></div>
+<div id="bar">
+  <div class="row">
+    <span class="lbl">мышь</span>
+    <button class="wide" data-mb="0">ЛКМ</button><button class="wide" data-mb="2">ПКМ</button>
+    <button id="latch" class="wide">зажать</button><button id="pmode" class="wide">тачпад</button>
+    <button data-mod="ShiftLeft">Shift</button><button data-mod="ControlLeft">Ctrl</button><button data-mod="AltLeft">Alt</button>
+    <span class="lbl" id="phint" style="min-width:0"></span>
+  </div>
+  <div class="row">
+    <span class="lbl">команды</span>
+    <button data-key="KeyA">A идти</button><button data-key="KeyZ">Z отдых</button><button data-key="KeyG">G охрана</button>
+    <button data-key="KeyN">N след.</button><button data-key="Space">центр</button><button data-key="Tab">инфо</button>
+    <button data-key="Backquote">` карта</button><button data-key="NumpadAdd">+ статы</button><button data-key="KeyP">пауза</button>
+  </div>
+  <div class="row">
+    <span class="lbl">группы</span>
+    <button data-key="Digit1">1</button><button data-key="Digit2">2</button><button data-key="Digit3">3</button><button data-key="Digit4">4</button>
+    <button data-key="Digit5">5</button><button data-key="Digit6">6</button><button data-key="Digit7">7</button><button data-key="Digit8">8</button>
+    <button data-key="Digit9">9</button><button data-key="Digit0">0</button>
+  </div>
+  <div class="row">
+    <span class="lbl">экран</span>
+    <button data-key="Escape">Esc</button><button data-key="F1">F1</button><button data-key="F2">F2</button><button data-key="F3">F3</button><button data-key="F4">F4</button>
+    <button data-key="F5">F5</button><button data-key="F6">F6</button><button data-key="F7">F7</button><button data-key="F8">F8</button>
+    <button data-key="ArrowLeft">←</button><button data-key="ArrowUp">↑</button><button data-key="ArrowDown">↓</button><button data-key="ArrowRight">→</button>
+  </div>
+  <div class="row">
+    <span class="lbl">симуляция</span>
+    <button id="run" class="wide">▶ пуск</button><button id="stepb" class="wide">шаг</button><button id="fs" class="wide">во весь экран</button>
+  </div>
+</div>
+<script type="importmap" data-jw-versions>{"imports":{"../js/ai/act.js":"../js/ai/act.js?v=2787e897cb","../js/ai/arena.js":"../js/ai/arena.js?v=2787e897cb","../js/ai/episode.js":"../js/ai/episode.js?v=2787e897cb","../js/ai/net.js":"../js/ai/net.js?v=2787e897cb","../js/ai/obs.js":"../js/ai/obs.js?v=2787e897cb","../js/ai/params.js":"../js/ai/params.js?v=2787e897cb","../js/ai/policy_net.js":"../js/ai/policy_net.js?v=2787e897cb","../js/ai/policy_script.js":"../js/ai/policy_script.js?v=2787e897cb","../js/ai/reward.js":"../js/ai/reward.js?v=2787e897cb","../js/ai/scenes.js":"../js/ai/scenes.js?v=2787e897cb","../js/ai/strategy.js":"../js/ai/strategy.js?v=2787e897cb","../js/ai/tactic.js":"../js/ai/tactic.js?v=2787e897cb","../js/ai/вождь.js":"../js/ai/вождь.js?v=2787e897cb","../js/ai/вождь3.js":"../js/ai/вождь3.js?v=2787e897cb","../js/ai/кампания.js":"../js/ai/кампания.js?v=2787e897cb","../js/ai/комдив.js":"../js/ai/комдив.js?v=2787e897cb","../js/ai/ластхит.js":"../js/ai/ластхит.js?v=2787e897cb","../js/ai/модель.js":"../js/ai/модель.js?v=2787e897cb","../js/ai/модель_партия.js":"../js/ai/модель_партия.js?v=2787e897cb","../js/ai/нейросети.js":"../js/ai/нейросети.js?v=2787e897cb","../js/ai/образец.js":"../js/ai/образец.js?v=2787e897cb","../js/ai/отряд.js":"../js/ai/отряд.js?v=2787e897cb","../js/ai/поведенец.js":"../js/ai/поведенец.js?v=2787e897cb","../js/ai/пресеты.js":"../js/ai/пресеты.js?v=2787e897cb","../js/ai/справочник.js":"../js/ai/справочник.js?v=2787e897cb","../js/ai/стратег_правило.js":"../js/ai/стратег_правило.js?v=2787e897cb","../js/ai/стройка.js":"../js/ai/стройка.js?v=2787e897cb","../js/ai/сцены.js":"../js/ai/сцены.js?v=2787e897cb","../js/ai/тирано2.js":"../js/ai/тирано2.js?v=2787e897cb","../js/ai/угодья.js":"../js/ai/угодья.js?v=2787e897cb","../js/ai/штаб.js":"../js/ai/штаб.js?v=2787e897cb","../js/archive.js":"../js/archive.js?v=2787e897cb","../js/core.js":"../js/core.js?v=2787e897cb","../js/engine.js":"../js/engine.js?v=2787e897cb","../js/fn.js":"../js/fn.js?v=2787e897cb","../js/input.js":"../js/input.js?v=2787e897cb","../js/loader.js":"../js/loader.js?v=2787e897cb","../js/mem.js":"../js/mem.js?v=2787e897cb","../js/modules.browser.js":"../js/modules.browser.js?v=2787e897cb","../js/modules.js":"../js/modules.js?v=2787e897cb","../js/net/lockstep.js":"../js/net/lockstep.js?v=2787e897cb","../js/net/игра.js":"../js/net/игра.js?v=2787e897cb","../js/net/канал.js":"../js/net/канал.js?v=2787e897cb","../js/net/локальный.js":"../js/net/локальный.js?v=2787e897cb","../js/net/холл.js":"../js/net/холл.js?v=2787e897cb","../js/port/ai_script.js":"../js/port/ai_script.js?v=2787e897cb","../js/port/artifacts.js":"../js/port/artifacts.js?v=2787e897cb","../js/port/autofood.js":"../js/port/autofood.js?v=2787e897cb","../js/port/autogroups.js":"../js/port/autogroups.js?v=2787e897cb","../js/port/buildplan.js":"../js/port/buildplan.js?v=2787e897cb","../js/port/caster.js":"../js/port/caster.js?v=2787e897cb","../js/port/combat.js":"../js/port/combat.js?v=2787e897cb","../js/port/economy.js":"../js/port/economy.js?v=2787e897cb","../js/port/fog.js":"../js/port/fog.js?v=2787e897cb","../js/port/follow.js":"../js/port/follow.js?v=2787e897cb","../js/port/humans.js":"../js/port/humans.js?v=2787e897cb","../js/port/inject.js":"../js/port/inject.js?v=2787e897cb","../js/port/input.js":"../js/port/input.js?v=2787e897cb","../js/port/kamikaze.js":"../js/port/kamikaze.js?v=2787e897cb","../js/port/loader.js":"../js/port/loader.js?v=2787e897cb","../js/port/magic.js":"../js/port/magic.js?v=2787e897cb","../js/port/move.js":"../js/port/move.js?v=2787e897cb","../js/port/orderqueue.js":"../js/port/orderqueue.js?v=2787e897cb","../js/port/orders_ai.js":"../js/port/orders_ai.js?v=2787e897cb","../js/port/path.js":"../js/port/path.js?v=2787e897cb","../js/port/patrol.js":"../js/port/patrol.js?v=2787e897cb","../js/port/prodqueue.js":"../js/port/prodqueue.js?v=2787e897cb","../js/port/skirmish.js":"../js/port/skirmish.js?v=2787e897cb","../js/port/новые_звери.js":"../js/port/новые_звери.js?v=2787e897cb","../js/render/fb.js":"../js/render/fb.js?v=2787e897cb","../js/render/hud.js":"../js/render/hud.js?v=2787e897cb","../js/render/panel.js":"../js/render/panel.js?v=2787e897cb","../js/render/renderer.js":"../js/render/renderer.js?v=2787e897cb","../js/render/scene.js":"../js/render/scene.js?v=2787e897cb","../js/render/sprites.js":"../js/render/sprites.js?v=2787e897cb","../js/render/text.js":"../js/render/text.js?v=2787e897cb","../js/render/wide.js":"../js/render/wide.js?v=2787e897cb","../js/ui/locale.js":"../js/ui/locale.js?v=2787e897cb","../js/ui/music.js":"../js/ui/music.js?v=2787e897cb","../js/ui/narration.js":"../js/ui/narration.js?v=2787e897cb","../js/ui/pathscenes.js":"../js/ui/pathscenes.js?v=2787e897cb","../js/ui/replay.js":"../js/ui/replay.js?v=2787e897cb","../js/ui/saves.js":"../js/ui/saves.js?v=2787e897cb","../js/ui/scenebuild.js":"../js/ui/scenebuild.js?v=2787e897cb","../js/ui/screen.js":"../js/ui/screen.js?v=2787e897cb","../js/ui/sfx.js":"../js/ui/sfx.js?v=2787e897cb","../js/ui/shell.js":"../js/ui/shell.js?v=2787e897cb","../js/ui/windows.js":"../js/ui/windows.js?v=2787e897cb","./arena.js":"./arena.js?v=2787e897cb","./lang.js":"./lang.js?v=2787e897cb","./path.js":"./path.js?v=2787e897cb","./viewer.js":"./viewer.js?v=2787e897cb"}}</script>
+<script type="module" src="viewer.js"></script>

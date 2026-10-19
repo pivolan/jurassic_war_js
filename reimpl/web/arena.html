@@ -1,0 +1,48 @@
+<meta charset="utf-8">
+<title>Jurassic War — АИ тренировка</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+  html, body { margin: 0; background: #14120f; color: #e8c07d; font: 14px/1.4 ui-monospace, Menlo, Consolas, monospace; }
+  #stage { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 10px 8px 16px; }
+  canvas { image-rendering: pixelated; background: #000; width: min(100%, 1280px); height: auto; aspect-ratio: 4 / 3; }
+  .bar { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; width: min(100%, 1280px); }
+  button { font: inherit; color: #e8c07d; background: #2f2a24; border: 1px solid #4a4136; border-radius: 4px;
+           padding: 7px 12px; cursor: pointer; }
+  button:hover { background: #3b342c; }
+  button.on { background: #6b5628; border-color: #a3833d; }
+  button:disabled { opacity: .45; cursor: default; }
+  button.проверочная { border-style: dashed; }
+  label { display:inline-flex; align-items:center; gap:5px; color:#b9a887; }
+  select { font: inherit; color: #e8c07d; background: #2f2a24; border: 1px solid #4a4136; border-radius: 4px; padding: 6px 8px; max-width: 46vw; }
+  #note { color: #8d8274; min-height: 1.4em; text-align: center; }
+  #сеть { width: min(100%, 1280px); color: #b9a887; display: flex; flex-wrap: wrap; gap: 4px 14px; }
+  #сеть span { white-space: nowrap; } #сеть b { color: #e8c07d; font-weight: normal; }
+  #табло { width: min(100%, 1280px); display: flex; flex-wrap: wrap; gap: 4px 18px; color: #b9a887; }
+  #табло > div { white-space: nowrap; }
+  #табло b { color: #e8c07d; font-weight: normal; }
+  h1 { font-size: 15px; font-weight: normal; color: #8d8274; margin: 4px 0 0; }
+</style>
+<div id="stage">
+  <h1>АИ тренировка · тренировочные арены · пунктиром — проверочные, на них не обучаем · заметка notes/AI-UNIT-STAGE2.md</h1>
+  <canvas id="c" width="640" height="480"></canvas>
+  <div class="bar" id="арены"></div>
+  <div class="bar">
+    <button id="политика" title="кто ведёт бойца: скриптовый учитель, нейронка или случайные действия">политика: скрипт</button>
+    <select id="веса" title="веса нейронки (out/ai/weights)"></select>
+    <label title="показать и промежуточные веса бойца (те, что ещё грузятся нынешней сетью)"><input type="checkbox" id="всевеса"> все веса</label>
+    <button id="температура" title="сэмплирование: 1 — как учили, 0.5 — осторожнее, 0 — всегда лучшее по мнению сети">t=1</button>
+    <button id="вариация" title="номер вариации сцены">вариация 0</button>
+    <button id="скорость" title="скорость хода">×3</button>
+    <button id="пауза">⏸</button>
+    <button id="шаг" title="один тик движка">шаг</button>
+    <button id="сброс">сброс</button>
+    <button id="прогон" title="прогнать 20 эпизодов без графики и показать средний итог">прогон ×20</button>
+    <button id="путь" title="стенд поиска пути">/jw/path</button>
+    <button id="игра">в игру</button>
+  </div>
+  <div id="табло"></div>
+  <div id="сеть"></div>
+  <div id="note"></div>
+</div>
+<script type="importmap" data-jw-versions>{"imports":{"../js/ai/act.js":"../js/ai/act.js?v=2787e897cb","../js/ai/arena.js":"../js/ai/arena.js?v=2787e897cb","../js/ai/episode.js":"../js/ai/episode.js?v=2787e897cb","../js/ai/net.js":"../js/ai/net.js?v=2787e897cb","../js/ai/obs.js":"../js/ai/obs.js?v=2787e897cb","../js/ai/params.js":"../js/ai/params.js?v=2787e897cb","../js/ai/policy_net.js":"../js/ai/policy_net.js?v=2787e897cb","../js/ai/policy_script.js":"../js/ai/policy_script.js?v=2787e897cb","../js/ai/reward.js":"../js/ai/reward.js?v=2787e897cb","../js/ai/scenes.js":"../js/ai/scenes.js?v=2787e897cb","../js/ai/strategy.js":"../js/ai/strategy.js?v=2787e897cb","../js/ai/tactic.js":"../js/ai/tactic.js?v=2787e897cb","../js/ai/вождь.js":"../js/ai/вождь.js?v=2787e897cb","../js/ai/вождь3.js":"../js/ai/вождь3.js?v=2787e897cb","../js/ai/кампания.js":"../js/ai/кампания.js?v=2787e897cb","../js/ai/комдив.js":"../js/ai/комдив.js?v=2787e897cb","../js/ai/ластхит.js":"../js/ai/ластхит.js?v=2787e897cb","../js/ai/модель.js":"../js/ai/модель.js?v=2787e897cb","../js/ai/модель_партия.js":"../js/ai/модель_партия.js?v=2787e897cb","../js/ai/нейросети.js":"../js/ai/нейросети.js?v=2787e897cb","../js/ai/образец.js":"../js/ai/образец.js?v=2787e897cb","../js/ai/отряд.js":"../js/ai/отряд.js?v=2787e897cb","../js/ai/поведенец.js":"../js/ai/поведенец.js?v=2787e897cb","../js/ai/пресеты.js":"../js/ai/пресеты.js?v=2787e897cb","../js/ai/справочник.js":"../js/ai/справочник.js?v=2787e897cb","../js/ai/стратег_правило.js":"../js/ai/стратег_правило.js?v=2787e897cb","../js/ai/стройка.js":"../js/ai/стройка.js?v=2787e897cb","../js/ai/сцены.js":"../js/ai/сцены.js?v=2787e897cb","../js/ai/тирано2.js":"../js/ai/тирано2.js?v=2787e897cb","../js/ai/угодья.js":"../js/ai/угодья.js?v=2787e897cb","../js/ai/штаб.js":"../js/ai/штаб.js?v=2787e897cb","../js/archive.js":"../js/archive.js?v=2787e897cb","../js/core.js":"../js/core.js?v=2787e897cb","../js/engine.js":"../js/engine.js?v=2787e897cb","../js/fn.js":"../js/fn.js?v=2787e897cb","../js/input.js":"../js/input.js?v=2787e897cb","../js/loader.js":"../js/loader.js?v=2787e897cb","../js/mem.js":"../js/mem.js?v=2787e897cb","../js/modules.browser.js":"../js/modules.browser.js?v=2787e897cb","../js/modules.js":"../js/modules.js?v=2787e897cb","../js/net/lockstep.js":"../js/net/lockstep.js?v=2787e897cb","../js/net/игра.js":"../js/net/игра.js?v=2787e897cb","../js/net/канал.js":"../js/net/канал.js?v=2787e897cb","../js/net/локальный.js":"../js/net/локальный.js?v=2787e897cb","../js/net/холл.js":"../js/net/холл.js?v=2787e897cb","../js/port/ai_script.js":"../js/port/ai_script.js?v=2787e897cb","../js/port/artifacts.js":"../js/port/artifacts.js?v=2787e897cb","../js/port/autofood.js":"../js/port/autofood.js?v=2787e897cb","../js/port/autogroups.js":"../js/port/autogroups.js?v=2787e897cb","../js/port/buildplan.js":"../js/port/buildplan.js?v=2787e897cb","../js/port/caster.js":"../js/port/caster.js?v=2787e897cb","../js/port/combat.js":"../js/port/combat.js?v=2787e897cb","../js/port/economy.js":"../js/port/economy.js?v=2787e897cb","../js/port/fog.js":"../js/port/fog.js?v=2787e897cb","../js/port/follow.js":"../js/port/follow.js?v=2787e897cb","../js/port/humans.js":"../js/port/humans.js?v=2787e897cb","../js/port/inject.js":"../js/port/inject.js?v=2787e897cb","../js/port/input.js":"../js/port/input.js?v=2787e897cb","../js/port/kamikaze.js":"../js/port/kamikaze.js?v=2787e897cb","../js/port/loader.js":"../js/port/loader.js?v=2787e897cb","../js/port/magic.js":"../js/port/magic.js?v=2787e897cb","../js/port/move.js":"../js/port/move.js?v=2787e897cb","../js/port/orderqueue.js":"../js/port/orderqueue.js?v=2787e897cb","../js/port/orders_ai.js":"../js/port/orders_ai.js?v=2787e897cb","../js/port/path.js":"../js/port/path.js?v=2787e897cb","../js/port/patrol.js":"../js/port/patrol.js?v=2787e897cb","../js/port/prodqueue.js":"../js/port/prodqueue.js?v=2787e897cb","../js/port/skirmish.js":"../js/port/skirmish.js?v=2787e897cb","../js/port/новые_звери.js":"../js/port/новые_звери.js?v=2787e897cb","../js/render/fb.js":"../js/render/fb.js?v=2787e897cb","../js/render/hud.js":"../js/render/hud.js?v=2787e897cb","../js/render/panel.js":"../js/render/panel.js?v=2787e897cb","../js/render/renderer.js":"../js/render/renderer.js?v=2787e897cb","../js/render/scene.js":"../js/render/scene.js?v=2787e897cb","../js/render/sprites.js":"../js/render/sprites.js?v=2787e897cb","../js/render/text.js":"../js/render/text.js?v=2787e897cb","../js/render/wide.js":"../js/render/wide.js?v=2787e897cb","../js/ui/locale.js":"../js/ui/locale.js?v=2787e897cb","../js/ui/music.js":"../js/ui/music.js?v=2787e897cb","../js/ui/narration.js":"../js/ui/narration.js?v=2787e897cb","../js/ui/pathscenes.js":"../js/ui/pathscenes.js?v=2787e897cb","../js/ui/replay.js":"../js/ui/replay.js?v=2787e897cb","../js/ui/saves.js":"../js/ui/saves.js?v=2787e897cb","../js/ui/scenebuild.js":"../js/ui/scenebuild.js?v=2787e897cb","../js/ui/screen.js":"../js/ui/screen.js?v=2787e897cb","../js/ui/sfx.js":"../js/ui/sfx.js?v=2787e897cb","../js/ui/shell.js":"../js/ui/shell.js?v=2787e897cb","../js/ui/windows.js":"../js/ui/windows.js?v=2787e897cb","./arena.js":"./arena.js?v=2787e897cb","./lang.js":"./lang.js?v=2787e897cb","./path.js":"./path.js?v=2787e897cb","./viewer.js":"./viewer.js?v=2787e897cb"}}</script>
+<script type="module" src="arena.js?v=613ee9b6"></script>

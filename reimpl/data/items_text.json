@@ -1,0 +1,512 @@
+{
+ "подписи": {
+  "оружие": {
+   "ru": "оружие",
+   "en": "weapon",
+   "pl": "broń"
+  },
+  "щит": {
+   "ru": "щит",
+   "en": "shield",
+   "pl": "tarcza"
+  },
+  "расходник": {
+   "ru": "расходник",
+   "en": "consumable",
+   "pl": "do zużycia"
+  },
+  "украшение": {
+   "ru": "украшение",
+   "en": "trinket",
+   "pl": "ozdoba"
+  },
+  "здоровье": {
+   "ru": "здоровье",
+   "en": "health",
+   "pl": "zdrowie"
+  },
+  "магия": {
+   "ru": "магия",
+   "en": "magic",
+   "pl": "magia"
+  },
+  "мана": {
+   "ru": "мана",
+   "en": "mana",
+   "pl": "mana"
+  },
+  "атака": {
+   "ru": "атака",
+   "en": "attack",
+   "pl": "atak"
+  },
+  "защита": {
+   "ru": "защита",
+   "en": "defence",
+   "pl": "obrona"
+  },
+  "скорость": {
+   "ru": "скорость",
+   "en": "speed",
+   "pl": "szybkość"
+  },
+  "цена": {
+   "ru": "цена",
+   "en": "price",
+   "pl": "cena"
+  },
+  "прибавки работают": {
+   "ru": "прибавки украшений включены",
+   "en": "trinket bonuses are on",
+   "pl": "premie ozdób włączone"
+  },
+  "прибавки выключены": {
+   "ru": "прибавки украшений выключены",
+   "en": "trinket bonuses are off",
+   "pl": "premie ozdób wyłączone"
+  },
+  "с": {
+   "ru": "с",
+   "en": "s",
+   "pl": "s"
+  },
+  "готовится": {
+   "ru": "готовится",
+   "en": "takes",
+   "pl": "czas"
+  },
+  "еда": {
+   "ru": "еды",
+   "en": "food",
+   "pl": "jedzenia"
+  },
+  "постройка": {
+   "ru": "постройка",
+   "en": "build",
+   "pl": "budowa"
+  }
+ },
+ "_": "Тексты предметов для подсказки. Имена en — из самой игры (0x420b0), ru/pl наши. Стат-числа берутся из памяти движка, здесь только для справки.",
+ "items": {
+  "1": {
+   "имя": {
+    "en": "Sword",
+    "ru": "Меч",
+    "pl": "Miecz"
+   },
+   "о": {
+    "ru": "Оружие ближнего боя. Самое сильное из покупных.",
+    "en": "Melee weapon, the strongest one you can buy.",
+    "pl": "Broń biała, najsilniejsza z kupowanych."
+   },
+   "группа": "оружие",
+   "цена": 2000
+  },
+  "2": {
+   "имя": {
+    "en": "Spear",
+    "ru": "Копьё",
+    "pl": "Włócznia"
+   },
+   "о": {
+    "ru": "Оружие ближнего боя.",
+    "en": "Melee weapon.",
+    "pl": "Broń biała."
+   },
+   "группа": "оружие",
+   "цена": 1400
+  },
+  "3": {
+   "имя": {
+    "en": "Stone-Ax",
+    "ru": "Каменный топор",
+    "pl": "Kamienny topór"
+   },
+   "о": {
+    "ru": "Оружие ближнего боя, дешёвое.",
+    "en": "Cheap melee weapon.",
+    "pl": "Tania broń biała."
+   },
+   "группа": "оружие",
+   "цена": 1000
+  },
+  "4": {
+   "имя": {
+    "en": "Boomerang",
+    "ru": "Бумеранг",
+    "pl": "Bumerang"
+   },
+   "о": {
+    "ru": "Метательное: даёт дальний бой на 2 клетки + скорость/32.",
+    "en": "Thrown: gives ranged attack, 2 tiles + speed/32.",
+    "pl": "Broń miotana: atak na dystans, 2 pola + szybkość/32."
+   },
+   "группа": "оружие",
+   "цена": 600
+  },
+  "5": {
+   "имя": {
+    "en": "Poison-Arrow",
+    "ru": "Отравленная стрела",
+    "pl": "Zatruta strzała"
+   },
+   "о": {
+    "ru": "Стрела: дальний бой на 2 клетки + скорость/16.",
+    "en": "Arrow: ranged attack, 2 tiles + speed/16.",
+    "pl": "Strzała: atak na dystans, 2 pola + szybkość/16."
+   },
+   "группа": "оружие",
+   "цена": 200
+  },
+  "6": {
+   "имя": {
+    "en": "Fire-Arrow",
+    "ru": "Огненная стрела",
+    "pl": "Ognista strzała"
+   },
+   "о": {
+    "ru": "Стрела: дальний бой на 2 клетки + скорость/16.",
+    "en": "Arrow: ranged attack, 2 tiles + speed/16.",
+    "pl": "Strzała: atak na dystans, 2 pola + szybkość/16."
+   },
+   "группа": "оружие",
+   "цена": 200
+  },
+  "7": {
+   "имя": {
+    "en": "Arrow",
+    "ru": "Стрела",
+    "pl": "Strzała"
+   },
+   "о": {
+    "ru": "Стрела: дальний бой на 2 клетки + скорость/16.",
+    "en": "Arrow: ranged attack, 2 tiles + speed/16.",
+    "pl": "Strzała: atak na dystans, 2 pola + szybkość/16."
+   },
+   "группа": "оружие",
+   "цена": 100
+  },
+  "8": {
+   "имя": {
+    "en": "Wood-Shield",
+    "ru": "Деревянный щит",
+    "pl": "Drewniana tarcza"
+   },
+   "о": {
+    "ru": "Щит. Сколько он снимет урона - зависит от оружия нападающего.",
+    "en": "Shield. How much it absorbs depends on the attacker's weapon.",
+    "pl": "Tarcza. Ile pochłonie, zależy od broni napastnika."
+   },
+   "группа": "щит",
+   "цена": 40
+  },
+  "9": {
+   "имя": {
+    "en": "Iron-Shield",
+    "ru": "Железный щит",
+    "pl": "Żelazna tarcza"
+   },
+   "о": {
+    "ru": "Щит. Сколько он снимет урона - зависит от оружия нападающего.",
+    "en": "Shield. How much it absorbs depends on the attacker's weapon.",
+    "pl": "Tarcza. Ile pochłonie, zależy od broni napastnika."
+   },
+   "группа": "щит",
+   "цена": 2
+  },
+  "10": {
+   "имя": {
+    "en": "Wather-Shield",
+    "ru": "Водяной щит",
+    "pl": "Wodna tarcza"
+   },
+   "о": {
+    "ru": "Щит. Сколько он снимет урона - зависит от оружия нападающего.",
+    "en": "Shield. How much it absorbs depends on the attacker's weapon.",
+    "pl": "Tarcza. Ile pochłonie, zależy od broni napastnika."
+   },
+   "группа": "щит",
+   "цена": 600
+  },
+  "11": {
+   "имя": {
+    "en": "Water pail",
+    "ru": "Ведро воды",
+    "pl": "Wiadro wody"
+   },
+   "о": {
+    "ru": "Выпить: восстанавливает здоровье и ману.",
+    "en": "Drink it: restores health and mana.",
+    "pl": "Wypij: przywraca zdrowie i manę."
+   },
+   "группа": "расходник",
+   "цена": 50
+  },
+  "12": {
+   "имя": {
+    "en": "Apple",
+    "ru": "Яблоко",
+    "pl": "Jabłko"
+   },
+   "о": {
+    "ru": "Съесть: восстанавливает здоровье и ману.",
+    "en": "Eat it: restores health and mana.",
+    "pl": "Zjedz: przywraca zdrowie i manę."
+   },
+   "группа": "расходник",
+   "цена": 100
+  },
+  "13": {
+   "имя": {
+    "en": "Herb",
+    "ru": "Трава",
+    "pl": "Zioło"
+   },
+   "о": {
+    "ru": "Съесть: восстанавливает здоровье и ману.",
+    "en": "Eat it: restores health and mana.",
+    "pl": "Zjedz: przywraca zdrowie i manę."
+   },
+   "группа": "расходник",
+   "цена": 200
+  },
+  "14": {
+   "имя": {
+    "en": "Ginseng",
+    "ru": "Женьшень",
+    "pl": "Żeń-szeń"
+   },
+   "о": {
+    "ru": "Съесть: восстанавливает здоровье и ману.",
+    "en": "Eat it: restores health and mana.",
+    "pl": "Zjedz: przywraca zdrowie i manę."
+   },
+   "группа": "расходник",
+   "цена": 300
+  },
+  "15": {
+   "имя": {
+    "en": "Celestial Sword",
+    "ru": "Небесный меч",
+    "pl": "Niebiański miecz"
+   },
+   "о": {
+    "ru": "Редкое оружие. Самая сильная вещь в игре.",
+    "en": "Rare weapon. The strongest item in the game.",
+    "pl": "Rzadka broń. Najsilniejszy przedmiot w grze."
+   },
+   "группа": "оружие",
+   "цена": 0
+  },
+  "16": {
+   "имя": {
+    "en": "Moonlight Sword",
+    "ru": "Лунный меч",
+    "pl": "Księżycowy miecz"
+   },
+   "о": {
+    "ru": "Редкое оружие.",
+    "en": "Rare weapon.",
+    "pl": "Rzadka broń."
+   },
+   "группа": "оружие",
+   "цена": 0
+  },
+  "17": {
+   "имя": {
+    "en": "Mystical Liquor",
+    "ru": "Волшебный напиток",
+    "pl": "Magiczny napój"
+   },
+   "о": {
+    "ru": "Украшение. Носится, не пьётся: пока надет, даёт +10 к мощности магии.",
+    "en": "Trinket. Worn, not drunk: while carried it gives +10 magic power.",
+    "pl": "Ozdoba. Nosi się, nie pije: daje +10 do mocy magii."
+   },
+   "группа": "артефакт",
+   "цена": 0
+  },
+  "18": {
+   "имя": {
+    "en": "Ax of Darkness",
+    "ru": "Топор Тьмы",
+    "pl": "Topór Ciemności"
+   },
+   "о": {
+    "ru": "Редкое оружие.",
+    "en": "Rare weapon.",
+    "pl": "Rzadka broń."
+   },
+   "группа": "оружие",
+   "цена": 0
+  },
+  "19": {
+   "имя": {
+    "en": "Rock crystal",
+    "ru": "Горный хрусталь",
+    "pl": "Kryształ górski"
+   },
+   "о": {
+    "ru": "Украшение мага: +20 к мощности магии, пока надето.",
+    "en": "Mage trinket: +20 magic power while worn.",
+    "pl": "Ozdoba maga: +20 do mocy magii, gdy noszona."
+   },
+   "группа": "артефакт",
+   "цена": 0
+  },
+  "20": {
+   "имя": {
+    "en": "Dragon's Eye",
+    "ru": "Глаз дракона",
+    "pl": "Smocze oko"
+   },
+   "о": {
+    "ru": "Украшение: +30 к скорости. Скорость в этой игре задаёт и обзор, и дальность стрельбы, и темп ударов - глаз и правда \"видит дальше\".",
+    "en": "Trinket: +30 speed. Speed here also sets sight, shooting range and attack rate - the eye really does see further.",
+    "pl": "Ozdoba: +30 do szybkości. Szybkość wyznacza też zasięg wzroku, zasięg strzału i tempo ciosów."
+   },
+   "группа": "артефакт",
+   "цена": 0
+  },
+  "21": {
+   "имя": {
+    "en": "Moon Shield",
+    "ru": "Лунный щит",
+    "pl": "Księżycowa tarcza"
+   },
+   "о": {
+    "ru": "Редкий щит: снимает ровно 15 урона от любого оружия.",
+    "en": "Rare shield: absorbs a flat 15 damage from any weapon.",
+    "pl": "Rzadka tarcza: pochłania równo 15 obrażeń."
+   },
+   "группа": "щит",
+   "цена": 0
+  },
+  "22": {
+   "имя": {
+    "en": "Hammer of Darkness",
+    "ru": "Молот Тьмы",
+    "pl": "Młot Ciemności"
+   },
+   "о": {
+    "ru": "Редкое оружие.",
+    "en": "Rare weapon.",
+    "pl": "Rzadka broń."
+   },
+   "группа": "оружие",
+   "цена": 0
+  },
+  "23": {
+   "имя": {
+    "en": "Volcano Spear",
+    "ru": "Копьё вулкана",
+    "pl": "Włócznia wulkanu"
+   },
+   "о": {
+    "ru": "Редкое оружие.",
+    "en": "Rare weapon.",
+    "pl": "Rzadka broń."
+   },
+   "группа": "оружие",
+   "цена": 0
+  },
+  "24": {
+   "имя": {
+    "en": "Sun Shield",
+    "ru": "Солнечный щит",
+    "pl": "Słoneczna tarcza"
+   },
+   "о": {
+    "ru": "Редкий щит: снимает ровно 20 урона от любого оружия.",
+    "en": "Rare shield: absorbs a flat 20 damage from any weapon.",
+    "pl": "Rzadka tarcza: pochłania równo 20 obrażeń."
+   },
+   "группа": "щит",
+   "цена": 0
+  },
+  "25": {
+   "имя": {
+    "en": "Leather Shoes",
+    "ru": "Кожаные башмаки",
+    "pl": "Skórzane buty"
+   },
+   "о": {
+    "ru": "Украшение: +20 к скорости и немного защиты.",
+    "en": "Trinket: +20 speed and a little defence.",
+    "pl": "Ozdoba: +20 do szybkości i trochę obrony."
+   },
+   "группа": "артефакт",
+   "цена": 0
+  },
+  "26": {
+   "имя": {
+    "en": "Bone Necklace",
+    "ru": "Костяное ожерелье",
+    "pl": "Kościany naszyjnik"
+   },
+   "о": {
+    "ru": "Украшение: +15 к защите.",
+    "en": "Trinket: +15 defence.",
+    "pl": "Ozdoba: +15 do obrony."
+   },
+   "группа": "артефакт",
+   "цена": 0
+  },
+  "27": {
+   "имя": {
+    "en": "Bone-Bracelet",
+    "ru": "Костяной браслет",
+    "pl": "Kościana bransoleta"
+   },
+   "о": {
+    "ru": "Украшение: защита и немного магии.",
+    "en": "Trinket: defence and a little magic.",
+    "pl": "Ozdoba: obrona i trochę magii."
+   },
+   "группа": "артефакт",
+   "цена": 0
+  },
+  "28": {
+   "имя": {
+    "en": "Gloves",
+    "ru": "Перчатки",
+    "pl": "Rękawice"
+   },
+   "о": {
+    "ru": "Украшение: немного атаки и защиты.",
+    "en": "Trinket: a little attack and defence.",
+    "pl": "Ozdoba: trochę ataku i obrony."
+   },
+   "группа": "артефакт",
+   "цена": 0
+  },
+  "29": {
+   "имя": {
+    "en": "Skull Stick",
+    "ru": "Посох с черепом",
+    "pl": "Laska z czaszką"
+   },
+   "о": {
+    "ru": "Украшение мага: +15 к мощности магии, плюс атака и защита.",
+    "en": "Mage trinket: +15 magic power, plus attack and defence.",
+    "pl": "Ozdoba maga: +15 do mocy magii, plus atak i obrona."
+   },
+   "группа": "артефакт",
+   "цена": 0
+  },
+  "30": {
+   "имя": {
+    "en": "Foods",
+    "ru": "Еда",
+    "pl": "Jedzenie"
+   },
+   "о": {
+    "ru": "Мясо. Рабочий несёт его на склад, там оно становится едой племени.",
+    "en": "Meat. A worker carries it to the storage, where it becomes tribe food.",
+    "pl": "Mięso. Robotnik niesie je do magazynu."
+   },
+   "группа": "расходник",
+   "цена": 0
+  }
+ }
+}

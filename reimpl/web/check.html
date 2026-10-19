@@ -1,0 +1,72 @@
+<!doctype html><html lang="ru"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jurassic War — проверка загрузки</title>
+<style>
+  body{margin:0;padding:18px;background:#0d0c0a;color:#e2d7c6;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace}
+  h1{font-size:19px;color:#e8c07d;margin:0 0 4px}
+  p{margin:0 0 12px;color:#95887a}
+  table{border-collapse:collapse;width:100%;max-width:760px;margin-bottom:16px}
+  td,th{padding:5px 8px;border-bottom:1px solid #332b21;text-align:left;white-space:nowrap}
+  th{color:#95887a;font-weight:400}
+  .ok{color:#7ad37a}.bad{color:#ff7d6b}.wait{color:#95887a}
+  button{font:inherit;background:#e8c07d;color:#17130d;border:0;border-radius:5px;padding:9px 18px;cursor:pointer;margin-right:10px}
+  button:disabled{opacity:.5;cursor:default}
+  #ua{color:#6b6156;font-size:12px;word-break:break-all;max-width:760px}
+  #итог{font-size:15px;margin:10px 0 16px}
+</style>
+<h1>Проверка загруженных архивов игры</h1>
+<p>Страница берёт архивы так же, как их берёт игра, и сверяет размер с эталонным. Ничего не меняет.</p>
+<div id="итог" class="wait">считаю…</div>
+<table><thead><tr><th>архив</th><th>должно быть</th><th>пришло</th><th>итог</th></tr></thead><tbody id="t"></tbody></table>
+<p><button id="fix" disabled>Перекачать всё мимо кеша</button><button id="again">Проверить заново</button></p>
+<div id="ua"></div>
+<script>
+// Эталонные размеры — те же, что в web/game.js (RAW_SIZE). Если пришло меньше, значит в кеше
+// или на канале лежит обрезанный файл: игра из такого архива читает ранние записи и не читает
+// поздние, отчего у окна настроек пропадает рамка, а экран сетевой игры не рисуется вовсе.
+const ПАКИ = {
+  '_PWAR01.TRC': 1566374, '_PWAR02.TRS': 9295747, '_PWAR03.TRC': 924128, '_PWAR04.TRS': 3369918,
+  '_PWAR05.TRS': 910384, '_PWAR06.TRW': 1085016, '_PWAR08.TRC': 16809358, '_PWAR09.TRC': 12944593,
+  '_PWAR10.TRC': 1226680, '_PWAR13.TRC': 3535542,
+};
+const t = document.getElementById('t'), итог = document.getElementById('итог');
+document.getElementById('ua').textContent = navigator.userAgent;
+const чис = (n) => n.toLocaleString('ru-RU');
+
+async function проверить(мимоКеша) {
+  t.innerHTML = ''; итог.className = 'wait'; итог.textContent = 'считаю…';
+  document.getElementById('fix').disabled = true;
+  let битых = 0, ошибок = 0;
+  for (const [имя, размер] of Object.entries(ПАКИ)) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${имя}</td><td>${чис(размер)}</td><td class="wait">…</td><td class="wait">качаю</td>`;
+    t.appendChild(tr);
+    const адрес = '../../PWAR/' + имя + (мимоКеша ? '?fresh=' + Date.now() : '');
+    try {
+      const о = await fetch(адрес, мимоКеша ? { cache: 'reload' } : undefined);
+      if (!о.ok) throw new Error('код ' + о.status);
+      const b = await о.arrayBuffer();
+      const ок = b.byteLength === размер;
+      if (!ок) битых++;
+      tr.cells[2].textContent = чис(b.byteLength); tr.cells[2].className = ок ? 'ok' : 'bad';
+      tr.cells[3].textContent = ок ? 'целый' : 'ОБРЕЗАН'; tr.cells[3].className = ок ? 'ok' : 'bad';
+    } catch (e) {
+      ошибок++;
+      tr.cells[2].textContent = '—'; tr.cells[3].textContent = 'не скачался: ' + e.message;
+      tr.cells[2].className = tr.cells[3].className = 'bad';
+    }
+  }
+  if (битых || ошибок) {
+    итог.className = 'bad';
+    итог.textContent = `Испорчено архивов: ${битых}${ошибок ? ', не скачалось: ' + ошибок : ''}. ` +
+      (мимоКеша ? 'Даже мимо кеша не доезжает — дело в канале или в сервере.' : 'Нажмите кнопку ниже: перекачаю мимо кеша.');
+    document.getElementById('fix').disabled = мимоКеша;
+  } else {
+    итог.className = 'ok';
+    итог.textContent = мимоКеша ? 'Всё целое. Кеш вылечен, можно возвращаться в игру.' : 'Все архивы целые — дело не в них.';
+  }
+}
+document.getElementById('fix').onclick = () => проверить(true);
+document.getElementById('again').onclick = () => проверить(false);
+проверить(false);
+</script>
